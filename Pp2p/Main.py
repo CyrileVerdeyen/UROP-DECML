@@ -1,5 +1,6 @@
+import json
 from time import time
-from twisted.internet.endpoints import TCP4ServerEndpoint
+from twisted.internet.endpoints import TCP4ServerEndpoint, TCP4ClientEndpoint, connectProtocol
 from twisted.internet.protocol import Protocol, Factory
 from twisted.internet import reactor
 from twisted.internet.task import LoopingCall
@@ -49,7 +50,7 @@ class MyProtocol(Protocol):
 
     def handle_ping(self, ping):
         self.send_pong()
-   
+
     def handle_pong(self, pong):
         print ("Got pong from", self.remote_nodeid)
         ###Update the timestamp
@@ -85,10 +86,10 @@ class MyProtocol(Protocol):
                 point = TCP4ClientEndpoint(reactor, host, int(port))
                 d = connectProtocol(point, MyProtocol(2))
                 d.addCallback(gotProtocol)
-        
+
     def handle_getaddr(self, getaddr):
         self.send_addr()
-        
+
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
