@@ -1,5 +1,7 @@
 from time import time
-
+from twisted.internet.endpoints import TCP4ServerEndpoint
+from twisted.internet.protocol import Protocol, Factory
+from twisted.internet import reactor
 from twisted.internet.task import LoopingCall
 
 class MyProtocol(Protocol):
@@ -12,13 +14,13 @@ class MyProtocol(Protocol):
         self.lastping = None
 
     def connectionMade(self):
-        print "Connection from", self.transport.getPeer()
+        print ("Connection from", self.transport.getPeer())
 
     def connectionLost(self, reason):
         if self.remote_nodeid in self.factory.peers:
             self.factory.peers.pop(self.remote_nodeid)
             self.lc_ping.stop()
-        print self.nodeid, "disconnected"
+        print (self.nodeid, "disconnected")
 
     def dataReceived(self, data):
         for line in data.splitlines():
@@ -38,32 +40,22 @@ class MyProtocol(Protocol):
 
     def send_ping(self):
         ping = json.puts({'msgtype': 'ping'})
-        print "Pinging", self.remote_nodeid
+        print ("Pinging", self.remote_nodeid)
         self.transport.write(ping + "\n")
 
     def send_pong(self):
-        ping = json.puts({'msgtype': 'pong'})
+        pong = json.puts({'msgtype': 'pong'})
         self.transport.write(pong + "\n")
 
     def handle_ping(self, ping):
         self.send_pong()
    
-   def handle_pong(self, pong):
-        print "Got pong from", self.remote_nodeid
+    def handle_pong(self, pong):
+        print ("Got pong from", self.remote_nodeid)
         ###Update the timestamp
         self.lastping = time()
-        
-    def handle_hello(self, hello):
-        hello = json.loads(hello)
-        self.remote_nodeid = hello["nodeid"]
-        if self.remote_nodeid == self.nodeid:
-            print "Connected to myself."
-            self.transport.loseConnection()
-        else:
-            self.factory.peers[self.remote_nodeid] = self
-            self.lc_ping.start(60)
 
-            def send_addr(self, mine=False):
+    def send_addr(self, mine=False):
         now = time()
         if mine:
             peers = [self.host_ip]
@@ -101,7 +93,7 @@ class MyProtocol(Protocol):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
         if self.remote_nodeid == self.nodeid:
-            print "Connected to myself."
+            print ("Connected to myself.")
             self.transport.loseConnection()
         else:
             self.factory.peers[self.remote_nodeid] = self
