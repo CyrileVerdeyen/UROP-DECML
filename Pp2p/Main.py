@@ -1,12 +1,27 @@
+##code addapted from https://benediktkr.github.io/dev/2016/02/04/p2p-with-twisted.html
+## Author: Cyrile Verdeyen
+
 import json
 from time import time
-from twisted.internet.endpoints import TCP4ServerEndpoint, TCP4ClientEndpoint, connectProtocol
-from twisted.internet.protocol import Protocol, Factory
+
 from twisted.internet import reactor
+from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
+                                        connectProtocol)
+from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
+from uuid import uuid4
+generate_nodeid = lambda: str(uuid4())
+
+class MyFactory(Factory):
+    def startFactory(self):
+        self.peers = {}
+        self.nodeid = generate_nodeid()
+
+endpoint = TCP4ServerEndpoint(reactor, 5999)
+endpoint.listen(MyFactory())
 
 class MyProtocol(Protocol):
-    def __init__(self, factory):
+    def __init__(self, fact ory):
         self.factory = factory
         self.state = "HELLO"
         self.remote_nodeid = None
@@ -15,7 +30,12 @@ class MyProtocol(Protocol):
         self.lastping = None
 
     def connectionMade(self):
+        remote_ip = self.transport.getPeer()
+        host_ip = self.transport.getHost()
+        self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
+        self.host_ip = host_ip.host + ":" + str(host_ip.port)
         print ("Connection from", self.transport.getPeer())
+
 
     def connectionLost(self, reason):
         if self.remote_nodeid in self.factory.peers:
@@ -36,22 +56,22 @@ class MyProtocol(Protocol):
                 self.handle_pong()
 
     def send_hello(self):
-        hello = json.puts({'nodeid': self.nodeid, 'msgtype': 'hello'})
+        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
         self.transport.write(hello + "\n")
 
     def send_ping(self):
-        ping = json.puts({'msgtype': 'ping'})
+        ping = json.dumps({'msgtype': 'ping'})
         print ("Pinging", self.remote_nodeid)
         self.transport.write(ping + "\n")
 
     def send_pong(self):
-        pong = json.puts({'msgtype': 'pong'})
+        pong = json.dumps({'msgtype': 'pong'})
         self.transport.write(pong + "\n")
 
-    def handle_ping(self, ping):
+    def handle_ping(self):
         self.send_pong()
 
-    def handle_pong(self, pong):
+    def handle_pong(self):
         print ("Got pong from", self.remote_nodeid)
         ###Update the timestamp
         self.lastping = time()
@@ -64,24 +84,12 @@ class MyProtocol(Protocol):
             peers = [(peer.remote_ip, peer.remote_nodeid)
                      for peer in self.factory.peers
                      if peer.peertype == 1 and peer.lastping > now-240]
-        addr = json.puts({'msgtype': 'addr', 'peers': peers})
-        self.transport.write(peers + "\n")
-
-    def send_addr(self, mine=False):
-        now = time()
-        if mine:
-            peers = [self.host_ip]
-        else:
-            peers = [(peer.remote_ip, peer.remote_nodeid)
-                     for peer in self.factory.peers
-                     if peer.peertype == 1 and peer.lastping > now-240]
-        addr = json.puts({'msgtype': 'addr', 'peers': peers})
         self.transport.write(peers + "\n")
 
     def handle_addr(self, addr):
-        json = json.loads(addr)
-        for remote_ip, remote_nodeid in json["peers"]:
-            if remote_node not in self.factory.peers:
+        json1 = json.loads(addr)
+        for remote_ip, remote_nodeid in json1["peers"]:
+            if remote_nodeid not in self.factory.peers:
                 host, port = remote_ip.split(":")
                 point = TCP4ClientEndpoint(reactor, host, int(port))
                 d = connectProtocol(point, MyProtocol(2))
@@ -102,4 +110,17 @@ class MyProtocol(Protocol):
             ###inform our new peer about us
             self.send_addr(mine=True)
             ###and ask them for more peers
-            self.send_getaddr()
+            self.send_addr(mine=False)
+
+def gotProtocol(p):
+    """The callback to start the protocol exchange. We let connecting
+    nodes start the hello handshake""" 
+    p.send_hello()
+
+endpoint = TCP4ServerEndpoint(reactor, 5999)
+endpoint.listen(MyFactory())
+
+point = TCP4ClientEndpoint(reactor, "localhost", 5999)
+d = connectProtocol(point, MyProtocol())
+d.addCallback(gotProtocol)
+
