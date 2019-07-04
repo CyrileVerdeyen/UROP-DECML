@@ -9,19 +9,21 @@ from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
+
 from uuid import uuid4
+
 generate_nodeid = lambda: str(uuid4())
 
-class MyFactory(Factory):
+class PPFactory(Factory):
     def startFactory(self):
         self.peers = {}
         self.nodeid = generate_nodeid()
 
-endpoint = TCP4ServerEndpoint(reactor, 5999)
-endpoint.listen(MyFactory())
+    def buildProtocol(self, addr):
+        return PPProtocol(self)
 
-class MyProtocol(Protocol):
-    def __init__(self, fact ory):
+class PPProtocol(Protocol):
+    def __init__(self, factory):
         self.factory = factory
         self.state = "HELLO"
         self.remote_nodeid = None
@@ -31,7 +33,7 @@ class MyProtocol(Protocol):
 
     def connectionMade(self):
         remote_ip = self.transport.getPeer()
-        host_ip = self.transport.getHost()
+        host_ip = self.transport.getHost()  
         self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         print ("Connection from", self.transport.getPeer())
@@ -40,7 +42,8 @@ class MyProtocol(Protocol):
     def connectionLost(self, reason):
         if self.remote_nodeid in self.factory.peers:
             self.factory.peers.pop(self.remote_nodeid)
-            self.lc_ping.stop()
+            try: self.lc_ping.stop()
+            except AssertionError: pass
         print (self.nodeid, "disconnected")
 
     def dataReceived(self, data):
@@ -92,7 +95,7 @@ class MyProtocol(Protocol):
             if remote_nodeid not in self.factory.peers:
                 host, port = remote_ip.split(":")
                 point = TCP4ClientEndpoint(reactor, host, int(port))
-                d = connectProtocol(point, MyProtocol(2))
+                d = connectProtocol(point, PPProtocol(2))
                 d.addCallback(gotProtocol)
 
     def handle_getaddr(self, getaddr):
@@ -116,11 +119,3 @@ def gotProtocol(p):
     """The callback to start the protocol exchange. We let connecting
     nodes start the hello handshake""" 
     p.send_hello()
-
-endpoint = TCP4ServerEndpoint(reactor, 5999)
-endpoint.listen(MyFactory())
-
-point = TCP4ClientEndpoint(reactor, "localhost", 5999)
-d = connectProtocol(point, MyProtocol())
-d.addCallback(gotProtocol)
-
