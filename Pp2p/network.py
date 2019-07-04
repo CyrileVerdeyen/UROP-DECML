@@ -10,14 +10,16 @@ from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
 
-from uuid import uuid4
-
-generate_nodeid = lambda: str(uuid4())
+from crypto import generate_nodeid
 
 class PPFactory(Factory):
+    def __init__(self):
+        pass
+
     def startFactory(self):
         self.peers = {}
         self.nodeid = generate_nodeid()
+        self.numProtocols = 0
 
     def buildProtocol(self, addr):
         return PPProtocol(self)
@@ -36,7 +38,8 @@ class PPProtocol(Protocol):
         host_ip = self.transport.getHost()  
         self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
-        print ("Connection from", self.transport.getPeer())
+        self.factory.numProtocols = self.factory.numProtocols + 1
+        print ("Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
 
 
     def connectionLost(self, reason):
@@ -44,11 +47,14 @@ class PPProtocol(Protocol):
             self.factory.peers.pop(self.remote_nodeid)
             try: self.lc_ping.stop()
             except AssertionError: pass
-        print (self.nodeid, "disconnected")
+        self.factory.numProtocols = self.factory.numProtocols - 1
+        print ("A Node dissconected. Connections left ", self.factory.numProtocols)
 
     def dataReceived(self, data):
-        for line in data.splitlines():
+        print("recieved data")
+        for line in (data.splitlines()):
             line = line.strip()
+            print(line.decode(errors="ignore"))
             msgtype = json.loads(line)['msgtype']
             if self.state == "HELLO" or msgtype == "hello":
                 self.handle_hello(line)
@@ -60,7 +66,9 @@ class PPProtocol(Protocol):
 
     def send_hello(self):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
-        self.transport.write(hello + "\n")
+        for i in range (100):
+            print("Sending Hello")
+            self.transport.write(hello + "\n")
 
     def send_ping(self):
         ping = json.dumps({'msgtype': 'ping'})
@@ -102,14 +110,16 @@ class PPProtocol(Protocol):
         self.send_addr()
 
     def handle_hello(self, hello):
+        print("Got hello from: " + self.remote_nodeid)
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
         if self.remote_nodeid == self.nodeid:
             print ("Connected to myself.")
             self.transport.loseConnection()
         else:
+            print ("Pinging")
             self.factory.peers[self.remote_nodeid] = self
-            self.lc_ping.start(60)
+            self.lc_ping.start(10)
             ###inform our new peer about us
             self.send_addr(mine=True)
             ###and ask them for more peers

@@ -17,7 +17,7 @@ def _print(*args):
 
 
 # Move this and network.BOOTSTRAP_NODES somewhere mode sensible
-DEFAULT_PORT = 5008
+DEFAULT_PORT = 5009
 
 parser = argparse.ArgumentParser(description="server")
 parser.add_argument('--port', type=int, default=DEFAULT_PORT)
@@ -35,7 +35,7 @@ except CannotListenError:
     _print("[!] Address in use")
     raise SystemExit
 
-BOOTSTRAP_NODES = []
+BOOTSTRAP_NODES = ["localhost:5008"]
 
 _print(" [ ] Trying to connect to host : localhost:5008")
 
