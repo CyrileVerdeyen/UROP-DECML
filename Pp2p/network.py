@@ -40,6 +40,10 @@ class PPProtocol(Protocol):
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         self.factory.numProtocols = self.factory.numProtocols + 1
         print ("Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
+        
+        send = json.dumps({'nodeid': self.nodeid, 'msgtype': 'send'})
+        print("Sending send")
+        self.transport.write((send + "\n").encode('utf8'))
 
 
     def connectionLost(self, reason):
@@ -54,7 +58,7 @@ class PPProtocol(Protocol):
         print("recieved data")
         for line in (data.splitlines()):
             line = line.strip()
-            print(line.decode(errors="ignore"))
+            print(line)
             msgtype = json.loads(line)['msgtype']
             if self.state == "HELLO" or msgtype == "hello":
                 self.handle_hello(line)
@@ -63,24 +67,29 @@ class PPProtocol(Protocol):
                 self.handle_ping()
             elif msgtype == "pong":
                 self.handle_pong()
+            elif msgtype == "send":
+                self.handle_send()
 
     def send_hello(self):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
-        for i in range (100):
-            print("Sending Hello")
-            self.transport.write(hello + "\n")
+        print("Sending Hello")
+        self.transport.write(hello.encode('utf-8') + "\n")
 
     def send_ping(self):
         ping = json.dumps({'msgtype': 'ping'})
         print ("Pinging", self.remote_nodeid)
-        self.transport.write(ping + "\n")
+        self.transport.write((ping + "\n").encode('utf-8'))
 
     def send_pong(self):
         pong = json.dumps({'msgtype': 'pong'})
-        self.transport.write(pong + "\n")
+        self.transport.write((pong + "\n").encode('utf-8'))
 
-    def handle_ping(self):
+
+    def handle_ping(self):  
         self.send_pong()
+
+    def handle_send(self):
+        print("WE ACTUALLY GOT SOMETHING")
 
     def handle_pong(self):
         print ("Got pong from", self.remote_nodeid)
@@ -91,11 +100,11 @@ class PPProtocol(Protocol):
         now = time()
         if mine:
             peers = [self.host_ip]
-        else:
+        '''else:
             peers = [(peer.remote_ip, peer.remote_nodeid)
                      for peer in self.factory.peers
                      if peer.peertype == 1 and peer.lastping > now-240]
-        self.transport.write(peers + "\n")
+            self.transport.write(peers + "\n")'''
 
     def handle_addr(self, addr):
         json1 = json.loads(addr)
@@ -110,7 +119,7 @@ class PPProtocol(Protocol):
         self.send_addr()
 
     def handle_hello(self, hello):
-        print("Got hello from: " + self.remote_nodeid)
+        print("Got hello from: " , self.remote_nodeid)
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
         if self.remote_nodeid == self.nodeid:
