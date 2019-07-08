@@ -24,7 +24,7 @@ class node2():
     def __init__(self):
         self.DEFAULT_PORT = 5010
         self.BOOTSRAP_NODES = ["localhost:5008",
-                                "localost:5009"]
+                                "localhost:5009"]
 
     def run(self):
         server2 = testFrame.test(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
@@ -35,7 +35,7 @@ class node3():
     def __init__(self):
         self.DEFAULT_PORT = 5011
         self.BOOTSRAP_NODES = ["localhost:5008",
-                                "localost:5009"]
+                                "localhost:5009"]
 
     def run(self):
         server3 = testFrame.test(self.DEFAULT_PORT, self.BOOTSRAP_NODES)

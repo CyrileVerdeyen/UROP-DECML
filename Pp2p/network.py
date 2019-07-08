@@ -44,6 +44,10 @@ class PPProtocol(Protocol):
         self.factory.numProtocols = self.factory.numProtocols + 1
         print ("Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
 
+        send = json.dumps({'nodeid': self.nodeid, 'msgtype': 'connected'})
+        print("Sending connected")
+        self.transport.write((send + "\n").encode('utf8'))
+
     # This gets called everytime a node dissconects.
     def connectionLost(self, reason):
         if self.remote_nodeid in self.factory.peers:
@@ -66,6 +70,13 @@ class PPProtocol(Protocol):
                 self.handle_ping()
             elif msgtype == "pong":
                 self.handle_pong()
+            elif msgtype == "connected":
+                self.handle_connected
+
+    # Handles connected messages
+    def handle_connected(self):
+        ## Messages don't send without a connected being sent first
+        pass
 
     # The first message that gets sent
     def send_hello(self):
@@ -88,7 +99,7 @@ class PPProtocol(Protocol):
 
     def handle_pong(self):
         print ("Got pong from", self.remote_nodeid)
-        ###Update the timestamp
+        ### Update the timestamp
         self.lastping = time()
 
     # Send the addresses to other nodes and own node
@@ -115,7 +126,7 @@ class PPProtocol(Protocol):
     def handle_getaddr(self, getaddr):
         self.send_addr()
 
-    #Handle the first message that gets sent
+    # Handle the first message that gets sent
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
@@ -127,9 +138,9 @@ class PPProtocol(Protocol):
             print ("Pinging")
             self.factory.peers[self.remote_nodeid] = self
             self.lc_ping.start(30)
-            ###inform our new peer about us
+            ### Inform our new peer about us
             self.send_addr(mine=True)
-            ###and ask them for more peers
+            ### and ask them for more peers
             self.send_addr(mine=False)
 
 def gotProtocol(p):
