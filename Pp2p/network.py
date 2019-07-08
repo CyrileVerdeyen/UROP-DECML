@@ -107,11 +107,12 @@ class PPProtocol(Protocol):
         now = time()
         if mine:
             peers = [self.host_ip]
-        '''else:
-            peers = [(peer.remote_ip, peer.remote_nodeid)
-                     for peer in self.factory.peers
-                     if peer.lastping > now-240]
-            self.transport.write(peers + "\n")'''
+        else:
+            peers = self.factory.peers
+
+        print(peers)
+        addr = json.dumps({'msgtype': 'addr', 'peers': peers})
+        self.transport.write((addr + "\n").encode('utf-8'))
 
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):
@@ -136,7 +137,7 @@ class PPProtocol(Protocol):
             self.transport.loseConnection()
         else:
             print ("Pinging")
-            self.factory.peers[self.remote_nodeid] = self
+            self.factory.peers[self.remote_nodeid] = self.remote_nodeid
             self.lc_ping.start(30)
             ### Inform our new peer about us
             self.send_addr(mine=True)
