@@ -1,4 +1,4 @@
 import test
 
-node = test.node()
+node = test.node0()
 node.run()

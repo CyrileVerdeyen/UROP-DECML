@@ -1,6 +1,6 @@
 import testFrame
 
-class node():
+class node0():
     def __init__(self):
         self.DEFAULT_PORT = 5008
         self.BOOTSRAP_NODES = []
