@@ -3,6 +3,7 @@
 
 import json
 from time import time
+from datetime import datetime
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
@@ -11,6 +12,15 @@ from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
+
+
+PING_INTERVAL = 30.0 # Interval for pinging
+
+def _print(*args):
+    # double, make common module
+    time = datetime.now().time().isoformat()[:8]
+    print (time)
+    print ("".join(map(str, args)))
 
 ## The factory class houses all the different protocols that each node has, as well as any other constant data. 
 class PPFactory(Factory):
@@ -22,18 +32,35 @@ class PPFactory(Factory):
         self.nodeid = generate_nodeid()
         self.numProtocols = 0
 
+    def stopFactory(self):
+        pass
+
     def buildProtocol(self, addr):
-        return PPProtocol(self)
+        return PPProtocol(self, "HELLO", "LISTENER")
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
 class PPProtocol(Protocol):
-    def __init__(self, factory):
+    def __init__(self, factory, state="HELLO", kind="LISTENER"):
         self.factory = factory
-        self.state = "HELLO"
+        self.state = state
+        self.VERSION = 0
+        self.kind = kind
         self.remote_nodeid = None
         self.nodeid = self.factory.nodeid
         self.lc_ping = LoopingCall(self.send_ping)
         self.lastping = None
+
+    def write(self, line):
+        self.transport.write((line + "\n").encode('utf-8'))
+
+    def print_peers(self):
+        if len(self.factory.peers) == 0:
+            _print(" [!] PEERS: No peers connected.")
+        else:
+            _print(" [ ] PEERS:")
+            for peer in self.factory.peers:
+                addr, kind = self.factory.peers[peer][:2]
+            _print("     [*]", peer, "at", addr, kind)
 
     # This method gets called everytime a connection gets made to a node.
     def connectionMade(self):
@@ -43,10 +70,6 @@ class PPProtocol(Protocol):
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         self.factory.numProtocols = self.factory.numProtocols + 1
         print ("Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
-
-        send = json.dumps({'nodeid': self.nodeid, 'msgtype': 'connected'})
-        print("Sending connected")
-        self.transport.write((send + "\n").encode('utf8'))
 
     # This gets called everytime a node dissconects.
     def connectionLost(self, reason):
@@ -59,19 +82,22 @@ class PPProtocol(Protocol):
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
     def dataReceived(self, data):
-        print("Recieved data")
         for line in (data.splitlines()):
             line = line.strip()
             msgtype = json.loads(line)['msgtype']
-            if self.state == "HELLO" or msgtype == "hello":
-                self.handle_hello(line)
+            if self.state in ["HELLO", "SENTHELLO"]:
+                # Force first message to be HELLO or crash
+                if msgtype == 'hello':
+                    self.handle_hello(line)
+                else:
+                    _print(" [!] Ignoring", msgtype, "in", self.state)
                 self.state = "READY"
             elif msgtype == "ping":
                 self.handle_ping()
             elif msgtype == "pong":
                 self.handle_pong()
-            elif msgtype == "connected":
-                self.handle_connected
+            elif msgtype == "addr":
+                self.handle_addr(line)
 
     # Handles connected messages
     def handle_connected(self):
@@ -82,47 +108,55 @@ class PPProtocol(Protocol):
     def send_hello(self):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
         print("Sending Hello")
-        self.transport.write(hello.encode('utf-8') + "\n")
+        self.write(hello)
+        self.state = "SENTHELLO"
 
     # Ping pongs are used to verify the excistance of nodes, and making sure that they have not disconected.
     def send_ping(self):
         ping = json.dumps({'msgtype': 'ping'})
-        print ("Pinging", self.remote_nodeid)
-        self.transport.write((ping + "\n").encode('utf-8'))
+        print ("Pinging", self.remote_ip)
+        self.write(ping)
 
     def send_pong(self):
         pong = json.dumps({'msgtype': 'pong'})
-        self.transport.write((pong + "\n").encode('utf-8'))
+        self.write(pong)
 
     def handle_ping(self):  
         self.send_pong()
 
     def handle_pong(self):
-        print ("Got pong from", self.remote_nodeid)
+        print ("Got pong from", self.remote_ip)
         ### Update the timestamp
         self.lastping = time()
 
     # Send the addresses to other nodes and own node
-    def send_addr(self, mine=False):
-        now = time()
-        if mine:
-            peers = [self.host_ip]
-        else:
-            peers = self.factory.peers
+    def send_addr(self):
+        peers = self.factory.peers
+        listeners = [(n, peers[n][0], peers[n][1])
+                    for n in peers]
 
-        print(peers)
-        addr = json.dumps({'msgtype': 'addr', 'peers': peers})
-        self.transport.write((addr + "\n").encode('utf-8'))
+        addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
+        self.write(addr)
 
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):
         json1 = json.loads(addr)
-        for remote_ip, remote_nodeid in json1["peers"]:
-            if remote_nodeid not in self.factory.peers:
-                host, port = remote_ip.split(":")
-                point = TCP4ClientEndpoint(reactor, host, int(port))
-                d = connectProtocol(point, PPProtocol(2))
-                d.addCallback(gotProtocol)
+        for node in json1["nodes"]:
+            _print("     [*] Recieved Node: "  + node[0] + " " + node[1] + " " + node[2])
+            if node[0] == self.nodeid:
+                _print(" [!] Not connecting to " + node[0] + ": thats me!")
+                continue
+            if node[2] == "SPEAKER":
+                _print(" [ ] Not connecting to " + node[0] + ": is " + node[2])
+                continue
+            if node[0] in self.factory.peers:
+                _print(" [ ] Not connecting to " + node[0]  + ": already connected")
+                continue
+            _print(" [ ] Trying to connect to peer " + node[0] + " " + node[1])
+            host, port = node[1].split(":")
+            point = TCP4ClientEndpoint(reactor, host, int(port))
+            d = connectProtocol(point, PPProtocol(PPFactory, "SENDHELLO", "SPEAKER"))
+            d.addCallback(gotProtocol)
 
     def handle_getaddr(self, getaddr):
         self.send_addr()
@@ -136,13 +170,18 @@ class PPProtocol(Protocol):
             print ("Connected to myself.")
             self.transport.loseConnection()
         else:
-            print ("Pinging")
-            self.factory.peers[self.remote_nodeid] = self.remote_nodeid
-            self.lc_ping.start(30)
-            ### Inform our new peer about us
-            self.send_addr(mine=True)
-            ### and ask them for more peers
-            self.send_addr(mine=False)
+            self.send_hello()
+            self.add_peer()
+            if self.kind == "LISTENER":
+                # The listener pings it's audience
+                _print(" [ ] Starting pinger to " + self.remote_nodeid)
+                self.lc_ping.start(PING_INTERVAL, now=False)
+                # Tell new audience about my peers
+                self.send_addr()
+
+    def add_peer(self):
+        entry = (self.remote_ip, self.kind)
+        self.factory.peers[self.remote_nodeid] = entry
 
 def gotProtocol(p):
     """The callback to start the protocol exchange. We let connecting
