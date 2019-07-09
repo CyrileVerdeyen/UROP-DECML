@@ -107,7 +107,6 @@ class PPProtocol(Protocol):
     # The first message that gets sent
     def send_hello(self):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
-        print("Sending Hello")
         self.write(hello)
         self.state = "SENTHELLO"
 
@@ -147,15 +146,15 @@ class PPProtocol(Protocol):
                 _print(" [!] Not connecting to " + node[0] + ": thats me!")
                 continue
             if node[2] == "SPEAKER":
-                _print(" [ ] Not connecting to " + node[0] + ": is " + node[2])
+                _print(" [!] Not connecting to " + node[0] + ": is " + node[2])
                 continue
             if node[0] in self.factory.peers:
-                _print(" [ ] Not connecting to " + node[0]  + ": already connected")
+                _print(" [!] Not connecting to " + node[0]  + ": already connected")
                 continue
             _print(" [ ] Trying to connect to peer " + node[0] + " " + node[1])
             host, port = node[1].split(":")
             point = TCP4ClientEndpoint(reactor, host, int(port))
-            d = connectProtocol(point, PPProtocol(PPFactory, "SENDHELLO", "SPEAKER"))
+            d = connectProtocol(point, PPProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
 
     def handle_getaddr(self, getaddr):
@@ -165,13 +164,20 @@ class PPProtocol(Protocol):
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
-        print("Got hello from: " , self.remote_nodeid)
+        print("Got hello from: " , self.remote_nodeid, self.remote_ip)
+        
         if self.remote_nodeid == self.nodeid:
-            print ("Connected to myself.")
+            print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
+            if self.state == "HELLO" :
+                self.add_peer("SPEAKER")
+            elif self.state == "SENTHELLO":
+                self.add_peer("LISTENER")
+
             self.send_hello()
-            self.add_peer()
+
+            print(self.kind)
             if self.kind == "LISTENER":
                 # The listener pings it's audience
                 _print(" [ ] Starting pinger to " + self.remote_nodeid)
@@ -179,8 +185,8 @@ class PPProtocol(Protocol):
                 # Tell new audience about my peers
                 self.send_addr()
 
-    def add_peer(self):
-        entry = (self.remote_ip, self.kind)
+    def add_peer(self, kind):
+        entry = (self.remote_ip, kind)
         self.factory.peers[self.remote_nodeid] = entry
 
 def gotProtocol(p):

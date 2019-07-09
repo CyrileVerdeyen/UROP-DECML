@@ -50,7 +50,7 @@ class test():
             _print("     [*] ", bootstrap)
             host, port = bootstrap.split(":")
             point = TCP4ClientEndpoint(reactor, host, int(port))
-            d = connectProtocol(point, PPProtocol(self.ppfactory))
+            d = connectProtocol(point, PPProtocol(self.ppfactory, "HELLO", "LISTENER"))
             d.addCallback(gotProtocol)
         reactor.run()
 

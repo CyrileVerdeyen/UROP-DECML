@@ -41,3 +41,23 @@ class node3():
         server3 = testFrame.test(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
         server3.server()
         server3.client()
+
+class node4():
+    def __init__(self):
+        self.DEFAULT_PORT = 5012
+        self.BOOTSRAP_NODES = ["localhost:5011"]
+
+    def run(self):
+        server4 = testFrame.test(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server4.server()
+        server4.client()
+
+class node5():
+    def __init__(self):
+        self.DEFAULT_PORT = 5013
+        self.BOOTSRAP_NODES = ["localhost:5012"]
+
+    def run(self):
+        server5 = testFrame.test(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server5.server()
+        server5.client()
