@@ -15,6 +15,7 @@ from crypto import generate_nodeid
 
 
 PING_INTERVAL = 30.0 # Interval for pinging
+PEERS_INTERVAL = 90.0 # Interval for asking again for peers
 
 def _print(*args):
     # double, make common module
@@ -48,6 +49,7 @@ class PPProtocol(Protocol):
         self.remote_nodeid = None
         self.nodeid = self.factory.nodeid
         self.lc_ping = LoopingCall(self.send_ping)
+        self.lc_peers = LoopingCall(self.send_addr)
         self.lastping = None
         self.lastpong = None
 
@@ -100,11 +102,6 @@ class PPProtocol(Protocol):
             elif msgtype == "addr":
                 self.handle_addr(line)
 
-    # Handles connected messages
-    def handle_connected(self):
-        ## Messages don't send without a connected being sent first
-        pass
-
     # The first message that gets sent
     def send_hello(self):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
@@ -131,7 +128,7 @@ class PPProtocol(Protocol):
         self.lastpong = time()
         addr, kind = self.factory.peers[self.remote_nodeid][:2]
         self.factory.peers[self.remote_nodeid] = (addr, kind, (self.lastpong - self.lastping))
-        print(self.factory.peers[self.remote_nodeid])
+        print(self.factory.peers)
 
     # Send the addresses to other nodes and own node
     def send_addr(self):
@@ -184,6 +181,7 @@ class PPProtocol(Protocol):
 
             _print(" [ ] Starting pinger to " + self.remote_nodeid)
             self.lc_ping.start(PING_INTERVAL, now=True)
+            self.lc_peers.start(PEERS_INTERVAL, now=False)
 
             if self.kind == "LISTENER":
                 # Tell new audience about my peers
