@@ -42,12 +42,10 @@ class test():
             raise SystemExit
 
     def client(self):
-        
-        _print(" [ ] Trying to connect to host : localhost:", self.DEFAULT_PORT)
 
         for bootstrap in self.BOOTSTRAP_NODES + [a+":"+str(self.DEFAULT_PORT) for a in self.args.bootstrap]:
 
-            _print("     [*] ", bootstrap)
+            _print(" [*] ", bootstrap)
             host, port = bootstrap.split(":")
             point = TCP4ClientEndpoint(reactor, host, int(port))
             d = connectProtocol(point, PPProtocol(self.ppfactory, "HELLO", "LISTENER"))
