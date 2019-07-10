@@ -23,7 +23,7 @@ def _print(*args):
     print (time)
     print ("".join(map(str, args)))
 
-## The factory class houses all the different protocols that each node has, as well as any other constant data. 
+## The factory class houses all the different protocols that each node has, as well as any other constant data.
 class PPFactory(Factory):
     def __init__(self):
         pass
@@ -68,7 +68,7 @@ class PPProtocol(Protocol):
     # This method gets called everytime a connection gets made to a node.
     def connectionMade(self):
         remote_ip = self.transport.getPeer()
-        host_ip = self.transport.getHost()  
+        host_ip = self.transport.getHost()
         self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         self.factory.numProtocols = self.factory.numProtocols + 1
@@ -167,7 +167,7 @@ class PPProtocol(Protocol):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
         print("Got hello from: " , self.remote_nodeid, self.remote_ip)
-        
+
         if self.remote_nodeid == self.nodeid:
             print (" [!] Connected to myself.")
             self.transport.loseConnection()
@@ -193,5 +193,5 @@ class PPProtocol(Protocol):
 
 def gotProtocol(p):
     """The callback to start the protocol exchange. We let connecting
-    nodes start the hello handshake""" 
+    nodes start the hello handshake"""
     p.send_hello()

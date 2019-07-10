@@ -2,7 +2,7 @@ import argparse
 from datetime import datetime
 from threading import Thread
 
-from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint) 
+from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint)
 from twisted.internet import reactor
 from twisted.internet.error import CannotListenError
 from twisted.internet.endpoints import connectProtocol
