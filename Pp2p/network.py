@@ -41,11 +41,12 @@ class PPFactory(Factory):
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
 class PPProtocol(Protocol):
-    def __init__(self, factory, state="HELLO", kind="LISTENER"):
+    def __init__(self, factory, state="HELLO", kind="LISTENER", type="NODE"):
         self.factory = factory
         self.state = state
         self.VERSION = 0
         self.kind = kind
+        self.type = type
         self.remote_nodeid = None
         self.nodeid = self.factory.nodeid
         self.lc_ping = LoopingCall(self.send_ping)
@@ -63,7 +64,7 @@ class PPProtocol(Protocol):
             _print(" [ ] PEERS:")
             for peer in self.factory.peers:
                 addr, kind = self.factory.peers[peer][:2]
-            _print("     [*]", peer, "at", addr, kind)
+            _print(" [*]", peer, "at", addr, kind)
 
     # This method gets called everytime a connection gets made to a node.
     def connectionMade(self):
@@ -128,7 +129,6 @@ class PPProtocol(Protocol):
         self.lastpong = time()
         addr, kind = self.factory.peers[self.remote_nodeid][:2]
         self.factory.peers[self.remote_nodeid] = (addr, kind, (self.lastpong - self.lastping))
-        print(self.factory.peers)
 
     # Send the addresses to other nodes and own node
     def send_addr(self):
