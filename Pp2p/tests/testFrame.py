@@ -10,6 +10,7 @@ from twisted.internet.endpoints import connectProtocol
 import sys
 sys.path.append("..")
 from network import (PPFactory, PPProtocol, gotProtocol)
+from clusterOperator import (COFactory, COProtocol, gotProtocol)
 
 def _print(*args):
     # double, make common module
@@ -17,7 +18,7 @@ def _print(*args):
     print (time)
     print ("".join(map(str, args)))
 
-class test():
+class testPP():
 
     def __init__(self, Port, BootstrapNodes=[]):
 
@@ -53,3 +54,38 @@ class test():
         reactor.run()
 
         #Thread(target=reactor.run, args=(False,)).start()
+
+class testCO():
+    def __init__(self, Port, BootstrapNodes=[]):
+
+        self.BOOTSTRAP_NODES = BootstrapNodes
+        self.DEFAULT_PORT = Port
+
+        parser = argparse.ArgumentParser(description="server")
+        parser.add_argument('--port', type=int, default=self.DEFAULT_PORT)
+        parser.add_argument('--listen', default="localhost")
+        parser.add_argument('--bootstrap', action="append", default=[])
+
+        self.args = parser.parse_args()
+
+    def server(self):
+        try:
+            endpoint = TCP4ServerEndpoint(reactor, self.args.port, interface=self.args.listen)
+            _print(" [ ] THIS IS THE CO")
+            _print(" [ ] LISTEN:", self.args.listen, ":", self.args.port)
+            self.cofactory = COFactory()
+            endpoint.listen(self.cofactory)
+        except CannotListenError:
+            _print("[!] Address in use")
+            raise SystemExit
+    
+    def client(self):
+
+        for bootstrap in self.BOOTSTRAP_NODES + [a+":"+str(self.DEFAULT_PORT) for a in self.args.bootstrap]:
+
+            _print(" [*] ", bootstrap)
+            host, port = bootstrap.split(":")
+            point = TCP4ClientEndpoint(reactor, host, int(port))
+            d = connectProtocol(point, COProtocol(self.cofactory, "HELLO", "LISTENER"))
+            d.addCallback(gotProtocol)
+        reactor.run()

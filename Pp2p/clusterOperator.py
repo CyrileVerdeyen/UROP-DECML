@@ -1,10 +1,9 @@
-## Code addapted from https://benediktkr.github.io/dev/2016/02/04/p2p-with-twisted.html
 ## Author: Cyrile Verdeyen
 
 import json
+import itertools
 from time import time
 from datetime import datetime
-import random
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
@@ -14,9 +13,7 @@ from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
 
-
-PING_INTERVAL = 30.0 # Interval for pinging
-PEERS_INTERVAL = 90.0 # Interval for asking again for peers
+QUESTION_INTERVAL = 10.0 #How often we send out questions
 
 def _print(*args):
     # double, make common module
@@ -25,7 +22,7 @@ def _print(*args):
     print ("".join(map(str, args)))
 
 ## The factory class houses all the different protocols that each node has, as well as any other constant data.
-class PPFactory(Factory):
+class COFactory(Factory):
     def __init__(self):
         pass
 
@@ -33,16 +30,18 @@ class PPFactory(Factory):
         self.peers = {}
         self.nodeid = generate_nodeid()[:10]
         self.numProtocols = 0
+        self.questions = {}
+        self.questionID = 0
 
     def stopFactory(self):
         pass
 
     def buildProtocol(self, addr):
-        return PPProtocol(self, "HELLO", "LISTENER")
+        return COProtocol(self, "HELLO", "LISTENER", "OPERATOR")
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
-class PPProtocol(Protocol):
-    def __init__(self, factory, state="HELLO", kind="LISTENER", type="NODE"):
+class COProtocol(Protocol):
+    def __init__(self, factory, state="HELLO", kind="LISTENER", type="OPERATOR"):
         self.factory = factory
         self.state = state
         self.VERSION = 0
@@ -50,10 +49,8 @@ class PPProtocol(Protocol):
         self.type = type
         self.remote_nodeid = None
         self.nodeid = self.factory.nodeid
-        self.lc_ping = LoopingCall(self.send_ping)
-        self.lc_peers = LoopingCall(self.send_addr)
-        self.lastping = None
-        self.lastpong = None
+        self.lc_question = LoopingCall(self.send_question)
+        self.lastQuestion = 0
 
     def write(self, line):
         self.transport.write((line + "\n").encode('utf-8'))
@@ -78,12 +75,8 @@ class PPProtocol(Protocol):
 
     # This gets called everytime a node dissconects.
     def connectionLost(self, reason):
-        if self.remote_nodeid in self.factory.peers:
-            self.factory.peers.pop(self.remote_nodeid)
-            try: self.lc_ping.stop()
-            except AssertionError: pass
         self.factory.numProtocols = self.factory.numProtocols - 1
-        print (" [X] A Node dissconected. Connections left ", self.factory.numProtocols)
+        print (" [X] Node ", self.remote_ip, " dissconected. Connections left ", self.factory.numProtocols)
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
     def dataReceived(self, data):
@@ -94,30 +87,19 @@ class PPProtocol(Protocol):
                 # Force first message to be HELLO or crash
                 if msgtype == 'hello':
                     self.handle_hello(line)
+                elif msgtype == 'question':
+                    self.handle_question(line)
                 else:
                     _print(" [!] Ignoring", msgtype, "in", self.state)
                 self.state = "READY"
-            elif msgtype == "ping":
-                self.handle_ping()
-            elif msgtype == "pong":
-                self.handle_pong()
-            elif msgtype == "addr":
+            elif msgtype == 'ping':
+                self.handle_ping
+            elif msgtype == 'addr':
                 self.handle_addr(line)
-            elif msgtype == "question":
+            elif msgtype == 'question':
                 self.handle_question(line)
-
-    # The first message that gets sent
-    def send_hello(self):
-        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
-        self.write(hello)
-        self.state = "SENTHELLO"
-
-    # Ping pongs are used to verify the excistance of nodes, and making sure that they have not disconected.
-    def send_ping(self):
-        ping = json.dumps({'msgtype': 'ping'})
-        self.lastping = time()
-        print (" [>] PING to", self.remote_nodeid, "at", self.remote_ip)
-        self.write(ping)
+            elif msgtype == 'response':
+                self.handle_response(line)
 
     def send_pong(self):
         pong = json.dumps({'msgtype': 'pong'})
@@ -126,61 +108,54 @@ class PPProtocol(Protocol):
     def handle_ping(self):
         self.send_pong()
 
-    def handle_pong(self):
-        print (" [<] Got pong from", self.remote_nodeid, "at", self.remote_ip)
-        ### Update the timestamp
-        self.lastpong = time()
-        addr, kind = self.factory.peers[self.remote_nodeid][:2]
-        self.factory.peers[self.remote_nodeid] = (addr, kind, (self.lastpong - self.lastping))
+    # The first message that gets sent
+    def send_hello(self):
+        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
+        self.write(hello)
+        self.state = "SENTHELLO"
 
-    # Send the addresses to other nodes and own node
-    def send_addr(self):
-        peers = self.factory.peers
-        listeners = [(n, peers[n][0], peers[n][1])
-                    for n in peers]
+    # Method that takes question requests and adds them to a queue
+    def handle_question(self, question):
+        json1 = json.loads(question)
+        self.factory.questions[self.factory.questionID] = json1["question"]
+        print("Got this quesiton: ", self.factory.questions[self.factory.questionID])
+        self.factory.questionID = self.factory.questionID + 1
 
-        addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
-        self.write(addr)
+    # Method that sends out the questions in the queue to the nodes
+    def send_question(self):
+        questions = self.factory.questions
+        print(questions)
+        if (questions) and (self.lastQuestion != self.factory.questionID):
+            question = [(n, questions[n][0])
+                        for n in itertools.islice(questions, self.lastQuestion, None)]
 
-    # Handle the addresses that get sent by other nodes, and contact them if new
+            message = json.dumps({'msgtype': 'question', 'question': question})
+            print(" [>] Sending: ", question, " to ", self.remote_nodeid, self.remote_ip,)
+            self.write(message)
+            self.lastQuestion = self.factory.questionID
+
+        else:
+            _print(" [ ] No questions to send")
+
+    def handle_response(self, response):
+        responses = json.loads(response)
+        for answer in responses["response"]:
+            print(" [<] Answer from ", self.remote_nodeid, self.remote_ip, "is ", answer)
+
+    # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):
         json1 = json.loads(addr)
         for node in json1["nodes"]:
-            _print(" [*] Recieved Node: "  + node[0] + " " + node[1] + " " + node[2])
             if node[0] == self.nodeid:
-                _print(" [!] Not connecting to " + node[0] + ": thats me!")
                 continue
             if node[2] == "SPEAKER":
-                _print(" [!] Not connecting to " + node[0] + ": is " + node[2])
                 continue
             if node[0] in self.factory.peers:
-                _print(" [!] Not connecting to " + node[0]  + ": already connected")
                 continue
-            _print(" [ ] Trying to connect to peer " + node[0] + " " + node[1])
             host, port = node[1].split(":")
             point = TCP4ClientEndpoint(reactor, host, int(port))
-            d = connectProtocol(point, PPProtocol(self.factory, "HELLO", "SPEAKER"))
+            d = connectProtocol(point, COProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
-
-    def handle_getaddr(self, getaddr):
-        self.send_addr()
-
-    def handle_question(self, question):
-        message = json.loads(question)
-        answers = []
-        for question in message["question"]:
-            yn = random.uniform(0, 1)
-            if (yn < 0.5 ):
-                answer = ("Response to " + str(question[0]) + " is no")
-            else:
-                answer = ("Response to " + str(question[0]) + " is yes")
-            print(answer)
-            answers.append(answer)
-        self.send_response(answers)
-
-    def send_response(self, response):
-        message = json.dumps({'msgtype': 'response', 'response': response})
-        self.write(message)
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
@@ -199,13 +174,8 @@ class PPProtocol(Protocol):
 
             self.send_hello()
 
-            _print(" [ ] Starting pinger to " + self.remote_nodeid)
-            self.lc_ping.start(PING_INTERVAL, now=True)
-            self.lc_peers.start(PEERS_INTERVAL, now=False)
-
-            if self.kind == "LISTENER":
-                # Tell new audience about my peers
-                self.send_addr()
+            _print(" [ ] Adding ", self.remote_nodeid, " to question list")
+            self.lc_question.start(QUESTION_INTERVAL, now=False)
 
     def add_peer(self, kind):
         entry = (self.remote_ip, kind)
