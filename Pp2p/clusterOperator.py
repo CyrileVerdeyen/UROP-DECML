@@ -13,7 +13,7 @@ from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
 
-QUESTION_INTERVAL = 10.0 #How often we send out questions
+QUESTION_INTERVAL = 30.0 #How often we send out questions
 
 def _print(*args):
     # double, make common module
@@ -117,17 +117,18 @@ class COProtocol(Protocol):
     # Method that takes question requests and adds them to a queue
     def handle_question(self, question):
         json1 = json.loads(question)
-        self.factory.questions[self.factory.questionID] = json1["question"]
-        print("Got this quesiton: ", self.factory.questions[self.factory.questionID])
-        self.factory.questionID = self.factory.questionID + 1
+        for question in json1["question"]:
+            self.factory.questions[self.factory.questionID] = question
+            print(" [<] Recieved this question: ", self.factory.questionID, self.factory.questions[self.factory.questionID])
+            self.factory.questionID = self.factory.questionID + 1
 
     # Method that sends out the questions in the queue to the nodes
     def send_question(self):
         questions = self.factory.questions
-        print(questions)
+        question = []
         if (questions) and (self.lastQuestion != self.factory.questionID):
-            question = [(n, questions[n][0])
-                        for n in itertools.islice(questions, self.lastQuestion, None)]
+            for n in range(self.lastQuestion, self.factory.questionID):
+                question.append((n, questions[n]))
 
             message = json.dumps({'msgtype': 'question', 'question': question})
             print(" [>] Sending: ", question, " to ", self.remote_nodeid, self.remote_ip,)
