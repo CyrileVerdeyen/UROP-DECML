@@ -13,7 +13,7 @@ from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
 
-QUESTION_INTERVAL = 30.0 #How often we send out questions
+QUESTION_INTERVAL = 10.0 #How often we send out questions
 
 def _print(*args):
     # double, make common module
@@ -165,11 +165,17 @@ class COProtocol(Protocol):
             self.factory.response[answer[0]].append(answer[1])
 
     def send_response(self):
-        for i in self.factory.questionNode[self.remote_ip]:
-        _print(" [>] Sending answer to ", self.remote_ip)
-        response = json.dumps({'msgtype': 'response', 'response': self.factory.response})
-        self.factory.response
-        self.write(response)
+        answer = {}
+        print(self.factory.questionNode[self.remote_ip])
+        if self.factory.questionNode[self.remote_ip]:
+            for i in self.factory.questionNode[self.remote_ip]:
+                answer[i] = self.factory.response[i]
+                del self.factory.response[i]
+                self.factory.questionNode[self.remote_ip].remove(i)
+
+            _print(" [>] Sending answer to ", self.remote_ip)
+            response = json.dumps({'msgtype': 'response', 'response': answer})
+            self.write(response)
 
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):

@@ -23,7 +23,7 @@ try:
     sock.connect((HOST, PORT))
     sock.sendall(data0)
 
-    time.sleep(45)
+    time.sleep(20)
 
     sock.sendall(data1)
 
