@@ -27,9 +27,10 @@ try:
 
     sock.sendall(data1)
 
-    answer = sock.recv()
+    while (True):
+        answer = sock.recv(512)
+        print(answer)
+
 
 finally:
     sock.close()
-
-print(answer)

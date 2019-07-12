@@ -1,9 +1,9 @@
 ## Author: Cyrile Verdeyen
 
 import json
-import itertools
 from time import time
 from datetime import datetime
+from collections import defaultdict
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
@@ -28,10 +28,14 @@ class COFactory(Factory):
 
     def startFactory(self):
         self.peers = {}
+        self.questionNode = {}
         self.nodeid = generate_nodeid()[:10]
         self.numProtocols = 0
         self.questions = {}
         self.questionID = 0
+        self.questionSent = 0
+        self.lastQuestionSent = 0
+        self.response = defaultdict(list)
 
     def stopFactory(self):
         pass
@@ -50,19 +54,19 @@ class COProtocol(Protocol):
         self.remote_nodeid = None
         self.nodeid = self.factory.nodeid
         self.lc_question = LoopingCall(self.send_question)
-        self.lastQuestion = 0
+        self.lc_response = LoopingCall(self.send_response)
 
     def write(self, line):
         self.transport.write((line + "\n").encode('utf-8'))
 
-    def print_peers(self):
+    def _print_peers(self):
         if len(self.factory.peers) == 0:
             _print(" [!] PEERS: No peers connected.")
         else:
             _print(" [ ] PEERS:")
             for peer in self.factory.peers:
                 addr, kind = self.factory.peers[peer][:2]
-            _print(" [*]", peer, "at", addr, kind)
+            print(" [*]", peer, "at", addr, kind)
 
     # This method gets called everytime a connection gets made to a node.
     def connectionMade(self):
@@ -71,12 +75,18 @@ class COProtocol(Protocol):
         self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         self.factory.numProtocols = self.factory.numProtocols + 1
-        print (" [*] Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
+        _print (" [*] Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
 
     # This gets called everytime a node dissconects.
     def connectionLost(self, reason):
+        if self.remote_nodeid in self.factory.peers:
+            self.factory.peers.pop(self.remote_nodeid)
+            try: self.lc_question.stop()
+            except AssertionError: pass
+        if self.remote_ip in self.factory.questionNode:
+            self.factory.questionNode.pop(self.remote_ip)
         self.factory.numProtocols = self.factory.numProtocols - 1
-        print (" [X] Node ", self.remote_ip, " dissconected. Connections left ", self.factory.numProtocols)
+        _print (" [X] Node ", self.remote_ip, " dissconected. Connections left ", self.factory.numProtocols)
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
     def dataReceived(self, data):
@@ -116,32 +126,50 @@ class COProtocol(Protocol):
 
     # Method that takes question requests and adds them to a queue
     def handle_question(self, question):
+        if self.remote_ip not in self.factory.questionNode:
+            self.factory.questionNode[self.remote_ip] = []
+            self.lc_response.start(QUESTION_INTERVAL, now=False)
         json1 = json.loads(question)
         for question in json1["question"]:
             self.factory.questions[self.factory.questionID] = question
-            print(" [<] Recieved this question: ", self.factory.questionID, self.factory.questions[self.factory.questionID])
+            _print(" [<] Recieved this question: ", self.factory.questionID, " ", self.factory.questions[self.factory.questionID])
+            self.factory.questionNode[self.remote_ip].append(self.factory.questionID)
             self.factory.questionID = self.factory.questionID + 1
+        self.factory.questionSent = 0
 
     # Method that sends out the questions in the queue to the nodes
     def send_question(self):
         questions = self.factory.questions
         question = []
-        if (questions) and (self.lastQuestion != self.factory.questionID):
-            for n in range(self.lastQuestion, self.factory.questionID):
-                question.append((n, questions[n]))
+        if self.factory.questionSent <= 2 : # CO only sends 3 questions out to whoever is still on that connected first
+            if (questions) and (self.factory.lastQuestionSent != self.factory.questionID):  # If there are new questions
+                for n in range(self.factory.lastQuestionSent, self.factory.questionID):
+                    question.append((n, questions[n]))
 
-            message = json.dumps({'msgtype': 'question', 'question': question})
-            print(" [>] Sending: ", question, " to ", self.remote_nodeid, self.remote_ip,)
-            self.write(message)
-            self.lastQuestion = self.factory.questionID
+                message = json.dumps({'msgtype': 'question', 'question': question})
+                _print(" [>] Sending: ", question, " to ", self.remote_nodeid, self.remote_ip,)
+                self.write(message)
 
-        else:
-            _print(" [ ] No questions to send")
+            else:
+                _print(" [ ] No questions to send")
+
+            if self.factory.questionSent == 2: # Last of three nodes updates last question sent out
+                self.factory.lastQuestionSent = self.factory.questionID
+
+            self.factory.questionSent += 1
 
     def handle_response(self, response):
         responses = json.loads(response)
         for answer in responses["response"]:
-            print(" [<] Answer from ", self.remote_nodeid, self.remote_ip, "is ", answer)
+            _print(" [<] Answer from ", self.remote_nodeid, " ", self.remote_ip, " for question " , answer[0], " is ", answer[1])
+            self.factory.response[answer[0]].append(answer[1])
+
+    def send_response(self):
+        for i in self.factory.questionNode[self.remote_ip]:
+        _print(" [>] Sending answer to ", self.remote_ip)
+        response = json.dumps({'msgtype': 'response', 'response': self.factory.response})
+        self.factory.response
+        self.write(response)
 
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):
@@ -162,10 +190,10 @@ class COProtocol(Protocol):
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
-        print("Got hello from: " , self.remote_nodeid, self.remote_ip)
+        _print(" [<] Got hello from: " , self.remote_nodeid, self.remote_ip)
 
         if self.remote_nodeid == self.nodeid:
-            print (" [!] Connected to myself.")
+            _print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
             if self.state == "HELLO" :
@@ -174,8 +202,6 @@ class COProtocol(Protocol):
                 self.add_peer("LISTENER")
 
             self.send_hello()
-
-            _print(" [ ] Adding ", self.remote_nodeid, " to question list")
             self.lc_question.start(QUESTION_INTERVAL, now=False)
 
     def add_peer(self, kind):

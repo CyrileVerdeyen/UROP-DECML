@@ -33,6 +33,7 @@ class PPFactory(Factory):
         self.peers = {}
         self.nodeid = generate_nodeid()[:10]
         self.numProtocols = 0
+        self.answeredQuestions = []
 
     def stopFactory(self):
         pass
@@ -65,7 +66,7 @@ class PPProtocol(Protocol):
             _print(" [ ] PEERS:")
             for peer in self.factory.peers:
                 addr, kind = self.factory.peers[peer][:2]
-            _print(" [*]", peer, "at", addr, kind)
+            print(" [*]", peer, "at", addr, kind)
 
     # This method gets called everytime a connection gets made to a node.
     def connectionMade(self):
@@ -74,7 +75,7 @@ class PPProtocol(Protocol):
         self.remote_ip = remote_ip.host + ":" + str(remote_ip.port)
         self.host_ip = host_ip.host + ":" + str(host_ip.port)
         self.factory.numProtocols = self.factory.numProtocols + 1
-        print (" [*] Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
+        _print (" [*] Connection from", self.transport.getPeer(), " Number of connections: ", self.factory.numProtocols)
 
     # This gets called everytime a node dissconects.
     def connectionLost(self, reason):
@@ -83,7 +84,7 @@ class PPProtocol(Protocol):
             try: self.lc_ping.stop()
             except AssertionError: pass
         self.factory.numProtocols = self.factory.numProtocols - 1
-        print (" [X] A Node dissconected. Connections left ", self.factory.numProtocols)
+        _print (" [X] A Node dissconected. Connections left ", self.factory.numProtocols)
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
     def dataReceived(self, data):
@@ -116,7 +117,7 @@ class PPProtocol(Protocol):
     def send_ping(self):
         ping = json.dumps({'msgtype': 'ping'})
         self.lastping = time()
-        print (" [>] PING to", self.remote_nodeid, "at", self.remote_ip)
+        _print (" [>] PING to", self.remote_nodeid, "at", self.remote_ip)
         self.write(ping)
 
     def send_pong(self):
@@ -127,7 +128,7 @@ class PPProtocol(Protocol):
         self.send_pong()
 
     def handle_pong(self):
-        print (" [<] Got pong from", self.remote_nodeid, "at", self.remote_ip)
+        _print (" [<] Got pong from", self.remote_nodeid, "at", self.remote_ip)
         ### Update the timestamp
         self.lastpong = time()
         addr, kind = self.factory.peers[self.remote_nodeid][:2]
@@ -168,28 +169,33 @@ class PPProtocol(Protocol):
     def handle_question(self, question):
         message = json.loads(question)
         answers = []
-        for question in message["question"]:
-            yn = random.uniform(0, 1)
-            if (yn < 0.5 ):
-                answer = ("Response to " + str(question[0]) + " is no")
+        for question in message["question"]: # For each questoin
+            if question[0] not in self.factory.answeredQuestions: # If I have not ye answered this question
+                yn = random.uniform(0, 1)
+                if (yn < 0.5 ):
+                    answer = ("no")
+                else:
+                    answer = ("yes")
+                _print( " [ ] Response to " + str(question[0]) + " is " + answer)
+                answers.append((question[0], answer))
+                self.factory.answeredQuestions.append(question[0])
             else:
-                answer = ("Response to " + str(question[0]) + " is yes")
-            print(answer)
-            answers.append(answer)
+                _print(" [!] Answered question " + str(question[0]) + " already")
         self.send_response(answers)
 
     def send_response(self, response):
         message = json.dumps({'msgtype': 'response', 'response': response})
+        _print = " [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip
         self.write(message)
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
-        print("Got hello from: " , self.remote_nodeid, self.remote_ip)
+        _print(" [<] Got hello from: " , self.remote_nodeid, self.remote_ip)
 
         if self.remote_nodeid == self.nodeid:
-            print (" [!] Connected to myself.")
+            _print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
             if self.state == "HELLO" :
