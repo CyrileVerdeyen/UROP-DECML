@@ -13,7 +13,9 @@ from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
 
-QUESTION_INTERVAL = 10.0 #How often we send out questions
+QUESTION_INTERVAL = 1.0 # How often we send out questions
+RESPONSE_INTERVAL = 1.0 # How often we send out questions
+TIMES_TO_SEND = 3 # Amount of nodes that recieve the question
 
 def _print(*args):
     # double, make common module
@@ -33,7 +35,7 @@ class COFactory(Factory):
         self.numProtocols = 0
         self.questions = {}
         self.questionID = 0
-        self.questionSent = 0
+        self.questionsLeft = 0
         self.lastQuestionSent = 0
         self.response = defaultdict(list)
 
@@ -85,6 +87,8 @@ class COProtocol(Protocol):
             except AssertionError: pass
         if self.remote_ip in self.factory.questionNode:
             self.factory.questionNode.pop(self.remote_ip)
+            try: self.lc_response.stop()
+            except AssertionError: pass
         self.factory.numProtocols = self.factory.numProtocols - 1
         _print (" [X] Node ", self.remote_ip, " dissconected. Connections left ", self.factory.numProtocols)
 
@@ -126,47 +130,49 @@ class COProtocol(Protocol):
 
     # Method that takes question requests and adds them to a queue
     def handle_question(self, question):
-        if self.remote_ip not in self.factory.questionNode:
+        if self.remote_ip not in self.factory.questionNode: # Added node as a question giver to send back info to later
             self.factory.questionNode[self.remote_ip] = []
-            self.lc_response.start(QUESTION_INTERVAL, now=False)
+            self.lc_response.start(RESPONSE_INTERVAL, now=False)
+
         json1 = json.loads(question)
         for question in json1["question"]:
-            self.factory.questions[self.factory.questionID] = question
-            _print(" [<] Recieved this question: ", self.factory.questionID, " ", self.factory.questions[self.factory.questionID])
+            self.factory.questions[self.factory.questionID] = (question, TIMES_TO_SEND)
+            _print(" [<] Recieved this question: ", self.factory.questionID, " ", self.factory.questions[self.factory.questionID][0])
             self.factory.questionNode[self.remote_ip].append(self.factory.questionID)
             self.factory.questionID = self.factory.questionID + 1
-        self.factory.questionSent = 0
+            self.factory.questionsLeft += TIMES_TO_SEND
 
     # Method that sends out the questions in the queue to the nodes
     def send_question(self):
         questions = self.factory.questions
-        question = []
-        if self.factory.questionSent <= 2 : # CO only sends 3 questions out to whoever is still on that connected first
-            if (questions) and (self.factory.lastQuestionSent != self.factory.questionID):  # If there are new questions
-                for n in range(self.factory.lastQuestionSent, self.factory.questionID):
-                    question.append((n, questions[n]))
 
-                message = json.dumps({'msgtype': 'question', 'question': question})
-                _print(" [>] Sending: ", question, " to ", self.remote_nodeid, self.remote_ip,)
+        if self.factory.questionsLeft > 0 : # CO only sends each question to 3 nodes
+            if (questions) and (self.factory.lastQuestionSent != self.factory.questionID):  # If there are new questions
+                message = json.dumps({'msgtype': 'question', 'questionID': self.factory.lastQuestionSent, 'question': questions[self.factory.lastQuestionSent][0], 
+                                        'answer': [], 'IDS': []})
+                _print(" [>] Sending: ", self.factory.lastQuestionSent, " to ", self.remote_nodeid, self.remote_ip)
                 self.write(message)
+
+                questions[self.factory.lastQuestionSent] = (questions[self.factory.lastQuestionSent][0], (questions[self.factory.lastQuestionSent][1] - 1) ) #Each question gets sent 3 times
+
+                if questions[self.factory.lastQuestionSent][1] == 0 :
+                    self.factory.lastQuestionSent += 1
+
+                self.factory.questionsLeft -= 1
 
             else:
                 _print(" [ ] No questions to send")
 
-            if self.factory.questionSent == 2: # Last of three nodes updates last question sent out
-                self.factory.lastQuestionSent = self.factory.questionID
-
-            self.factory.questionSent += 1
 
     def handle_response(self, response):
         responses = json.loads(response)
-        for answer in responses["response"]:
-            _print(" [<] Answer from ", self.remote_nodeid, " ", self.remote_ip, " for question " , answer[0], " is ", answer[1])
-            self.factory.response[answer[0]].append(answer[1])
+        
+        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"] )
+
+        self.factory.response[responses["questionID"]].append(responses["answer"])
 
     def send_response(self):
         answer = {}
-        print(self.factory.questionNode[self.remote_ip])
         if self.factory.questionNode[self.remote_ip]:
             for i in self.factory.questionNode[self.remote_ip]:
                 answer[i] = self.factory.response[i]

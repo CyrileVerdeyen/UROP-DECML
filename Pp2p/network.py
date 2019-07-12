@@ -34,6 +34,7 @@ class PPFactory(Factory):
         self.nodeid = generate_nodeid()[:10]
         self.numProtocols = 0
         self.answeredQuestions = []
+        self.questions = {}
 
     def stopFactory(self):
         pass
@@ -169,24 +170,42 @@ class PPProtocol(Protocol):
     def handle_question(self, question):
         message = json.loads(question)
         answers = []
-        for question in message["question"]: # For each questoin
-            if question[0] not in self.factory.answeredQuestions: # If I have not ye answered this question
-                yn = random.uniform(0, 1)
-                if (yn < 0.5 ):
-                    answer = ("no")
-                else:
-                    answer = ("yes")
-                _print( " [ ] Response to " + str(question[0]) + " is " + answer)
-                answers.append((question[0], answer))
-                self.factory.answeredQuestions.append(question[0])
-            else:
-                _print(" [!] Answered question " + str(question[0]) + " already")
-        self.send_response(answers)
+        IDS = []
 
-    def send_response(self, response):
-        message = json.dumps({'msgtype': 'response', 'response': response})
-        _print = " [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip
-        self.write(message)
+        if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this question
+            yn = random.uniform(0, 1) #TODO: actually get answers
+            if (yn < 0.5 ):
+                answer = ("no")
+            else:
+                answer = ("yes")
+            _print( " [ ] Response to " + str(message["questionID"]) + " is " + answer)
+
+            if message["answer"]: # If the message has other answers already
+                answers = message["answer"]
+                answers.append(answer)
+            else:
+                answers = [answer]
+
+            if message["IDS"]: # If the message has IDS of nodes that have responded
+                IDS = message["IDS"]
+                IDS.append(self.nodeid)
+            else:
+                IDS = [self.nodeid]
+
+            self.factory.answeredQuestions.append(message["questionID"])
+            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answer, IDS)
+            self.send_response()
+
+        else:
+            _print(" [!] Answered question " + str(question[0]) + " already")
+
+        
+
+    def send_response(self):
+        for response, info in self.factory.questions.items():
+            message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
+            _print = " [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip
+            self.write(message)
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
