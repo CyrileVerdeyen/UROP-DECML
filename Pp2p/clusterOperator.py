@@ -124,7 +124,7 @@ class COProtocol(Protocol):
 
     # The first message that gets sent
     def send_hello(self):
-        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
+        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello', 'type': 'CO'})
         self.write(hello)
         self.state = "SENTHELLO"
 
@@ -167,21 +167,23 @@ class COProtocol(Protocol):
     def handle_response(self, response):
         responses = json.loads(response)
         
-        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"] )
+        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"])
 
         self.factory.response[responses["questionID"]].append(responses["answer"])
+        print(self.factory.response[responses["questionID"]])
 
     def send_response(self):
         answer = {}
-        if self.factory.questionNode[self.remote_ip]:
-            for i in self.factory.questionNode[self.remote_ip]:
-                answer[i] = self.factory.response[i]
-                del self.factory.response[i]
-                self.factory.questionNode[self.remote_ip].remove(i)
+        if self.factory.questionNode[self.remote_ip]: # If the node we are connected to is a question node
+            for i in self.factory.questionNode[self.remote_ip]: # For each question that the question node has sent
+                if self.factory.response[i]:
+                    answer[i] = self.factory.response[i]
+                    del self.factory.response[i]
 
-            _print(" [>] Sending answer to ", self.remote_ip)
-            response = json.dumps({'msgtype': 'response', 'response': answer})
-            self.write(response)
+            if answer:
+                _print(" [>] Sending answer to ", self.remote_ip)
+                response = json.dumps({'msgtype': 'response', 'response': answer})
+                self.write(response)
 
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):

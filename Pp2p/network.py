@@ -16,7 +16,8 @@ from crypto import generate_nodeid
 
 
 PING_INTERVAL = 30.0 # Interval for pinging
-PEERS_INTERVAL = 90.0 # Interval for asking again for peers
+PEERS_INTERVAL = 180.0 # Interval for asking again for peers
+RESPONSE_INTERVAL = 30.0 # Interval for sending responses to questions
 
 def _print(*args):
     # double, make common module
@@ -32,6 +33,7 @@ class PPFactory(Factory):
     def startFactory(self):
         self.peers = {}
         self.nodeid = generate_nodeid()[:10]
+        _print(" [ ] Node ID is: ", self.nodeid)
         self.numProtocols = 0
         self.answeredQuestions = []
         self.questions = {}
@@ -54,8 +56,10 @@ class PPProtocol(Protocol):
         self.nodeid = self.factory.nodeid
         self.lc_ping = LoopingCall(self.send_ping)
         self.lc_peers = LoopingCall(self.send_addr)
+        self.lc_response = LoopingCall(self.send_response)
         self.lastping = None
         self.lastpong = None
+        self.sentResponse = []
 
     def write(self, line):
         self.transport.write((line + "\n").encode('utf-8'))
@@ -110,7 +114,7 @@ class PPProtocol(Protocol):
 
     # The first message that gets sent
     def send_hello(self):
-        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello'})
+        hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello', 'type': 'NODE'})
         self.write(hello)
         self.state = "SENTHELLO"
 
@@ -118,7 +122,7 @@ class PPProtocol(Protocol):
     def send_ping(self):
         ping = json.dumps({'msgtype': 'ping'})
         self.lastping = time()
-        _print (" [>] PING to", self.remote_nodeid, "at", self.remote_ip)
+        _print (" [>] PING to ", self.remote_nodeid, " at ", self.remote_ip)
         self.write(ping)
 
     def send_pong(self):
@@ -129,7 +133,7 @@ class PPProtocol(Protocol):
         self.send_pong()
 
     def handle_pong(self):
-        _print (" [<] Got pong from", self.remote_nodeid, "at", self.remote_ip)
+        _print (" [<] Got pong from ", self.remote_nodeid, " at ", self.remote_ip)
         ### Update the timestamp
         self.lastpong = time()
         addr, kind = self.factory.peers[self.remote_nodeid][:2]
@@ -172,12 +176,15 @@ class PPProtocol(Protocol):
         answers = []
         IDS = []
 
+        _print(" [<] Got question: " , message["questionID"], " from: ",self.remote_nodeid, self.remote_ip)
+
         if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this question
             yn = random.uniform(0, 1) #TODO: actually get answers
             if (yn < 0.5 ):
                 answer = ("no")
             else:
                 answer = ("yes")
+
             _print( " [ ] Response to " + str(message["questionID"]) + " is " + answer)
 
             if message["answer"]: # If the message has other answers already
@@ -186,47 +193,57 @@ class PPProtocol(Protocol):
             else:
                 answers = [answer]
 
-            if message["IDS"]: # If the message has IDS of nodes that have responded
+            if message["IDS"]: # If the message has IDS of nodes that have responded, add own ID to it
                 IDS = message["IDS"]
                 IDS.append(self.nodeid)
+
             else:
                 IDS = [self.nodeid]
 
             self.factory.answeredQuestions.append(message["questionID"])
             self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answer, IDS)
-            self.send_response()
 
         else:
             _print(" [!] Answered question " + str(question[0]) + " already")
 
-        
-
     def send_response(self):
-        for response, info in self.factory.questions.items():
-            message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-            _print = " [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip
-            self.write(message)
+        if self.factory.questions: # If there are questions
+            for response, info in self.factory.questions.items(): # For each question in the question log
+                if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
+                    if self.remote_nodeid not in info[3]: #If the node we are connected too has not yet responded to the question
+                        message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
+                        _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
+                        self.sentResponse.append(info[0])
+                        self.write(message)
+                    else:
+                        _print(" [!] Not sending question, ", info[1], " to ", self.remote_nodeid, self.remote_ip, " since it has already responded")
+
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
+        type = hello["type"]
         _print(" [<] Got hello from: " , self.remote_nodeid, self.remote_ip)
 
         if self.remote_nodeid == self.nodeid:
             _print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
-            if self.state == "HELLO" :
-                self.add_peer("SPEAKER")
-            elif self.state == "SENTHELLO":
-                self.add_peer("LISTENER")
+            if type == "NODE":
+                if self.state == "HELLO" :
+                    self.add_peer("SPEAKER")
+                elif self.state == "SENTHELLO":
+                    self.add_peer("LISTENER")
+            else:
+                self.add_peer("CO")
 
             self.send_hello()
 
             _print(" [ ] Starting pinger to " + self.remote_nodeid)
             self.lc_ping.start(PING_INTERVAL, now=True)
             self.lc_peers.start(PEERS_INTERVAL, now=False)
+            self.lc_response.start(RESPONSE_INTERVAL, now=True)
 
             if self.kind == "LISTENER":
                 # Tell new audience about my peers
