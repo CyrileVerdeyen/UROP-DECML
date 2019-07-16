@@ -53,6 +53,7 @@ class PPProtocol(Protocol):
         self.kind = kind
         self.type = type
         self.remote_nodeid = None
+        self.remote_type = None
         self.nodeid = self.factory.nodeid
         self.lc_ping = LoopingCall(self.send_ping)
         self.lc_peers = LoopingCall(self.send_addr)
@@ -207,30 +208,42 @@ class PPProtocol(Protocol):
             _print(" [!] Answered question " + str(question[0]) + " already")
 
     def send_response(self):
+        print("PEERS: ", self.factory.peers)
         if self.factory.questions: # If there are questions
             for response, info in self.factory.questions.items(): # For each question in the question log
+                notAnswered = []
                 if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
-                    if self.remote_nodeid not in info[3]: #If the node we are connected too has not yet responded to the question
+                    for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
+                        if peerInfo[1] == "NODE": # If the peer is a Node
+                            if peer not in info[3]: # If peer has not yet answered
+                                notAnswered.append(peer)
+                if notAnswered:
+                    for node in notAnswered:
+                        if self.remote_nodeid == node:
+                            message = json.dumps({'msgtype': 'question', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
+                            _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
+                            self.sentResponse.append(info[0])
+                            self.write(message)
+                else:
+                    if self.remote_type == "CO":
                         message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
                         _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
                         self.sentResponse.append(info[0])
                         self.write(message)
-                    else:
-                        _print(" [!] Not sending question, ", info[1], " to ", self.remote_nodeid, self.remote_ip, " since it has already responded")
 
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
         hello = json.loads(hello)
         self.remote_nodeid = hello["nodeid"]
-        type = hello["type"]
+        self.remote_type = hello["type"]
         _print(" [<] Got hello from: " , self.remote_nodeid, self.remote_ip)
 
         if self.remote_nodeid == self.nodeid:
             _print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
-            if type == "NODE":
+            if self.remote_type == "NODE":
                 if self.state == "HELLO" :
                     self.add_peer("SPEAKER")
                 elif self.state == "SENTHELLO":

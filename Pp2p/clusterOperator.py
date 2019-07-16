@@ -54,6 +54,7 @@ class COProtocol(Protocol):
         self.kind = kind
         self.type = type
         self.remote_nodeid = None
+        self.remote_type = "NODE"
         self.nodeid = self.factory.nodeid
         self.lc_question = LoopingCall(self.send_question)
         self.lc_response = LoopingCall(self.send_response)
@@ -148,7 +149,7 @@ class COProtocol(Protocol):
 
         if self.factory.questionsLeft > 0 : # CO only sends each question to 3 nodes
             if (questions) and (self.factory.lastQuestionSent != self.factory.questionID):  # If there are new questions
-                message = json.dumps({'msgtype': 'question', 'questionID': self.factory.lastQuestionSent, 'question': questions[self.factory.lastQuestionSent][0], 
+                message = json.dumps({'msgtype': 'question', 'questionID': self.factory.lastQuestionSent, 'question': questions[self.factory.lastQuestionSent][0],
                                         'answer': [], 'IDS': []})
                 _print(" [>] Sending: ", self.factory.lastQuestionSent, " to ", self.remote_nodeid, self.remote_ip)
                 self.write(message)
@@ -166,7 +167,7 @@ class COProtocol(Protocol):
 
     def handle_response(self, response):
         responses = json.loads(response)
-        
+
         _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"])
 
         self.factory.response[responses["questionID"]].append(responses["answer"])
