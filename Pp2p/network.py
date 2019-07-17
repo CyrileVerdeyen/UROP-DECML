@@ -17,7 +17,7 @@ from crypto import generate_nodeid
 
 PING_INTERVAL = 30.0 # Interval for pinging
 PEERS_INTERVAL = 180.0 # Interval for asking again for peers
-RESPONSE_INTERVAL = 30.0 # Interval for sending responses to questions
+RESPONSE_INTERVAL = 5.0 # Interval for sending responses to questions
 
 def _print(*args):
     # double, make common module
@@ -186,10 +186,10 @@ class PPProtocol(Protocol):
             else:
                 answer = ("yes")
 
-            _print( " [ ] Response to " + str(message["questionID"]) + " is " + answer)
+            _print( " [ ] Response to " ,  message["questionID"], " is " + answer)
 
             if message["answer"]: # If the message has other answers already
-                answers = [message["answer"]]
+                answers = message["answer"]
                 answers.append(answer)
             else:
                 answers = [answer]
@@ -202,35 +202,49 @@ class PPProtocol(Protocol):
                 IDS = [self.nodeid]
 
             self.factory.answeredQuestions.append(message["questionID"])
-            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answer, IDS)
+            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answers, IDS)
 
         else:
-            _print(" [!] Answered question " + str(question[0]) + " already")
+            _print(" [!] Answered question ",  message["questionID"], " already. Appending differance and sending again.")
+            answers = self.factory.questions[message["questionID"]][2]
+            IDS = self.factory.questions[message["questionID"]][3]
+
+            for answer in message["answer"]:
+                answers.append(answer)
+
+            for ID in message["IDS"]:
+                if ID not in IDS:
+                    IDS.append(ID)
+
+            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answers, IDS)
+            if message["questionID"] in self.sentResponse:
+                self.sentResponse.remove(message["questionID"])
+
 
     def send_response(self):
         if self.factory.questions: # If there are questions
             for response, info in self.factory.questions.items(): # For each question in the question log
                 notAnswered = []
-                if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
-                    for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
-                        if peerInfo[1] is not "CO": # If the peer is a Node
-                            print("PEER IS: ", peer, " NODES ANSWERED: ", info[3])
-                            if peer not in info[3]: # If peer has not yet answered
-                                notAnswered.append(peer)
+                for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
+                    if peerInfo[1] is not "CO": # If the peer is a Node
+                        if peer not in info[3]: # If peer has not yet answered
+                            notAnswered.append(peer)
 
                 if notAnswered:
                     for node in notAnswered:
-                        if self.remote_nodeid == node:
-                            message = json.dumps({'msgtype': 'question', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-                            _print(" [>] Sending: question, to: ", self.remote_nodeid, self.remote_ip)
-                            self.sentResponse.append(info[0])
-                            self.write(message)
+                        if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
+                            if self.remote_nodeid == node:
+                                message = json.dumps({'msgtype': 'question', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
+                                _print(" [>] Sending: question, to: ", self.remote_nodeid, self.remote_ip)
+                                self.sentResponse.append(info[0])
+                                self.write(message)
                 else:
                     if self.remote_type == "CO":
-                        message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-                        _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
-                        self.sentResponse.append(info[0])
-                        self.write(message)
+                        if info[0] not in self.sentResponse:
+                            message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
+                            _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
+                            self.sentResponse.append(info[0])
+                            self.write(message)
 
 
     # Handle the first message that gets sent

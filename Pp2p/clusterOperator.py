@@ -167,9 +167,7 @@ class COProtocol(Protocol):
 
     def handle_response(self, response):
         responses = json.loads(response)
-
-        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"])
-
+        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"], " From: ", self.remote_nodeid)
         self.factory.response[responses["questionID"]].append(responses["answer"])
 
     def send_response(self):
