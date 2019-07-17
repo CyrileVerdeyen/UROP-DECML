@@ -189,7 +189,7 @@ class PPProtocol(Protocol):
             _print( " [ ] Response to " + str(message["questionID"]) + " is " + answer)
 
             if message["answer"]: # If the message has other answers already
-                answers = message["answer"]
+                answers = [message["answer"]]
                 answers.append(answer)
             else:
                 answers = [answer]
@@ -208,20 +208,21 @@ class PPProtocol(Protocol):
             _print(" [!] Answered question " + str(question[0]) + " already")
 
     def send_response(self):
-        print("PEERS: ", self.factory.peers)
         if self.factory.questions: # If there are questions
             for response, info in self.factory.questions.items(): # For each question in the question log
                 notAnswered = []
                 if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
                     for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
-                        if peerInfo[1] == "NODE": # If the peer is a Node
+                        if peerInfo[1] is not "CO": # If the peer is a Node
+                            print("PEER IS: ", peer, " NODES ANSWERED: ", info[3])
                             if peer not in info[3]: # If peer has not yet answered
                                 notAnswered.append(peer)
+
                 if notAnswered:
                     for node in notAnswered:
                         if self.remote_nodeid == node:
                             message = json.dumps({'msgtype': 'question', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-                            _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
+                            _print(" [>] Sending: question, to: ", self.remote_nodeid, self.remote_ip)
                             self.sentResponse.append(info[0])
                             self.write(message)
                 else:

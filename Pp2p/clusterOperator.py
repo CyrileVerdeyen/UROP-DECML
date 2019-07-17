@@ -171,7 +171,6 @@ class COProtocol(Protocol):
         _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"])
 
         self.factory.response[responses["questionID"]].append(responses["answer"])
-        print(self.factory.response[responses["questionID"]])
 
     def send_response(self):
         answer = {}
