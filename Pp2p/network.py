@@ -180,13 +180,9 @@ class PPProtocol(Protocol):
         _print(" [<] Got question: " , message["questionID"], " from: ",self.remote_nodeid, self.remote_ip)
 
         if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this question
-            yn = random.uniform(0, 1) #TODO: actually get answers
-            if (yn < 0.5 ):
-                answer = ("no")
-            else:
-                answer = ("yes")
+            answer = random.randint(0, 100000000) #TODO: actually get answers
 
-            _print( " [ ] Response to " ,  message["questionID"], " is " + answer)
+            _print( " [ ] Response to " ,  message["questionID"], " is ", answer)
 
             if message["answer"]: # If the message has other answers already
                 answers = message["answer"]
@@ -210,7 +206,8 @@ class PPProtocol(Protocol):
             IDS = self.factory.questions[message["questionID"]][3]
 
             for answer in message["answer"]:
-                answers.append(answer)
+                if answer not in answers:
+                    answers.append(answer)
 
             for ID in message["IDS"]:
                 if ID not in IDS:
