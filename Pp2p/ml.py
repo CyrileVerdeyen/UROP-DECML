@@ -5,26 +5,17 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import svm
 
-# The digits dataset
-digits = datasets.load_digits()
+class ml():
 
-images_and_labels = list(zip(digits.images, digits.target))
+    def __init__(self, imgs):
+        self.imgs = imgs
+        X = self.imgs[b"data"]
+        Y = self.imgs[b"labels"]
+        self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo')
+        self.clf.fit(X, Y)
 
-# To apply a classifier on this data, we need to flatten the image, to
-# turn the data in a (samples, feature) matrix:
-n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
+        print(self.clf)
 
-# Create a classifier: a support vector classifier
-classifier = svm.SVC(gamma=0.001)
-
-# We learn the digits on the first half of the digits
-classifier.fit(data[:n_samples // 2], digits.target[:n_samples // 2])
-
-# Now predict the value of the digit on the second half:
-expected = digits.target[n_samples // 2:]
-predicted = classifier.predict(data[n_samples // 2:])
-
-print("Classification report for classifier %s:\n%s\n"
-      % (classifier, metrics.classification_report(expected, predicted)))
-print("Confusion matrix:\n%s" % metrics.confusion_matrix(expected, predicted))
+    def classify(self, img):
+        self.img = img
+        return self.clf.predict(self.img)

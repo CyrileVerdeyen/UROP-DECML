@@ -11,6 +11,7 @@ from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
+import numpy as np
 
 from crypto import generate_nodeid
 
@@ -27,7 +28,8 @@ def _print(*args):
 
 ## The factory class houses all the different protocols that each node has, as well as any other constant data.
 class PPFactory(Factory):
-    def __init__(self):
+    def __init__(self, ml):
+        self.ml = ml
         pass
 
     def startFactory(self):
@@ -177,10 +179,10 @@ class PPProtocol(Protocol):
         answers = []
         IDS = []
 
-        _print(" [<] Got question: " , message["questionID"], " from: ",self.remote_nodeid, self.remote_ip)
+        _print(" [<] Got question: " , message["questionID"], " from: ", self.remote_nodeid, self.remote_ip)
 
         if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this question
-            answer = random.randint(0, 100000000) #TODO: actually get answers
+            answer = self.factory.ml.classify(np.asarray(message["question"])) #TODO:  save so that I don't have to go through this mess each time
 
             _print( " [ ] Response to " ,  message["questionID"], " is ", answer)
 

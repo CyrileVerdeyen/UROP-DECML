@@ -20,10 +20,11 @@ def _print(*args):
 
 class testPP():
 
-    def __init__(self, Port, BootstrapNodes=[]):
+    def __init__(self, Port, BootstrapNodes=[], ml = None):
 
         self.BOOTSTRAP_NODES = BootstrapNodes
         self.DEFAULT_PORT = Port
+        self.ml = ml
 
         parser = argparse.ArgumentParser(description="server")
         parser.add_argument('--port', type=int, default=self.DEFAULT_PORT)
@@ -36,7 +37,7 @@ class testPP():
         try:
             endpoint = TCP4ServerEndpoint(reactor, self.args.port, interface=self.args.listen)
             _print(" [ ] LISTEN:", self.args.listen, ":", self.args.port)
-            self.ppfactory = PPFactory()
+            self.ppfactory = PPFactory(self.ml)
             endpoint.listen(self.ppfactory)
         except CannotListenError:
             _print("[!] Address in use")
@@ -78,7 +79,7 @@ class testCO():
         except CannotListenError:
             _print("[!] Address in use")
             raise SystemExit
-    
+
     def client(self):
 
         for bootstrap in self.BOOTSTRAP_NODES + [a+":"+str(self.DEFAULT_PORT) for a in self.args.bootstrap]:

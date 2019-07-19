@@ -1,4 +1,11 @@
 import testFrame
+import ml
+
+def unpickle(file):
+    import pickle
+    with open(file, 'rb') as fo:
+        dict = pickle.load(fo, encoding='bytes')
+    return dict
 
 class CO():
     def __init__(self):
@@ -15,8 +22,11 @@ class node0():
         self.DEFAULT_PORT = 5008
         self.BOOTSRAP_NODES = ["localhost:5005"]
 
+        imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/data_batch_1")
+        self.ml = ml.ml(imgs1)
+
     def run(self):
-        server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
         server.server()
         server.client()
 
@@ -26,8 +36,11 @@ class node1():
         self.BOOTSRAP_NODES = ["localhost:5005",
                                 "localhost:5008"]
 
+        imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/data_batch_2")
+        self.ml = ml.ml(imgs1)
+
     def run(self):
-        server1 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server1 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
         server1.server()
         server1.client()
 
@@ -38,8 +51,11 @@ class node2():
                                 "localhost:5008",
                                 "localhost:5009"]
 
+        imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/data_batch_3")
+        self.ml = ml.ml(imgs1)
+
     def run(self):
-        server2 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server2 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
         server2.server()
         server2.client()
 
@@ -50,8 +66,12 @@ class node3():
                                 "localhost:5008",
                                 "localhost:5009"]
 
+        imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/data_batch_4")
+        self.ml = ml.ml(imgs1)
+
+
     def run(self):
-        server3 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server3 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
         server3.server()
         server3.client()
 
@@ -60,9 +80,12 @@ class node4():
         self.DEFAULT_PORT = 5012
         self.BOOTSRAP_NODES = ["localhost:5005",
                                 "localhost:5011"]
+        imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/data_batch_5")
+        self.ml = ml.ml(imgs1)
+
 
     def run(self):
-        server4 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server4 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
         server4.server()
         server4.client()
 
