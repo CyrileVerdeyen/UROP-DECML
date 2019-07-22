@@ -4,6 +4,7 @@ import json
 from time import time
 from datetime import datetime
 from collections import defaultdict
+from statistics import mode
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
@@ -14,8 +15,8 @@ from twisted.internet.task import LoopingCall
 from crypto import generate_nodeid
 
 QUESTION_INTERVAL = 1.0 # How often we send out questions
-RESPONSE_INTERVAL = 1.0 # How often we send out questions
-TIMES_TO_SEND = 3 # Amount of nodes that recieve the question
+RESPONSE_INTERVAL = 30.0 # How often we send out the responses we got
+TIMES_TO_SEND = 1 # Amount of nodes that recieve the question
 
 def _print(*args):
     # double, make common module
@@ -167,15 +168,20 @@ class COProtocol(Protocol):
 
     def handle_response(self, response):
         responses = json.loads(response)
-        _print(" [<] Response for: ", responses["questionID"], " is: ", responses["answer"], ". Answered by: ", responses["IDS"], " From: ", self.remote_nodeid)
-        self.factory.response[responses["questionID"]].append(responses["answer"])
+        _print(" [<] Got responses for: ", responses["questionID"], " by: ", responses["IDS"], " From: ", self.remote_nodeid)
+        for answer in responses["answer"] :
+            self.factory.response[responses["questionID"]].append(answer)
 
     def send_response(self):
-        answer = {}
+        answer = []
         if self.factory.questionNode[self.remote_ip]: # If the node we are connected to is a question node
             for i in self.factory.questionNode[self.remote_ip]: # For each question that the question node has sent
                 if self.factory.response[i]:
-                    answer[i] = self.factory.response[i]
+                    answers = []
+                    for j in self.factory.response[i]:
+                        answers.append(j[0])
+                    answer.append([i, mode(answers)])
+                    print(answer)
                     del self.factory.response[i]
 
             if answer:

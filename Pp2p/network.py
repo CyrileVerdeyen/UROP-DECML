@@ -181,8 +181,9 @@ class PPProtocol(Protocol):
 
         _print(" [<] Got question: " , message["questionID"], " from: ", self.remote_nodeid, self.remote_ip)
 
-        if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this question
-            answer = self.factory.ml.classify(np.asarray(message["question"])) #TODO:  save so that I don't have to go through this mess each time
+        if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this
+            question = np.asarray(message["question"]).reshape(1, -1)
+            answer = self.factory.ml.classify(question)
 
             _print( " [ ] Response to " ,  message["questionID"], " is ", answer)
 
