@@ -4,7 +4,7 @@ import json
 from time import time
 from datetime import datetime
 from collections import defaultdict
-from statistics import mode
+from collections import Counter
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
@@ -139,7 +139,7 @@ class COProtocol(Protocol):
         json1 = json.loads(question)
         for question in json1["question"]:
             self.factory.questions[self.factory.questionID] = (question, TIMES_TO_SEND)
-            _print(" [<] Recieved this question: ", self.factory.questionID, " ", self.factory.questions[self.factory.questionID][0])
+            _print(" [<] Recieved question: ", self.factory.questionID)
             self.factory.questionNode[self.remote_ip].append(self.factory.questionID)
             self.factory.questionID = self.factory.questionID + 1
             self.factory.questionsLeft += TIMES_TO_SEND
@@ -168,7 +168,7 @@ class COProtocol(Protocol):
 
     def handle_response(self, response):
         responses = json.loads(response)
-        _print(" [<] Got responses for: ", responses["questionID"], " by: ", responses["IDS"], " From: ", self.remote_nodeid)
+        _print(" [<] Got responses for: ", responses["questionID"], " by: ", responses["IDS"], " From: ", self.remote_nodeid, " They are: ", responses["answer"])
         for answer in responses["answer"] :
             self.factory.response[responses["questionID"]].append(answer)
 
@@ -177,12 +177,22 @@ class COProtocol(Protocol):
         if self.factory.questionNode[self.remote_ip]: # If the node we are connected to is a question node
             for i in self.factory.questionNode[self.remote_ip]: # For each question that the question node has sent
                 if self.factory.response[i]:
-                    answers = []
+                    answers = {}
                     for j in self.factory.response[i]:
-                        answers.append(j[0])
-                    answer.append([i, mode(answers)])
-                    print(answer)
-                    del self.factory.response[i]
+                        if answers.get(j[0][0]) != None:
+                            answers[j[0][0]] += j[1][0]
+                        else:
+                            answers[j[0][0]] = j[1][0]
+
+                    ans = [0, 0]
+                    if answers:
+                        for a in answers:
+                            if answers[a] > ans[1]:
+                                ans[0] = a
+                                ans[1] = answers[a]
+
+                        answer.append([i, ans[0]])
+                        del self.factory.response[i]
 
             if answer:
                 _print(" [>] Sending answer to ", self.remote_ip)

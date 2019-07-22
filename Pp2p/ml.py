@@ -17,12 +17,12 @@ class ml():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
-            self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo')
+            self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
-        print(self.clf)
-
     def classify(self, img):
         self.img = img
-        return self.clf.predict(self.img).tolist()
+        predict = self.clf.predict_proba(self.img)
+        predict = predict[0]
+        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])

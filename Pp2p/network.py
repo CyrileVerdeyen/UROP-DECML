@@ -235,14 +235,14 @@ class PPProtocol(Protocol):
                         if info[0] not in self.sentResponse: # If we have not yet sent this reponse yet
                             if self.remote_nodeid == node:
                                 message = json.dumps({'msgtype': 'question', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-                                _print(" [>] Sending: question, to: ", self.remote_nodeid, self.remote_ip)
+                                _print(" [>] Sending: question " , info[0], " to: ", self.remote_nodeid, self.remote_ip)
                                 self.sentResponse.append(info[0])
                                 self.write(message)
                 else:
                     if self.remote_type == "CO":
                         if info[0] not in self.sentResponse:
                             message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
-                            _print(" [>] Sending: response, to: ", self.remote_nodeid, self.remote_ip)
+                            _print(" [>] Sending: response for: ", info[0], " to: ", self.remote_nodeid, self.remote_ip)
                             self.sentResponse.append(info[0])
                             self.write(message)
 
