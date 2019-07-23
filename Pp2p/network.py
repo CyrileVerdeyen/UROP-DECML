@@ -1,19 +1,17 @@
-## Code addapted from https://benediktkr.github.io/dev/2016/02/04/p2p-with-twisted.html
 ## Author: Cyrile Verdeyen
 
 import json
 from time import time
 from datetime import datetime
-import random
 
 from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
 from twisted.internet.task import LoopingCall
-import numpy as np
 
 from crypto import generate_nodeid
+import networkHelp
 
 
 PING_INTERVAL = 30.0 # Interval for pinging
@@ -34,7 +32,7 @@ class PPFactory(Factory):
 
     def startFactory(self):
         self.peers = {}
-        self.nodeid = generate_nodeid()[:10]
+        self.nodeid = generate_nodeid()
         _print(" [ ] Node ID is: ", self.nodeid)
         self.numProtocols = 0
         self.answeredQuestions = []
@@ -176,49 +174,15 @@ class PPProtocol(Protocol):
 
     def handle_question(self, question):
         message = json.loads(question)
-        answers = []
-        IDS = []
 
         _print(" [<] Got question: " , message["questionID"], " from: ", self.remote_nodeid, self.remote_ip)
 
         if message["questionID"] not in self.factory.answeredQuestions: # If I have not ye answered this
-            question = np.asarray(message["question"]).reshape(1, -1)
-            answer = self.factory.ml.classify(question)
-
-            _print( " [ ] Response to " ,  message["questionID"], " is ", answer)
-
-            if message["answer"]: # If the message has other answers already
-                answers = message["answer"]
-                answers.append(answer)
-            else:
-                answers = [answer]
-
-            if message["IDS"]: # If the message has IDS of nodes that have responded, add own ID to it
-                IDS = message["IDS"]
-                IDS.append(self.nodeid)
-
-            else:
-                IDS = [self.nodeid]
-
-            self.factory.answeredQuestions.append(message["questionID"])
-            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answers, IDS)
+            networkHelp.answerQuestion(message, self.nodeid, self.factory)
 
         else:
             _print(" [!] Answered question ",  message["questionID"], " already. Appending differance and sending again.")
-            answers = self.factory.questions[message["questionID"]][2]
-            IDS = self.factory.questions[message["questionID"]][3]
-
-            for answer in message["answer"]:
-                if answer not in answers:
-                    answers.append(answer)
-
-            for ID in message["IDS"]:
-                if ID not in IDS:
-                    IDS.append(ID)
-
-            self.factory.questions[message["questionID"]] = (message["questionID"], message["question"], answers, IDS)
-            if message["questionID"] in self.sentResponse:
-                self.sentResponse.remove(message["questionID"])
+            networkHelp.answeredQuestion(message, self.sentResponse, self.factory)
 
 
     def send_response(self):
@@ -239,7 +203,7 @@ class PPProtocol(Protocol):
                                 self.sentResponse.append(info[0])
                                 self.write(message)
                 else:
-                    if self.remote_type == "CO":
+                    if self.remote_type == "CO": # Sending the ansers to CO since everyone ha answered
                         if info[0] not in self.sentResponse:
                             message = json.dumps({'msgtype': 'response', 'questionID': info[0], 'question': info[1], 'answer': info[2], 'IDS': info[3]})
                             _print(" [>] Sending: response for: ", info[0], " to: ", self.remote_nodeid, self.remote_ip)
@@ -258,13 +222,7 @@ class PPProtocol(Protocol):
             _print (" [!] Connected to myself.")
             self.transport.loseConnection()
         else:
-            if self.remote_type == "NODE":
-                if self.state == "HELLO" :
-                    self.add_peer("SPEAKER")
-                elif self.state == "SENTHELLO":
-                    self.add_peer("LISTENER")
-            else:
-                self.add_peer("CO")
+            networkHelp.addPeerState(self)
 
             self.send_hello()
 
@@ -276,10 +234,6 @@ class PPProtocol(Protocol):
             if self.kind == "LISTENER":
                 # Tell new audience about my peers
                 self.send_addr()
-
-    def add_peer(self, kind):
-        entry = (self.remote_ip, kind)
-        self.factory.peers[self.remote_nodeid] = entry
 
 def gotProtocol(p):
     """The callback to start the protocol exchange. We let connecting
