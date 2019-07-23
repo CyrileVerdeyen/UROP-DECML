@@ -16,12 +16,12 @@ def nameImg(ID):
 
 
 imgs1 = unpickle("./cifar-10-python/cifar-10-batches-py/test_batch")
-question0 = imgs1[b"data"][372].tolist()
-answer0 = imgs1[b"labels"][372]
+question0 = imgs1[b"data"][3222].tolist()
+answer0 = imgs1[b"labels"][3222]
 print("The expected answer for 0 is: ", answer0, " Which is a: ", nameImg(answer0))
 
-question1 = imgs1[b"data"][486].tolist()
-answer1 = imgs1[b"labels"][486]
+question1 = imgs1[b"data"][46].tolist()
+answer1 = imgs1[b"labels"][46]
 print("The expected answer for 1 is: ", answer1, " Which is a: ", nameImg(answer1))
 
 question2 = imgs1[b"data"][7322].tolist()
@@ -66,7 +66,7 @@ try:
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:
-            print("For quesiton: ", response[0], " the answer is: ", response[1], " which is a: ", nameImg(response[1]))
+            print("For quesiton: ", response[0], " the answer is: ", response[1], " which is a: ", nameImg(int(response[1])))
 
 
 finally:

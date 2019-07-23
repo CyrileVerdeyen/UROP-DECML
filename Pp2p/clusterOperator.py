@@ -169,8 +169,23 @@ class COProtocol(Protocol):
     def handle_response(self, response):
         responses = json.loads(response)
         _print(" [<] Got responses for: ", responses["questionID"], " by: ", responses["IDS"], " From: ", self.remote_nodeid, " They are: ", responses["answer"])
-        for answer in responses["answer"] :
-            self.factory.response[responses["questionID"]].append(answer)
+
+        if self.factory.response[responses["questionID"]]:
+
+            for key, value in self.factory.response[responses["questionID"]].items(): # Adding new ansers of keys taht excist
+                if key in responses["answer"]:
+                    for valueR in responses["answer"][key]:
+                        if valueR in value: # If the value is already in it, go to next one
+                            continue
+                        else:
+                            self.factory.response[responses["questionID"]][key].append(valueR)
+
+            for key, value in responses["answer"].items(): # Adding new keys to answers
+                if key not in self.factory.response[responses["questionID"]]:
+                    self.factory.response[responses["questionID"]][key] = value
+
+        else:
+            self.factory.response[responses["questionID"]] = (responses["answer"])
 
     def send_response(self):
         answer = []
@@ -178,11 +193,12 @@ class COProtocol(Protocol):
             for i in self.factory.questionNode[self.remote_ip]: # For each question that the question node has sent
                 if self.factory.response[i]:
                     answers = {}
-                    for j in self.factory.response[i]:
-                        if answers.get(j[0][0]) != None:
-                            answers[j[0][0]] += j[1][0]
-                        else:
-                            answers[j[0][0]] = j[1][0]
+                    for key, values in self.factory.response[i].items():
+                        for value in values:
+                            if answers.get(key) != None:
+                                answers[key] += value[0]
+                            else:
+                                answers[key] = value[0]
 
                     ans = [0, 0]
                     if answers:
