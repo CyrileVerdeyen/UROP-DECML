@@ -20,15 +20,16 @@ def _print(*args):
 
 class testPP():
 
-    def __init__(self, Port, BootstrapNodes=[], ml = None):
+    def __init__(self, Port, BootstrapNodes=[], ml = None, Host = "localhost"):
 
         self.BOOTSTRAP_NODES = BootstrapNodes
         self.DEFAULT_PORT = Port
         self.ml = ml
+        self.DEFAULT_HOST = Host
 
         parser = argparse.ArgumentParser(description="server")
         parser.add_argument('--port', type=int, default=self.DEFAULT_PORT)
-        parser.add_argument('--listen', default="localhost")
+        parser.add_argument('--listen', default=self.DEFAULT_HOST)
         parser.add_argument('--bootstrap', action="append", default=[])
 
         self.args = parser.parse_args()
@@ -57,14 +58,15 @@ class testPP():
         #Thread(target=reactor.run, args=(False,)).start()
 
 class testCO():
-    def __init__(self, Port, BootstrapNodes=[]):
+    def __init__(self, Port, BootstrapNodes=[], Host = "localhost"):
 
         self.BOOTSTRAP_NODES = BootstrapNodes
         self.DEFAULT_PORT = Port
+        self.DEFAULT_HOST = Host
 
         parser = argparse.ArgumentParser(description="server")
         parser.add_argument('--port', type=int, default=self.DEFAULT_PORT)
-        parser.add_argument('--listen', default="localhost")
+        parser.add_argument('--listen', default=self.DEFAULT_HOST)
         parser.add_argument('--bootstrap', action="append", default=[])
 
         self.args = parser.parse_args()

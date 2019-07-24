@@ -24,7 +24,7 @@ class node0():
         self.BOOTSRAP_NODES = ["localhost:5005"]
 
         imgs = unpickle("./cifar-10-batches-py/data_batch_1")
-        self.ml = ml.ml(imgs, "0")
+        self.ml = ml.mlsvm(imgs, "0")
 
     def run(self):
         server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
@@ -38,7 +38,7 @@ class node1():
                                 "localhost:5008"]
 
         imgs = unpickle("./cifar-10-batches-py/data_batch_2")
-        self.ml = ml.ml(imgs, "1")
+        self.ml = ml.mlsvm(imgs, "1")
 
     def run(self):
         server1 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
@@ -53,7 +53,7 @@ class node2():
                                 "localhost:5009"]
 
         imgs = unpickle("./cifar-10-batches-py/data_batch_3")
-        self.ml = ml.ml(imgs, "2")
+        self.ml = ml.mlsvm(imgs, "2")
 
     def run(self):
         server2 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
@@ -68,7 +68,7 @@ class node3():
                                 "localhost:5009"]
 
         imgs = unpickle("./cifar-10-batches-py/data_batch_4")
-        self.ml = ml.ml(imgs, "3")
+        self.ml = ml.mlsvm(imgs, "3")
 
 
     def run(self):
@@ -82,7 +82,7 @@ class node4():
         self.BOOTSRAP_NODES = ["localhost:5005",
                                 "localhost:5011"]
         imgs = unpickle("./cifar-10-batches-py/data_batch_5")
-        self.ml = ml.ml(imgs, "4")
+        self.ml = ml.mlsvm(imgs, "4")
 
 
     def run(self):
