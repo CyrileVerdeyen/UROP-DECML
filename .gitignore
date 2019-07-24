@@ -3,4 +3,4 @@
 Pp2p/.vscode/settings.json
 .vscode/.ropeproject/config.py
 *.pkl
-Pp2p/tests/cifar-10-python
+Pp2p/tests/cifar-10-batches-py
