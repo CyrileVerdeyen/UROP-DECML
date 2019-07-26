@@ -16,7 +16,7 @@ import networkHelp
 
 PING_INTERVAL = 30.0 # Interval for pinging
 PEERS_INTERVAL = 180.0 # Interval for asking again for peers
-RESPONSE_INTERVAL = 5.0 # Interval for sending responses to questions
+RESPONSE_INTERVAL = 2.5 # Interval for sending responses to questions
 
 def _print(*args):
     # double, make common module
@@ -165,7 +165,7 @@ class PPProtocol(Protocol):
                 continue
             _print(" [ ] Trying to connect to peer " + node[0] + " " + node[1])
             host, port = node[1].split(":")
-            point = TCP4ClientEndpoint(reactor, host, int(port))
+            point = TCP4ClientEndpoint(reactor, host, int(port)) # Change port to 5006, the port that I will use for nodes
             d = connectProtocol(point, PPProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
 
@@ -190,7 +190,7 @@ class PPProtocol(Protocol):
             for response, info in self.factory.questions.items(): # For each question in the question log
                 notAnswered = []
                 for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
-                    if peerInfo[1] is not "CO": # If the peer is a Node
+                    if peerInfo[1] is not "CO": # If the peer is a Node TODO: Need to add case for peer bring a speaker or listener
                         if peer not in info[3]: # If peer has not yet answered
                             notAnswered.append(peer)
 

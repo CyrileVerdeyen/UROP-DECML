@@ -3,6 +3,7 @@ import sys
 import json
 import time
 import random
+from sklearn.metrics import accuracy_score
 
 
 def unpickle(file):
@@ -17,13 +18,15 @@ def nameImg(ID):
 
 imgs1 = unpickle("./cifar-10-batches-py/test_batch")
 
+true_answers = []
+answers = []
 
-def createQuestion():
-    number = random.randint(1, 10000)
+def createQuestion(number):
 
     question0 = imgs1[b"data"][number].tolist()
     answer0 = imgs1[b"labels"][number]
     print("The expected answer is: ", answer0, " Which is a: ", nameImg(answer0))
+    true_answers.append(answer0)
 
     m0 =({'msgtype': 'question', 'question': [question0]})
     jsonObj0 = json.dumps(m0)
@@ -42,13 +45,14 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     # Connect to server and send data
     sock.connect((HOST, PORT))
-    QA = createQuestion()
+    num = 1
+    QA = createQuestion(num)
     sock.sendall(QA[0])
     quesitonsSent += 1
 
     time.sleep(5)
 
-    while (True):
+    while (num < 999):
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:
@@ -56,8 +60,10 @@ try:
             if int(response[1]) == QA[1]:
                 correctAnswers += 1
             print("Correct Responses: ", correctAnswers, "/", quesitonsSent)
+            answers.append(int(response[1]))
 
-        QA = createQuestion()
+        num += 1
+        QA = createQuestion(num)
         sock.sendall(QA[0])
         quesitonsSent += 1
 
@@ -66,3 +72,6 @@ try:
 
 finally:
     sock.close()
+
+accuracy = accuracy_score(true_answers, answers)
+print("Accuracy is: ", accuracy)

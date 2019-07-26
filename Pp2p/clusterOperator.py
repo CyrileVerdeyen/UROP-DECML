@@ -15,7 +15,7 @@ from twisted.internet.task import LoopingCall
 from crypto import generate_nodeid
 
 QUESTION_INTERVAL = 1.0 # How often we send out questions
-RESPONSE_INTERVAL = 30.0 # How often we send out the responses we got
+RESPONSE_INTERVAL = 5.0 # How often we send out the responses we got
 TIMES_TO_SEND = 3 # Amount of nodes that recieve the question
 
 def _print(*args):
@@ -226,7 +226,7 @@ class COProtocol(Protocol):
             if node[0] in self.factory.peers:
                 continue
             host, port = node[1].split(":")
-            point = TCP4ClientEndpoint(reactor, host, int(port))
+            point = TCP4ClientEndpoint(reactor, host, int(port)) # Change port to 5006
             d = connectProtocol(point, COProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
 
