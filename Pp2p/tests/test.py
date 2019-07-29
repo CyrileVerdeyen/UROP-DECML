@@ -30,10 +30,6 @@ class node():
                 imgs[b"data"].append(img[b"data"][(data+j)])
                 imgs[b"labels"].append(img[b"labels"][(data+j)])
 
-        print(len(imgs[b"data"]))
-
-
-
         self.DEFAULT_PORT = 5006
         self.BOOTSRAP_NODES = ["localhost:5005"]
 
