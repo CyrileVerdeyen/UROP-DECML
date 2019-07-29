@@ -165,7 +165,7 @@ class PPProtocol(Protocol):
                 continue
             _print(" [ ] Trying to connect to peer " + node[0] + " " + node[1])
             host, port = node[1].split(":")
-            point = TCP4ClientEndpoint(reactor, host, int(port)) # Change port to 5006, the port that I will use for nodes
+            point = TCP4ClientEndpoint(reactor, host, 5006)
             d = connectProtocol(point, PPProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
 
