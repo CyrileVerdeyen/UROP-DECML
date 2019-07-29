@@ -1,6 +1,5 @@
 import testFrame
 import ml
-from sklearn.externals import joblib
 
 def unpickle(file):
     import pickle

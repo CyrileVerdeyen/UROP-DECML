@@ -4,7 +4,7 @@ from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import svm
-from sklearn.externals import joblib
+import joblib
 import os.path
 
 class mlsvm():

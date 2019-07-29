@@ -9,3 +9,5 @@ wget -O data.tar.gz "http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"
 tar -C ./tests -xvzf data.tar.gz
 #Numpy
 sudo pip3 install numpy
+#Joblib
+sudo pip3 install joblib
