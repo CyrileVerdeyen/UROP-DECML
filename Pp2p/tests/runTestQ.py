@@ -52,7 +52,7 @@ try:
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:
-            print("For quesiton: ", response[0], " the answer is: ", response[1], " which is a: ", nameImg(int(response[1])))
+            print("Guessed answer is: ", response[1], " which is a: ", nameImg(int(response[1])))
             if int(response[1]) == QA[1]:
                 correctAnswers += 1
             print("Correct Responses: ", correctAnswers, "/", quesitonsSent)
