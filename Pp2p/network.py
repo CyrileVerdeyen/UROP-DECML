@@ -190,7 +190,7 @@ class PPProtocol(Protocol):
             for response, info in self.factory.questions.items(): # For each question in the question log
                 notAnswered = []
                 for peer, peerInfo in self.factory.peers.items(): # For all peers we are connected too
-                    if peerInfo[1] is not "CO": # If the peer is a Node TODO: Need to add case for peer bring a speaker or listener
+                    if peerInfo[1] is not "CO": # If the peer is a Node
                         if peer not in info[3]: # If peer has not yet answered
                             notAnswered.append(peer)
 

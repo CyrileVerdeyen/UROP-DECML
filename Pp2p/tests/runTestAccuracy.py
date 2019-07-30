@@ -52,7 +52,7 @@ try:
 
     time.sleep(5)
 
-    while (num < 999):
+    while (num < 997):
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:

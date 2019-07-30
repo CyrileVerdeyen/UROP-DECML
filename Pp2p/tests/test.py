@@ -1,12 +1,25 @@
 import testFrame
 import ml
 from sklearn.externals import joblib
+import random
 
 def unpickle(file):
     import pickle
     with open(file, 'rb') as fo:
         dict = pickle.load(fo, encoding='bytes')
     return dict
+
+def data():
+    imgs = {b"data": [], b"labels": []}
+
+    for i in (range (1,6)):
+        data = random.randint(0, 4999)
+        img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
+        for j in range(5000):
+            imgs[b"data"].append(img[b"data"][(data+j)])
+            imgs[b"labels"].append(img[b"labels"][(data+j)])
+
+    return imgs
 
 class CO():
     def __init__(self):
@@ -23,7 +36,7 @@ class node0():
         self.DEFAULT_PORT = 5008
         self.BOOTSRAP_NODES = ["localhost:5005"]
 
-        imgs = unpickle("./cifar-10-batches-py/data_batch_1")
+        imgs = data()
         self.ml = ml.mlsvm(imgs, "0")
 
     def run(self):
@@ -37,7 +50,7 @@ class node1():
         self.BOOTSRAP_NODES = ["localhost:5005",
                                 "localhost:5008"]
 
-        imgs = unpickle("./cifar-10-batches-py/data_batch_2")
+        imgs = data()
         self.ml = ml.mlsvm(imgs, "1")
 
     def run(self):
@@ -52,7 +65,7 @@ class node2():
                                 "localhost:5008",
                                 "localhost:5009"]
 
-        imgs = unpickle("./cifar-10-batches-py/data_batch_3")
+        imgs = data()
         self.ml = ml.mlsvm(imgs, "2")
 
     def run(self):
@@ -67,7 +80,7 @@ class node3():
                                 "localhost:5008",
                                 "localhost:5009"]
 
-        imgs = unpickle("./cifar-10-batches-py/data_batch_4")
+        imgs = data()
         self.ml = ml.mlsvm(imgs, "3")
 
 
@@ -81,9 +94,9 @@ class node4():
         self.DEFAULT_PORT = 5012
         self.BOOTSRAP_NODES = ["localhost:5005",
                                 "localhost:5011"]
-        imgs = unpickle("./cifar-10-batches-py/data_batch_5")
-        self.ml = ml.mlsvm(imgs, "4")
 
+        imgs = data()
+        self.ml = ml.mlsvm(imgs, "4")
 
     def run(self):
         server4 = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
