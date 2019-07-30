@@ -1,4 +1,6 @@
 #!/bin/bash
+#Install pip3
+sudo apt install python3-pip
 #Scikit learn
 sudo pip3 install -U scikit-learn
 #Twisted
