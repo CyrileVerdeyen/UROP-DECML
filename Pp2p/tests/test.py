@@ -1,6 +1,7 @@
 import testFrame
 import ml
 import random
+import socket
 
 def unpickle(file):
     import pickle
@@ -10,16 +11,19 @@ def unpickle(file):
 
 class CO():
     def __init__(self):
+        self.ip = socket.gethostbyname(socket.gethostname())
         self.DEFAULT_PORT = 5005
         self.BOOTSRAP_NODES = []
 
     def run(self):
-        server = testFrame.testCO(self.DEFAULT_PORT, self.BOOTSRAP_NODES)
+        server = testFrame.testCO(self.DEFAULT_PORT, self.BOOTSRAP_NODES, Host=self.ip)
         server.server()
         server.client()
 
 class node():
     def __init__(self):
+
+        self.ip = socket.gethostbyname(socket.gethostname())
 
         imgs = {b"data": [], b"labels": []}
 
@@ -31,11 +35,11 @@ class node():
                 imgs[b"labels"].append(img[b"labels"][(data+j)])
 
         self.DEFAULT_PORT = 5006
-        self.BOOTSRAP_NODES = ["localhost:5005"]
+        self.BOOTSRAP_NODES = ["10.221.31.232:5005"]
 
         self.ml = ml.mlsvm(imgs, "0")
 
     def run(self):
-        server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)
+        server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml, Host=self.ip)
         server.server()
         server.client()

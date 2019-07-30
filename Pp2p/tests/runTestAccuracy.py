@@ -35,7 +35,7 @@ def createQuestion(number):
 
     return (data0,answer0)
 
-HOST, PORT = "localhost", 5005
+HOST, PORT = "10.221.31.232", 5005
 quesitonsSent = 0
 correctAnswers = 0
 
