@@ -17,6 +17,7 @@ class mlsvm():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
+            print("Running the ml")
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
