@@ -226,7 +226,7 @@ class COProtocol(Protocol):
             if node[0] in self.factory.peers:
                 continue
             host, port = node[1].split(":")
-            point = TCP4ClientEndpoint(reactor, host, int(port)) # Change port to 5006
+            point = TCP4ClientEndpoint(reactor, host, "5006") # Change port to 5006
             d = connectProtocol(point, COProtocol(self.factory, "HELLO", "SPEAKER"))
             d.addCallback(gotProtocol)
 

@@ -20,4 +20,4 @@ for i in ${!HOSTS[*]} ; do
     konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTN}" & sleep 10s
 done
 
-konsole --noclose -e ssh -t ${CO} "${SCRIPTQ}"
+konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}"
