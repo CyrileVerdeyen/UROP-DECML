@@ -136,9 +136,10 @@ class COProtocol(Protocol):
     def send_addr(self):
         peers = self.factory
         listeners = []
+        print(peers)
 
         for n in peers:
-            print("splitting: ", peers[n][0])
+            print("splitting: ", (peers[n][0]))
             ip, port = (peers[n][0]).split(":")
             print("ip ", ip)
             listeners.append(n, (str(ip) + ":5006"), "LISTNER")
