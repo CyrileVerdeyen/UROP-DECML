@@ -17,6 +17,7 @@ from crypto import generate_nodeid
 QUESTION_INTERVAL = 3.0 # How often we send out questions
 RESPONSE_INTERVAL = 10.0 # How often we send out the responses we got
 TIMES_TO_SEND = 2 # Amount of nodes that recieve the question
+PEERS_INTERVAL = 10 # How often we send out the peers we have connected with
 
 def _print(*args):
     # double, make common module
@@ -58,6 +59,7 @@ class COProtocol(Protocol):
         self.remote_type = "NODE"
         self.nodeid = self.factory.nodeid
         self.lc_question = LoopingCall(self.send_question)
+        self.lc_peers = LoopingCall(self.send_addr)
         self.lc_response = LoopingCall(self.send_response)
 
     def write(self, line):
@@ -130,6 +132,17 @@ class COProtocol(Protocol):
         hello = json.dumps({'nodeid': self.nodeid, 'msgtype': 'hello', 'type': 'CO'})
         self.write(hello)
         self.state = "SENTHELLO"
+
+    def send_addr(self):
+        peers = self.factory.peers
+        listeners = [(n, peers[n][0], peers[n][1])
+                    for n in peers]
+
+        addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
+        self.write(addr)
+
+    def handle_getaddr(self, getaddr):
+        self.send_addr()
 
     # Method that takes question requests and adds them to a queue
     def handle_question(self, question):
@@ -248,6 +261,7 @@ class COProtocol(Protocol):
 
             self.send_hello()
             self.lc_question.start(QUESTION_INTERVAL, now=False)
+            self.lc_peers.start(PEERS_INTERVAL, now=True)
 
     def add_peer(self, kind):
         entry = (self.remote_ip, kind)
