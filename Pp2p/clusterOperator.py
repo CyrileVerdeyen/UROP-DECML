@@ -134,10 +134,11 @@ class COProtocol(Protocol):
         self.state = "SENTHELLO"
 
     def send_addr(self):
-        peers = self.factory.peers
-        listeners = [(n, peers[n][0], peers[n][1])
-                    for n in peers]
-        print(listeners)
+        peers = self.factory
+        for n in peers:
+            ip, port = peers[n][0].split(":")
+            listeners = [(n, (ip + ":5006"), "LISTNER")
+                        for n in peers]
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
         self.write(addr)
