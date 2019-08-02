@@ -138,7 +138,9 @@ class COProtocol(Protocol):
         listeners = []
 
         for n in peers:
+            print("splitting: ", peers[n][0])
             ip, port = (peers[n][0]).split(":")
+            print("ip ", ip)
             listeners.append(n, (str(ip) + ":5006"), "LISTNER")
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
