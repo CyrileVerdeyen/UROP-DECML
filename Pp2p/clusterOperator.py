@@ -134,7 +134,7 @@ class COProtocol(Protocol):
         self.state = "SENTHELLO"
 
     def send_addr(self):
-        peers = self.factory
+        peers = self.factory.peers
         listeners = []
         print(peers)
 
