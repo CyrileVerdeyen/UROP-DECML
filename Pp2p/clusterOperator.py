@@ -122,6 +122,7 @@ class COProtocol(Protocol):
         self.write(pong)
 
     def handle_ping(self):
+        _print(" [<] Got ping from: ", self.remote_nodeid)
         self.send_pong()
 
     # The first message that gets sent
