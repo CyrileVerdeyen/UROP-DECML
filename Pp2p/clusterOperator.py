@@ -136,8 +136,8 @@ class COProtocol(Protocol):
     def send_addr(self):
         peers = self.factory
         for n in peers:
-            ip, port = peers[n][0].split(":")
-            listeners = [(n, (ip + ":5006"), "LISTNER")
+            ip, port = (peers[n][0]).split(":")
+            listeners = [(n, (str(ip) + ":5006"), "LISTNER")
                         for n in peers]
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
