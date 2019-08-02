@@ -137,6 +137,7 @@ class COProtocol(Protocol):
         peers = self.factory.peers
         listeners = [(n, peers[n][0], peers[n][1])
                     for n in peers]
+        print(listeners)
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
         self.write(addr)
