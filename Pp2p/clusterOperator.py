@@ -142,7 +142,9 @@ class COProtocol(Protocol):
             print("splitting: ", (peers[n][0]))
             ip, port = (peers[n][0]).split(":")
             print("ip ", ip)
-            listeners.append(n, (str(ip) + ":5006"), "LISTNER")
+            listeners.append((n, (str(ip) + ":5006"), "LISTENER"))
+            print(listeners)
+
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
         self.write(addr)
