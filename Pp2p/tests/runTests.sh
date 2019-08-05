@@ -14,10 +14,23 @@ SCRIPTCO=("cd UROPFNS/Pp2p/tests;
 SCRIPTQ=("cd UROPFNS/Pp2p/tests;
     python3 runTestQ.py")
 
+SCRIPTA=("cd UROPFNS/Pp2p/tests;
+    python3 runTestAccuracy.py")
+
 konsole --noclose -e ssh -t ${CO} "${SCRIPTCO}" & sleep 3s
 
 for i in ${!HOSTS[*]} ; do
     konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTN}" & sleep 1s
 done
 
-konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}"
+PULLFLAG=$1
+
+if [ ${PULLFLAG} -eq 0 ];
+then
+    konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}"
+fi
+
+if [ ${PULLFLAG} -eq 1 ];
+then
+    konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
+fi

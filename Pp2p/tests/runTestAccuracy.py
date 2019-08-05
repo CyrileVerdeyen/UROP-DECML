@@ -33,7 +33,7 @@ def createQuestion(number):
 
     data0 = (jsonObj0.encode('utf-8'))
 
-    return (data0,answer0)
+    return ((data0+"b\r\n"),answer0)
 
 HOST, PORT = "10.221.31.232", 5005
 quesitonsSent = 0
