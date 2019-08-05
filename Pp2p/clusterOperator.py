@@ -10,6 +10,7 @@ from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
+from twisted.protocols.basic import LineReceiver
 from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
@@ -48,7 +49,7 @@ class COFactory(Factory):
         return COProtocol(self, "HELLO", "LISTENER", "OPERATOR")
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
-class COProtocol(Protocol):
+class COProtocol(LineReceiver):
     def __init__(self, factory, state="HELLO", kind="LISTENER", type="OPERATOR"):
         self.factory = factory
         self.state = state
@@ -63,7 +64,7 @@ class COProtocol(Protocol):
         self.lc_response = LoopingCall(self.send_response)
 
     def write(self, line):
-        self.transport.write((line + "\n").encode('utf-8'))
+        self.transport.write((line + "\r\n").encode('utf-8'))
 
     def _print_peers(self):
         if len(self.factory.peers) == 0:
@@ -97,7 +98,7 @@ class COProtocol(Protocol):
         _print (" [X] Node ", self.remote_ip, " dissconected. Connections left ", self.factory.numProtocols)
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
-    def dataReceived(self, data):
+    def lineReceived(self, data):
         for line in (data.splitlines()):
             line = line.strip()
             msgtype = json.loads(line)['msgtype']
@@ -136,15 +137,10 @@ class COProtocol(Protocol):
     def send_addr(self):
         peers = self.factory.peers
         listeners = []
-        print(peers)
 
         for n in peers:
-            print("splitting: ", (peers[n][0]))
             ip, port = (peers[n][0]).split(":")
-            print("ip ", ip)
             listeners.append((n, (str(ip) + ":5006"), "LISTENER"))
-            print(listeners)
-
 
         addr = json.dumps({'msgtype': 'addr', 'nodes': listeners})
         self.write(addr)

@@ -8,6 +8,7 @@ from twisted.internet import reactor
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
+from twisted.protocols.basic import LineReceiver
 from twisted.internet.task import LoopingCall
 
 from crypto import generate_nodeid
@@ -45,7 +46,7 @@ class PPFactory(Factory):
         return PPProtocol(self, "HELLO", "LISTENER")
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
-class PPProtocol(Protocol):
+class PPProtocol(LineReceiver):
     def __init__(self, factory, state="HELLO", kind="LISTENER", type="NODE"):
         self.factory = factory
         self.state = state
@@ -63,7 +64,7 @@ class PPProtocol(Protocol):
         self.sentResponse = []
 
     def write(self, line):
-        self.transport.write((line + "\n").encode('utf-8'))
+        self.transport.write((line + "\r\n").encode('utf-8'))
 
     def print_peers(self):
         if len(self.factory.peers) == 0:
@@ -93,7 +94,7 @@ class PPProtocol(Protocol):
         _print (" [X] A Node dissconected. Connections left ", self.factory.numProtocols)
 
     # dataRecieved gets called everytime new bytes arrive at the port that is being listened to.
-    def dataReceived(self, data):
+    def lineReceived(self, data):
         for line in (data.splitlines()):
             line = line.strip()
             msgtype = json.loads(line)['msgtype']
