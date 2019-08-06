@@ -1,6 +1,7 @@
 ## Author: Cyrile Verdeyen
 
 import json
+import random
 from time import time
 from datetime import datetime
 from collections import defaultdict
@@ -18,13 +19,20 @@ from crypto import generate_nodeid
 QUESTION_INTERVAL = 3.0 # How often we send out questions
 RESPONSE_INTERVAL = 10.0 # How often we send out the responses we got
 TIMES_TO_SEND = 1 # Amount of nodes that recieve the question
-PEERS_INTERVAL = 10 # How often we send out the peers we have connected with
+PEERS_INTERVAL = 10.0 # How often we send out the peers we have connected with
+DATA_INTERVAL = 30.0 # How often data gets sent to Nodes for more learning
 
 def _print(*args):
     # double, make common module
     time = datetime.now().time().isoformat()[:8]
     print (time)
     print ("".join(map(str, args)))
+
+def unpickle(file):
+    import pickle
+    with open(file, 'rb') as fo:
+        dict = pickle.load(fo, encoding='bytes')
+    return dict
 
 ## The factory class houses all the different protocols that each node has, as well as any other constant data.
 class COFactory(Factory):
@@ -62,6 +70,7 @@ class COProtocol(LineReceiver):
         self.lc_question = LoopingCall(self.send_question)
         self.lc_peers = LoopingCall(self.send_addr)
         self.lc_response = LoopingCall(self.send_response)
+        self.lc_data = LoopingCall(self.send_data)
 
     def write(self, line):
         self.transport.write((line + "\r\n").encode('utf-8'))
@@ -233,6 +242,20 @@ class COProtocol(LineReceiver):
                 response = json.dumps({'msgtype': 'response', 'response': answer})
                 self.write(response)
 
+    def send_data(self):
+        imgs = {b"data": [], b"labels": []}
+
+        i = random.randint(1,5)
+        data = random.randint(0, 9500)
+        img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
+        for j in range(500):
+            imgs[b"data"].append(img[b"data"][(data+j)])
+            imgs[b"labels"].append(img[b"labels"][(data+j)])
+
+        data = json.dumps({'msgtype': 'data', 'data': imgs})
+        _print(" [>] Sending data to: ", self.remote_nodeid, self.remote_ip)
+        self.write(data)
+
     # Handle the addresses that get sent by other nodes, and contact them
     def handle_addr(self, addr):
         json1 = json.loads(addr)
@@ -266,6 +289,7 @@ class COProtocol(LineReceiver):
             self.send_hello()
             self.lc_question.start(QUESTION_INTERVAL, now=False)
             self.lc_peers.start(PEERS_INTERVAL, now=True)
+            self.lc_data.start(DATA_INTERVAL, now=False)
 
     def add_peer(self, kind):
         entry = (self.remote_ip, kind)

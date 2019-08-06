@@ -113,6 +113,8 @@ class PPProtocol(LineReceiver):
                 self.handle_addr(line)
             elif msgtype == "question":
                 self.handle_question(line)
+            elif msgtype == "data":
+                self.handle_data(line)
 
     # The first message that gets sent
     def send_hello(self):
@@ -211,6 +213,10 @@ class PPProtocol(LineReceiver):
                             self.sentResponse.append(info[0])
                             self.write(message)
 
+    def handle_data(self, data):
+        data = json.loads(data)
+        _print(" [<] Got data from: " , self.remote_nodeid, self.remote_ip,". Running ML" )
+        self.factory.ml.update(data["data"])
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):
