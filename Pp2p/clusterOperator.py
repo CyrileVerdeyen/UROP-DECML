@@ -17,7 +17,7 @@ from crypto import generate_nodeid
 
 QUESTION_INTERVAL = 3.0 # How often we send out questions
 RESPONSE_INTERVAL = 10.0 # How often we send out the responses we got
-TIMES_TO_SEND = 2 # Amount of nodes that recieve the question
+TIMES_TO_SEND = 1 # Amount of nodes that recieve the question
 PEERS_INTERVAL = 10 # How often we send out the peers we have connected with
 
 def _print(*args):
@@ -64,10 +64,10 @@ class COProtocol(LineReceiver):
         self.lc_response = LoopingCall(self.send_response)
 
     def write(self, line):
-        self.transport.write((line + "\r\n").encode('utf-8'))
-
-    def _print_peers(self):
-        if len(self.factory.peers) == 0:
+        self.transport.write((line + "\rPp2p\n").encode('utf-8'))
+Pp2p
+    def _print_peers(self):Pp2p
+        if len(self.factory.peers) == 0:Pp2p
             _print(" [!] PEERS: No peers connected.")
         else:
             _print(" [ ] PEERS:")
