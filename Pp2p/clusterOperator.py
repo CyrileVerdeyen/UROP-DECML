@@ -65,7 +65,7 @@ class COProtocol(LineReceiver):
 
     def write(self, line):
         self.transport.write((line + "\rPp2p\n").encode('utf-8'))
-Pp2p
+
     def _print_peers(self):Pp2p
         if len(self.factory.peers) == 0:Pp2p
             _print(" [!] PEERS: No peers connected.")

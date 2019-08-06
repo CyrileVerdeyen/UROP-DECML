@@ -10,7 +10,6 @@ SCRIPTP=("cd UROPFNS/Pp2p;
     git pull")
 
 SCRIPTR=("cd UROPFNS/Pp2p/tests;
-    sudo cp saved_model0.pkl /models
     rm saved_model0.pkl")
 
 PULLFLAG=$1
@@ -25,7 +24,7 @@ fi
 if [ ${PULLFLAG} -eq 1 ];
 then
     for i in ${!HOSTS[*]} ; do
-        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTP}" & sleep 6s
+        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTP}" & sleep 1s
     done
 fi
 
