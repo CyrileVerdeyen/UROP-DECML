@@ -64,7 +64,7 @@ class COProtocol(LineReceiver):
         self.lc_response = LoopingCall(self.send_response)
 
     def write(self, line):
-        self.transport.write((line + "\rPp2p\n").encode('utf-8'))
+        self.transport.write((line + "\r\n").encode('utf-8'))
 
     def _print_peers(self):
         if len(self.factory.peers) == 0:
