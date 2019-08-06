@@ -2,6 +2,7 @@
 from sklearn import datasets
 from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
+from sklearn.linear_model import SGDClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import svm
 import joblib
@@ -41,10 +42,36 @@ class mlnn():
             self.clf = MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(100, 20), random_state=1, early_stopping=True)
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
-            print(self.clf)
 
     def classify(self, img):
         self.img = img
         predict = self.clf.predict_proba(self.img)
         predict = predict[0]
         return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+
+class mlsgd():
+
+    def __init__(self, imgs, ID):
+
+        if os.path.exists('saved_model' + str(ID) + '.pkl'):
+            self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
+        else:
+            self.imgs = imgs
+            X = self.imgs[b"data"]
+            Y = self.imgs[b"labels"]
+            print("Running the ml")
+            self.clf = SGDClassifier(loss="log", penalty="l2", max_iter=5, early_stopping=True)
+            self.clf.fit(X, Y)
+            joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
+
+    def classify(self, img):
+        self.img = img
+        predict = self.clf.predict_proba(self.img)
+        predict = predict[0]
+        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+
+    def update(self, img):
+        self.img = img
+        X = self.img[b"data"]
+        Y = self.img[b"labels"]
+        self.clf.partial_fit(X, Y)

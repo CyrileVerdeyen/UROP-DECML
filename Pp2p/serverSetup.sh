@@ -9,6 +9,10 @@ SCRIPT=("git clone -b serverImplementation --single-branch https://github.com/Cy
 SCRIPTP=("cd UROPFNS/Pp2p;
     git pull")
 
+SCRIPTR=("cd UROPFNS/Pp2p/tests;
+    sudo cp saved_model0.pkl /models
+    rm saved_model0.pkl")
+
 PULLFLAG=$1
 
 if [ ${PULLFLAG} -eq 0 ];
@@ -22,5 +26,12 @@ if [ ${PULLFLAG} -eq 1 ];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTP}" & sleep 6s
+    done
+fi
+
+if [ ${PULLFLAG} -eq 2 ];
+then
+    for i in ${!HOSTS[*]} ; do
+        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTR}" & sleep 1s
     done
 fi
