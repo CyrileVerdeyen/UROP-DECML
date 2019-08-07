@@ -217,10 +217,16 @@ class PPProtocol(LineReceiver):
                             self.sentResponse.append(info[0])
                             self.write(message)
 
+    # Handles data that the server sends it, and updates its model
     def handle_data(self, data):
         data = json.loads(data)
+        imgs = {"data": [], "labels": []}
+        for img in data["data"]:
+            imgs["data"].append(img)
+        for label in data["labels"]:
+            imgs["labels"].append(label)
         _print(" [<] Got data from: " , self.remote_nodeid, self.remote_ip,". Running ML" )
-        self.factory.ml.update(data["data"])
+        self.factory.ml.update(imgs)
 
     # Handle the first message that gets sent
     def handle_hello(self, hello):

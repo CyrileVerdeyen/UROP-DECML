@@ -72,6 +72,6 @@ class mlsgd():
 
     def update(self, img):
         self.img = img
-        X = self.img[b"data"]
-        Y = self.img[b"labels"]
+        X = self.img["data"]
+        Y = self.img["labels"]
         self.clf.partial_fit(X, Y)
