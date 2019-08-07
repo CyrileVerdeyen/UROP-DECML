@@ -99,6 +99,10 @@ class COProtocol(LineReceiver):
             self.factory.peers.pop(self.remote_nodeid)
             try: self.lc_question.stop()
             except AssertionError: pass
+            try: self.lc_peers.stop()
+            except AssertionError: pass
+            try: self.lc_data.stop()
+            except AssertionError: pass
         if self.remote_ip in self.factory.questionNode:
             self.factory.questionNode.pop(self.remote_ip)
             try: self.lc_response.stop()
@@ -242,17 +246,17 @@ class COProtocol(LineReceiver):
                 response = json.dumps({'msgtype': 'response', 'response': answer})
                 self.write(response)
 
+    #This sends out random data batches to nodes for them to fit to get better models
     def send_data(self):
-        imgs = {b"data": [], b"labels": []}
-
+        datas = []
+        labels = []
         i = random.randint(1,5)
         data = random.randint(0, 9500)
         img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
-        for j in range(500):
-            imgs[b"data"].append(img[b"data"][(data+j)])
-            imgs[b"labels"].append(img[b"labels"][(data+j)])
-
-        data = json.dumps({'msgtype': 'data', 'data': imgs})
+        for j in range(250):
+            datas.append((img[b"data"][(data+j)]).tolist())
+            labels.append((img[b"labels"][(data+j)]))
+        data = json.dumps({'msgtype': 'data', 'data': datas, 'labels': labels})
         _print(" [>] Sending data to: ", self.remote_nodeid, self.remote_ip)
         self.write(data)
 

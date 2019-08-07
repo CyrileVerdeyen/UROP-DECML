@@ -47,6 +47,10 @@ class PPFactory(Factory):
 
 ## The PPProtocol is where the communication happens between each of the nodes. This handles the sending, recieving and handling of the data.
 class PPProtocol(LineReceiver):
+
+    MAX_LENGTH = 1000000000
+
+
     def __init__(self, factory, state="HELLO", kind="LISTENER", type="NODE"):
         self.factory = factory
         self.state = state
