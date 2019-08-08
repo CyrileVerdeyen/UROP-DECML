@@ -60,7 +60,7 @@ class mlsgd():
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
             print("Running the ml")
-            self.clf = SGDClassifier(loss="log", penalty="l2", max_iter=500, early_stopping=False)
+            self.clf = SGDClassifier(loss="log", penalty="l2", max_iter=400, early_stopping=False, shuffle=True, learning_rate='optimal ')
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
