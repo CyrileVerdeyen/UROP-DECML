@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import svm
 from sklearn.externals import joblib
 import os.path
+from time import time
 
 class mlsvm():
 
@@ -17,7 +18,16 @@ class mlsvm():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
+
+            if (os.path.exists("ml.txt")):
+                os.remove("ml.txt")
+            self.log = open("ml.txt", "w+")
+
+            timeStart = time()
+            print("Running the ml")
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
+            runTime = ((time() - timeStart)/60)
+            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 

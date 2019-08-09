@@ -13,11 +13,10 @@ def data():
     imgs = {b"data": [], b"labels": []}
 
     for i in (range (1,6)):
-        data = random.randint(0, 4999)
         img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
-        for j in range(5000):
-            imgs[b"data"].append(img[b"data"][(data+j)])
-            imgs[b"labels"].append(img[b"labels"][(data+j)])
+        for j in range(10000):
+            imgs[b"data"].append(img[b"data"][(j)])
+            imgs[b"labels"].append(img[b"labels"][(j)])
 
     return imgs
 

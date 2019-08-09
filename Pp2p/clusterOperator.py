@@ -2,6 +2,7 @@
 
 import json
 from time import time
+import os
 from datetime import datetime
 from collections import defaultdict
 from collections import Counter
@@ -39,6 +40,10 @@ class COFactory(Factory):
         self.questionsLeft = 0
         self.lastQuestionSent = 0
         self.response = defaultdict(list)
+
+        if (os.path.exists("responses.txt")):
+            os.remove("responses.txt")
+        self.log = open("responses.txt", "w+")
 
     def stopFactory(self):
         pass
@@ -213,6 +218,7 @@ class COProtocol(Protocol):
             if answer:
                 _print(" [>] Sending answer to ", self.remote_ip)
                 response = json.dumps({'msgtype': 'response', 'response': answer})
+                self.factory.log.write(( "Question: " + str(i) + " Answer: " + str(ans[0]) + "\r\n"))
                 self.write(response)
 
     # Handle the addresses that get sent by other nodes, and contact them
