@@ -7,6 +7,7 @@ from sklearn.model_selection import train_test_split
 from sklearn import svm
 import joblib
 import os.path
+from time import time
 
 class mlsvm():
 
@@ -18,8 +19,16 @@ class mlsvm():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
+
+            if (os.path.exists("ml.txt")):
+                os.remove("ml.txt")
+            self.log = open("ml.txt", "w+")
+
+            timeStart = time()
             print("Running the ml")
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
+            runTime = ((time() - timeStart)/60)
+            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
@@ -39,7 +48,16 @@ class mlnn():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
+
+            if (os.path.exists("ml.txt")):
+                os.remove("ml.txt")
+            self.log = open("ml.txt", "w+")
+
+            timeStart = time()
+            print("Running the ml")
             self.clf = MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(100, 20), random_state=1, early_stopping=True)
+            runTime = ((time() - timeStart)/60)
+            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
@@ -59,8 +77,16 @@ class mlsgd():
             self.imgs = imgs
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
+
+            if (os.path.exists("ml.txt")):
+                os.remove("ml.txt")
+            self.log = open("ml.txt", "w+")
+
+            timeStart = time()
             print("Running the ml")
             self.clf = SGDClassifier(loss="modified_huber", penalty="l2", max_iter=400, early_stopping=False, shuffle=True, learning_rate='optimal')
+            runTime = ((time() - timeStart)/60)
+            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 

@@ -27,28 +27,28 @@ SCRIPTD=("cd UROPFNS/Pp2p/tests;
 
 PULLFLAG=$1
 
-if [ ${PULLFLAG} -eq 0 ];
+if [[ ${PULLFLAG} == *"setup" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPT}" & sleep 6s
     done
 fi
 
-if [ ${PULLFLAG} -eq 1 ];
+if [[ ${PULLFLAG} == *"pull" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTP}" & sleep 1s
     done
 fi
 
-if [ ${PULLFLAG} -eq 2 ];
+if [[ ${PULLFLAG} == *"remove" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTR}" & sleep 1s
     done
 fi
 
-if [ ${PULLFLAG} -eq 3 ];
+if [[ ${PULLFLAG} == *"delete" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTD}" & sleep 1s

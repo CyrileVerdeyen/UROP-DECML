@@ -2,6 +2,7 @@
 
 import json
 import random
+import os
 from time import time
 from datetime import datetime
 from collections import defaultdict
@@ -36,8 +37,8 @@ def unpickle(file):
 
 ## The factory class houses all the different protocols that each node has, as well as any other constant data.
 class COFactory(Factory):
-    def __init__(self):
-        pass
+    def __init__(self, data=False):
+        self.data = data
 
     def startFactory(self):
         self.peers = {}
@@ -49,6 +50,10 @@ class COFactory(Factory):
         self.questionsLeft = 0
         self.lastQuestionSent = 0
         self.response = defaultdict(list)
+
+        if (os.path.exists("responses.txt")):
+            os.remove("responses.txt")
+        self.log = open("responses.txt", "w+")
 
     def stopFactory(self):
         pass
@@ -203,7 +208,7 @@ class COProtocol(LineReceiver):
 
         if self.factory.response[responses["questionID"]]:
 
-            for key, value in self.factory.response[responses["questionID"]].items(): # Adding new ansers of keys taht excist
+            for key, value in self.factory.response[responses["questionID"]].items(): # Adding new ansers of keys that excist
                 if key in responses["answer"]:
                     for valueR in responses["answer"][key]:
                         if valueR in value: # If the value is already in it, go to next one
@@ -239,6 +244,7 @@ class COProtocol(LineReceiver):
                                 ans[1] = answers[a]
 
                         answer.append([i, ans[0]])
+                        self.factory.log.write(( str(i) + " " + str(ans[0]) + "\r\n"))
                         del self.factory.response[i]
 
             if answer:
@@ -293,7 +299,9 @@ class COProtocol(LineReceiver):
             self.send_hello()
             self.lc_question.start(QUESTION_INTERVAL, now=False)
             self.lc_peers.start(PEERS_INTERVAL, now=True)
-            self.lc_data.start(DATA_INTERVAL, now=False)
+
+            if self.factory.data:
+                self.lc_data.start(DATA_INTERVAL, now=False)
 
     def add_peer(self, kind):
         entry = (self.remote_ip, kind)

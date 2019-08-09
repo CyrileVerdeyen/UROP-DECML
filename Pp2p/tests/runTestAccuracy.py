@@ -4,6 +4,7 @@ import json
 import time
 import random
 from sklearn.metrics import accuracy_score
+import os
 
 
 def unpickle(file):
@@ -39,6 +40,11 @@ HOST, PORT = "10.221.31.232", 5005
 quesitonsSent = 0
 correctAnswers = 0
 
+if (os.path.exists("tests.txt")):
+    os.remove("tests.txt")
+
+log = open("tests.txt", "w+")
+
 # Create a socket (SOCK_STREAM means a TCP socket)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -56,10 +62,14 @@ try:
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:
-            print("For quesiton: ", response[0], " the answer is: ", response[1], " which is a: ", nameImg(int(response[1])))
+            message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]) + " which is a: " + nameImg(int(response[1])))
+            print(message)
             if int(response[1]) == QA[1]:
                 correctAnswers += 1
-            print("Correct Responses: ", correctAnswers, "/", quesitonsSent)
+            score = ("Correct Responses: " + str(correctAnswers) + "/" + str(quesitonsSent))
+            print(score)
+            log.write(message)
+            log.write(score)
             answers.append(int(response[1]))
 
         num += 1

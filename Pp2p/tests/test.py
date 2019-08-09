@@ -10,13 +10,14 @@ def unpickle(file):
     return dict
 
 class CO():
-    def __init__(self):
+    def __init__(self, data=False):
         self.ip = socket.gethostbyname(socket.gethostname())
         self.DEFAULT_PORT = 5005
         self.BOOTSRAP_NODES = []
+        self.data = data
 
     def run(self):
-        server = testFrame.testCO(self.DEFAULT_PORT, self.BOOTSRAP_NODES, Host=self.ip)
+        server = testFrame.testCO(self.DEFAULT_PORT, self.BOOTSRAP_NODES, Host=self.ip, data=self.data)
         server.server()
         server.client()
 
@@ -37,7 +38,7 @@ class node():
         self.DEFAULT_PORT = 5006
         self.BOOTSRAP_NODES = ["10.221.31.232:5005"]
 
-        self.ml = ml.mlsgd(imgs, "0")
+        self.ml = ml.mlsvm(imgs, "0")
 
     def run(self):
         server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml, Host=self.ip)

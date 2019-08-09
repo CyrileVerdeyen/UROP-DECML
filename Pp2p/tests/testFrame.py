@@ -58,11 +58,12 @@ class testPP():
         #Thread(target=reactor.run, args=(False,)).start()
 
 class testCO():
-    def __init__(self, Port, BootstrapNodes=[], Host = "localhost"):
+    def __init__(self, Port, BootstrapNodes=[], Host = "localhost", data = False):
 
         self.BOOTSTRAP_NODES = BootstrapNodes
         self.DEFAULT_PORT = Port
         self.DEFAULT_HOST = Host
+        self.data = data
 
         parser = argparse.ArgumentParser(description="server")
         parser.add_argument('--port', type=int, default=self.DEFAULT_PORT)
@@ -76,7 +77,7 @@ class testCO():
             endpoint = TCP4ServerEndpoint(reactor, self.args.port, interface=self.args.listen)
             _print(" [ ] THIS IS THE CO")
             _print(" [ ] LISTEN:", self.args.listen, ":", self.args.port)
-            self.cofactory = COFactory()
+            self.cofactory = COFactory(self.data)
             endpoint.listen(self.cofactory)
         except CannotListenError:
             _print("[!] Address in use")

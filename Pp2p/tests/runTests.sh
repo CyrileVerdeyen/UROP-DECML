@@ -11,26 +11,43 @@ SCRIPTN=("cd UROPFNS/Pp2p/tests;
 SCRIPTCO=("cd UROPFNS/Pp2p/tests;
     python3 runTestCO.py")
 
+SCRIPTCOD=("cd UROPFNS/Pp2p/tests;
+    python3 runTestCOd.py")
+
 SCRIPTQ=("cd UROPFNS/Pp2p/tests;
     python3 runTestQ.py")
 
 SCRIPTA=("cd UROPFNS/Pp2p/tests;
     python3 runTestAccuracy.py")
 
-konsole --noclose -e ssh -t ${CO} "${SCRIPTCO}" & sleep 3s
+CONSOLE=$1
+if [ $CONSOLE == "d" ];
+then
+    konsole --noclose -e ssh -t ${CO} "${SCRIPTCOD}" & sleep 3s
+fi
+
+if [ $CONSOLE == "nd" ];
+then
+    konsole --noclose -e ssh -t ${CO} "${SCRIPTCO}" & sleep 3s
+fi
 
 for i in ${!HOSTS[*]} ; do
     konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTN}" & sleep 1s
 done
 
-PULLFLAG=$1
+PULLFLAG=$2
 
-if [ ${PULLFLAG} -eq 0 ];
+if [ ${PULLFLAG} == "q" ];
 then
     konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}"
 fi
 
-if [ ${PULLFLAG} -eq 1 ];
+if [ ${PULLFLAG} == "a" ];
+then
+    konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
+fi
+
+if [ ${PULLFLAG} == "ml" ];
 then
     konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
 fi
