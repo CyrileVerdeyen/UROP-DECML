@@ -12,6 +12,19 @@ SCRIPTP=("cd UROPFNS/Pp2p;
 SCRIPTR=("cd UROPFNS/Pp2p/tests;
     rm saved_model0.pkl")
 
+SCRIPTM=("cd UROPFNS/Pp2p;
+    wget -O Tdata.tar.gz 'http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz';
+    tar -C ./tests -xvzf Tdata.tar.gz;
+    wget -O Ldata.tar.gz 'http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz';
+    tar -C ./tests -xvzf Ldata.tar.gz;
+    wget -O Tedata.tar.gz 'http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz';
+    tar -C ./tests -xvzf Tedata.tar.gz;
+    wget -O Ledata.tar.gz 'http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz';
+    tar -C ./tests -xvzf Ledata.tar.gz")
+
+SCRIPTD=("cd UROPFNS/Pp2p/tests;
+    git clean -f")
+
 PULLFLAG=$1
 
 if [ ${PULLFLAG} -eq 0 ];
@@ -32,5 +45,12 @@ if [ ${PULLFLAG} -eq 2 ];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTR}" & sleep 1s
+    done
+fi
+
+if [ ${PULLFLAG} -eq 3 ];
+then
+    for i in ${!HOSTS[*]} ; do
+        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTD}" & sleep 1s
     done
 fi
