@@ -7,6 +7,13 @@ from sklearn import svm
 from sklearn.externals import joblib
 import os.path
 from time import time
+from datetime import datetime
+
+def _print(*args):
+    # double, make common module
+    time = datetime.now().time().isoformat()[:8]
+    print (time)
+    print ("".join(map(str, args)))
 
 class mlsvm():
 
@@ -19,16 +26,10 @@ class mlsvm():
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
 
-            if (os.path.exists("ml.txt")):
-                os.remove("ml.txt")
-            self.log = open("ml.txt", "w+")
-
-            timeStart = time()
-            print("Running the ml")
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
-            runTime = ((time() - timeStart)/60)
-            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
+            _print("Running the ML")
             self.clf.fit(X, Y)
+            _print("Finished running ML")
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
     def classify(self, img):
