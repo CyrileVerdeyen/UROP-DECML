@@ -36,7 +36,7 @@ class node0():
         self.BOOTSRAP_NODES = ["localhost:5005"]
 
         imgs = data()
-        self.ml = ml.mlsvm(imgs, "0")
+        self.ml = ml.mlsgd(imgs, "0")
 
     def run(self):
         server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml)

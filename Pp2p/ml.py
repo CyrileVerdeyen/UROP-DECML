@@ -4,6 +4,7 @@ from sklearn import metrics
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import svm
+from sklearn.linear_model import SGDClassifier
 from sklearn.externals import joblib
 import os.path
 from time import time
@@ -58,3 +59,32 @@ class mlnn():
         predict = self.clf.predict_proba(self.img)
         predict = predict[0]
         return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+
+class mlsgd():
+
+    def __init__(self, imgs, ID):
+
+        if os.path.exists('saved_model' + str(ID) + '.pkl'):
+            self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
+        else:
+            self.imgs = imgs
+            X = self.imgs[b"data"]
+            Y = self.imgs[b"labels"]
+
+            _print("Running the ML")
+            self.clf = SGDClassifier(loss="modified_huber", penalty="l2", max_iter=20, early_stopping=False, shuffle=True, learning_rate="optimal")
+            self.clf.fit(X, Y)
+            _print("Finished running the ML")
+            joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
+
+    def classify(self, img):
+        self.img = img
+        predict = self.clf.predict_proba(self.img)
+        predict = predict[0]
+        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+
+    def update(self, img):
+        self.img = img
+        X = self.img["data"]
+        Y = self.img["labels"]
+        self.clf.partial_fit(X, Y)

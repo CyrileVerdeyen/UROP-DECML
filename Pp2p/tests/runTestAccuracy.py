@@ -62,12 +62,12 @@ try:
         answer = sock.recv(512)
         message = json.loads(answer)
         for response in message["response"]:
-            message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]) + " which is a: " + nameImg(int(response[1])))
+            message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]) + " which is a: " + str(nameImg(int(response[1]))))
             print(message)
             if int(response[1]) == QA[1]:
                 correctAnswers += 1
             score = ("Correct Responses: " + str(correctAnswers) + "/" + str(quesitonsSent))
-            log.write(score)
+            log.write(score + "\r\n")
             answers.append(int(response[1]))
 
         num += 1
