@@ -9,6 +9,12 @@ import joblib
 import os.path
 from time import time
 
+def _print(*args):
+    # double, make common module
+    time = datetime.now().time().isoformat()[:8]
+    print (time)
+    print ("".join(map(str, args)))
+
 class mlsvm():
 
     def __init__(self, imgs, ID):
@@ -20,16 +26,10 @@ class mlsvm():
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
 
-            if (os.path.exists("ml.txt")):
-                os.remove("ml.txt")
-            self.log = open("ml.txt", "w+")
-
-            timeStart = time()
-            print("Running the ml")
+            _print("Running the ML")
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
-            runTime = ((time() - timeStart)/60)
-            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
+            _print("Finished training ML")
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
     def classify(self, img):
@@ -49,16 +49,10 @@ class mlnn():
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
 
-            if (os.path.exists("ml.txt")):
-                os.remove("ml.txt")
-            self.log = open("ml.txt", "w+")
-
-            timeStart = time()
-            print("Running the ml")
+            _print("Running the ML")
             self.clf = MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(100, 20), random_state=1, early_stopping=True)
-            runTime = ((time() - timeStart)/60)
-            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
+            _print("Finihsed running the ML")
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
     def classify(self, img):
@@ -78,16 +72,10 @@ class mlsgd():
             X = self.imgs[b"data"]
             Y = self.imgs[b"labels"]
 
-            if (os.path.exists("ml.txt")):
-                os.remove("ml.txt")
-            self.log = open("ml.txt", "w+")
-
-            timeStart = time()
-            print("Running the ml")
+            _print("Running the ML")
             self.clf = SGDClassifier(loss="modified_huber", penalty="l2", max_iter=400, early_stopping=False, shuffle=True, learning_rate='optimal')
-            runTime = ((time() - timeStart)/60)
-            self.log.write(("Time it took to learn: " + str(runTime) + " mins"))
             self.clf.fit(X, Y)
+            _print("Finished running the ML")
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
 
     def classify(self, img):
