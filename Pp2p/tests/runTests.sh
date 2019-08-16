@@ -23,12 +23,12 @@ SCRIPTA=("cd UROPFNS/Pp2p/tests;
 CONSOLE=$1
 if [ $CONSOLE == "d" ];
 then
-    konsole --noclose -e ssh -t ${CO} "${SCRIPTCOD}" & sleep 3s
+    konsole --noclose -e ssh -t ${CO} "${SCRIPTCOD}" & sleep 60s
 fi
 
 if [ $CONSOLE == "nd" ];
 then
-    konsole --noclose -e ssh -t ${CO} "${SCRIPTCO}" & sleep 3s
+    konsole --noclose -e ssh -t ${CO} "${SCRIPTCO}" & sleep 60s
 fi
 
 for i in ${!HOSTS[*]} ; do
@@ -43,11 +43,6 @@ then
 fi
 
 if [ ${PULLFLAG} == "a" ];
-then
-    konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
-fi
-
-if [ ${PULLFLAG} == "ml" ];
 then
     konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
 fi
