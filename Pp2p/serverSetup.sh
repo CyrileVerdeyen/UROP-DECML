@@ -12,6 +12,9 @@ SCRIPTP=("cd UROPFNS/Pp2p;
 SCRIPTR=("cd UROPFNS/Pp2p/tests;
     rm saved_model0.pkl")
 
+SCRIPTN=("cd UROPFNS/Pp2p/tests;
+    mv saved_model0.pkl saved_model.pkl")
+
 SCRIPTM=("cd UROPFNS/Pp2p;
     wget -O Tdata.tar.gz 'http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz';
     tar -C ./tests -xvzf Tdata.tar.gz;
@@ -52,5 +55,12 @@ if [[ ${PULLFLAG} == *"delete" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTD}" & sleep 1s
+    done
+fi
+
+if [[ ${PULLFLAG} == *"rename" ]];
+then
+    for i in ${!HOSTS[*]} ; do
+        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTN}" & sleep 1s
     done
 fi
