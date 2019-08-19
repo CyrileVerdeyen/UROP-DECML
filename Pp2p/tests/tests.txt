@@ -1,0 +1,997 @@
+Correct Responses: 1/1
+For quesiton: 0 the answer is: 8 which is a: b'ship'Correct Responses: 1/1Correct Responses: 1/3
+Correct Responses: 1/3
+For quesiton: 2 the answer is: 8 which is a: b'ship'Correct Responses: 1/3Correct Responses: 1/5
+Correct Responses: 2/5
+For quesiton: 4 the answer is: 6 which is a: b'frog'Correct Responses: 2/5Correct Responses: 3/7
+Correct Responses: 3/7
+For quesiton: 6 the answer is: 4 which is a: b'deer'Correct Responses: 3/7Correct Responses: 3/9
+Correct Responses: 3/9
+For quesiton: 8 the answer is: 8 which is a: b'ship'Correct Responses: 3/9Correct Responses: 3/11
+Correct Responses: 3/11
+For quesiton: 10 the answer is: 8 which is a: b'ship'Correct Responses: 3/11Correct Responses: 3/13
+Correct Responses: 3/13
+For quesiton: 12 the answer is: 1 which is a: b'automobile'Correct Responses: 3/13Correct Responses: 3/15
+Correct Responses: 3/15
+For quesiton: 14 the answer is: 5 which is a: b'dog'Correct Responses: 3/15Correct Responses: 3/17
+Correct Responses: 3/17
+For quesiton: 16 the answer is: 4 which is a: b'deer'Correct Responses: 3/17Correct Responses: 3/19
+Correct Responses: 3/19
+For quesiton: 18 the answer is: 4 which is a: b'deer'Correct Responses: 3/19Correct Responses: 3/21
+Correct Responses: 4/21
+For quesiton: 20 the answer is: 0 which is a: b'airplane'Correct Responses: 4/21Correct Responses: 4/23
+Correct Responses: 4/23
+For quesiton: 22 the answer is: 6 which is a: b'frog'Correct Responses: 4/23Correct Responses: 4/25
+Correct Responses: 4/25
+For quesiton: 24 the answer is: 6 which is a: b'frog'Correct Responses: 4/25Correct Responses: 4/27
+Correct Responses: 4/27
+For quesiton: 26 the answer is: 8 which is a: b'ship'Correct Responses: 4/27Correct Responses: 4/29
+Correct Responses: 5/29
+For quesiton: 28 the answer is: 6 which is a: b'frog'Correct Responses: 5/29Correct Responses: 5/31
+Correct Responses: 5/31
+For quesiton: 30 the answer is: 4 which is a: b'deer'Correct Responses: 5/31Correct Responses: 5/33
+Correct Responses: 5/33
+For quesiton: 32 the answer is: 6 which is a: b'frog'Correct Responses: 5/33Correct Responses: 5/35
+Correct Responses: 5/35
+For quesiton: 34 the answer is: 1 which is a: b'automobile'Correct Responses: 5/35Correct Responses: 5/37
+Correct Responses: 5/37
+For quesiton: 36 the answer is: 8 which is a: b'ship'Correct Responses: 5/37Correct Responses: 5/39
+Correct Responses: 6/39
+For quesiton: 38 the answer is: 5 which is a: b'dog'Correct Responses: 6/39Correct Responses: 6/41
+Correct Responses: 7/41
+For quesiton: 40 the answer is: 6 which is a: b'frog'Correct Responses: 7/41Correct Responses: 8/43
+Correct Responses: 9/43
+For quesiton: 42 the answer is: 6 which is a: b'frog'Correct Responses: 9/43Correct Responses: 9/45
+Correct Responses: 10/45
+For quesiton: 44 the answer is: 9 which is a: b'truck'Correct Responses: 10/45Correct Responses: 10/47
+Correct Responses: 11/47
+For quesiton: 46 the answer is: 9 which is a: b'truck'Correct Responses: 11/47Correct Responses: 11/49
+Correct Responses: 11/49
+For quesiton: 48 the answer is: 4 which is a: b'deer'Correct Responses: 11/49Correct Responses: 11/51
+Correct Responses: 11/51
+For quesiton: 50 the answer is: 6 which is a: b'frog'Correct Responses: 11/51Correct Responses: 11/53
+Correct Responses: 11/53
+For quesiton: 52 the answer is: 6 which is a: b'frog'Correct Responses: 11/53Correct Responses: 12/55
+Correct Responses: 13/55
+For quesiton: 54 the answer is: 8 which is a: b'ship'Correct Responses: 13/55Correct Responses: 13/57
+Correct Responses: 13/57
+For quesiton: 56 the answer is: 1 which is a: b'automobile'Correct Responses: 13/57Correct Responses: 13/59
+Correct Responses: 14/59
+For quesiton: 58 the answer is: 6 which is a: b'frog'Correct Responses: 14/59Correct Responses: 14/61
+Correct Responses: 14/61
+For quesiton: 60 the answer is: 4 which is a: b'deer'Correct Responses: 14/61Correct Responses: 14/63
+Correct Responses: 14/63
+For quesiton: 62 the answer is: 8 which is a: b'ship'Correct Responses: 14/63Correct Responses: 14/65
+Correct Responses: 14/65
+For quesiton: 64 the answer is: 4 which is a: b'deer'Correct Responses: 14/65Correct Responses: 14/67
+Correct Responses: 14/67
+For quesiton: 66 the answer is: 0 which is a: b'airplane'Correct Responses: 14/67Correct Responses: 14/69
+Correct Responses: 14/69
+For quesiton: 68 the answer is: 9 which is a: b'truck'Correct Responses: 14/69Correct Responses: 14/71
+Correct Responses: 14/71
+For quesiton: 70 the answer is: 4 which is a: b'deer'Correct Responses: 14/71Correct Responses: 15/73
+Correct Responses: 16/73
+For quesiton: 72 the answer is: 8 which is a: b'ship'Correct Responses: 16/73Correct Responses: 16/75
+Correct Responses: 16/75
+For quesiton: 74 the answer is: 4 which is a: b'deer'Correct Responses: 16/75Correct Responses: 16/77
+Correct Responses: 16/77
+For quesiton: 76 the answer is: 5 which is a: b'dog'Correct Responses: 16/77Correct Responses: 16/79
+Correct Responses: 16/79
+For quesiton: 78 the answer is: 0 which is a: b'airplane'Correct Responses: 16/79Correct Responses: 16/81
+Correct Responses: 17/81
+For quesiton: 80 the answer is: 1 which is a: b'automobile'Correct Responses: 17/81Correct Responses: 17/83
+Correct Responses: 17/83
+For quesiton: 82 the answer is: 0 which is a: b'airplane'Correct Responses: 17/83Correct Responses: 17/85
+Correct Responses: 17/85
+For quesiton: 84 the answer is: 9 which is a: b'truck'Correct Responses: 17/85Correct Responses: 17/87
+Correct Responses: 17/87
+For quesiton: 86 the answer is: 8 which is a: b'ship'Correct Responses: 17/87Correct Responses: 17/89
+Correct Responses: 17/89
+For quesiton: 88 the answer is: 8 which is a: b'ship'Correct Responses: 17/89Correct Responses: 17/91
+Correct Responses: 17/91
+For quesiton: 90 the answer is: 4 which is a: b'deer'Correct Responses: 17/91Correct Responses: 17/93
+Correct Responses: 17/93
+For quesiton: 92 the answer is: 9 which is a: b'truck'Correct Responses: 17/93Correct Responses: 18/95
+Correct Responses: 19/95
+For quesiton: 94 the answer is: 6 which is a: b'frog'Correct Responses: 19/95Correct Responses: 19/97
+Correct Responses: 19/97
+For quesiton: 96 the answer is: 8 which is a: b'ship'Correct Responses: 19/97Correct Responses: 19/99
+Correct Responses: 19/99
+For quesiton: 98 the answer is: 9 which is a: b'truck'Correct Responses: 19/99Correct Responses: 19/101
+Correct Responses: 19/101
+For quesiton: 100 the answer is: 4 which is a: b'deer'Correct Responses: 19/101Correct Responses: 19/103
+Correct Responses: 19/103
+For quesiton: 102 the answer is: 7 which is a: b'horse'Correct Responses: 19/103Correct Responses: 19/105
+Correct Responses: 19/105
+For quesiton: 104 the answer is: 8 which is a: b'ship'Correct Responses: 19/105Correct Responses: 20/107
+Correct Responses: 21/107
+For quesiton: 106 the answer is: 6 which is a: b'frog'Correct Responses: 21/107Correct Responses: 21/109
+Correct Responses: 21/109
+For quesiton: 108 the answer is: 5 which is a: b'dog'Correct Responses: 21/109Correct Responses: 21/111
+Correct Responses: 21/111
+For quesiton: 110 the answer is: 5 which is a: b'dog'Correct Responses: 21/111Correct Responses: 21/113
+Correct Responses: 21/113
+For quesiton: 112 the answer is: 4 which is a: b'deer'Correct Responses: 21/113Correct Responses: 21/115
+Correct Responses: 21/115
+For quesiton: 114 the answer is: 6 which is a: b'frog'Correct Responses: 21/115Correct Responses: 21/117
+Correct Responses: 21/117
+For quesiton: 116 the answer is: 9 which is a: b'truck'Correct Responses: 21/117Correct Responses: 21/119
+Correct Responses: 21/119
+For quesiton: 118 the answer is: 5 which is a: b'dog'Correct Responses: 21/119Correct Responses: 21/121
+Correct Responses: 21/121
+For quesiton: 120 the answer is: 4 which is a: b'deer'Correct Responses: 21/121Correct Responses: 21/123
+Correct Responses: 21/123
+For quesiton: 122 the answer is: 4 which is a: b'deer'Correct Responses: 21/123Correct Responses: 21/125
+Correct Responses: 21/125
+For quesiton: 124 the answer is: 6 which is a: b'frog'Correct Responses: 21/125Correct Responses: 21/127
+Correct Responses: 21/127
+For quesiton: 126 the answer is: 5 which is a: b'dog'Correct Responses: 21/127Correct Responses: 21/129
+Correct Responses: 21/129
+For quesiton: 128 the answer is: 9 which is a: b'truck'Correct Responses: 21/129Correct Responses: 21/131
+Correct Responses: 21/131
+For quesiton: 130 the answer is: 9 which is a: b'truck'Correct Responses: 21/131Correct Responses: 22/133
+Correct Responses: 23/133
+For quesiton: 132 the answer is: 9 which is a: b'truck'Correct Responses: 23/133Correct Responses: 23/135
+Correct Responses: 23/135
+For quesiton: 134 the answer is: 5 which is a: b'dog'Correct Responses: 23/135Correct Responses: 23/137
+Correct Responses: 23/137
+For quesiton: 136 the answer is: 9 which is a: b'truck'Correct Responses: 23/137Correct Responses: 23/139
+Correct Responses: 23/139
+For quesiton: 138 the answer is: 8 which is a: b'ship'Correct Responses: 23/139Correct Responses: 23/141
+Correct Responses: 23/141
+For quesiton: 140 the answer is: 1 which is a: b'automobile'Correct Responses: 23/141Correct Responses: 23/143
+Correct Responses: 23/143
+For quesiton: 142 the answer is: 6 which is a: b'frog'Correct Responses: 23/143Correct Responses: 23/145
+Correct Responses: 23/145
+For quesiton: 144 the answer is: 9 which is a: b'truck'Correct Responses: 23/145Correct Responses: 23/147
+Correct Responses: 23/147
+For quesiton: 146 the answer is: 4 which is a: b'deer'Correct Responses: 23/147Correct Responses: 23/149
+Correct Responses: 23/149
+For quesiton: 148 the answer is: 5 which is a: b'dog'Correct Responses: 23/149Correct Responses: 23/151
+Correct Responses: 23/151
+For quesiton: 150 the answer is: 8 which is a: b'ship'Correct Responses: 23/151Correct Responses: 23/153
+Correct Responses: 24/153
+For quesiton: 152 the answer is: 0 which is a: b'airplane'Correct Responses: 24/153Correct Responses: 24/155
+Correct Responses: 24/155
+For quesiton: 154 the answer is: 4 which is a: b'deer'Correct Responses: 24/155Correct Responses: 25/157
+Correct Responses: 25/157
+For quesiton: 156 the answer is: 8 which is a: b'ship'Correct Responses: 25/157Correct Responses: 26/159
+Correct Responses: 26/159
+For quesiton: 158 the answer is: 8 which is a: b'ship'Correct Responses: 26/159Correct Responses: 26/161
+Correct Responses: 27/161
+For quesiton: 160 the answer is: 1 which is a: b'automobile'Correct Responses: 27/161Correct Responses: 28/163
+Correct Responses: 28/163
+For quesiton: 162 the answer is: 4 which is a: b'deer'Correct Responses: 28/163Correct Responses: 28/165
+Correct Responses: 28/165
+For quesiton: 164 the answer is: 8 which is a: b'ship'Correct Responses: 28/165Correct Responses: 28/167
+Correct Responses: 29/167
+For quesiton: 166 the answer is: 4 which is a: b'deer'Correct Responses: 29/167Correct Responses: 29/169
+Correct Responses: 29/169
+For quesiton: 168 the answer is: 8 which is a: b'ship'Correct Responses: 29/169Correct Responses: 29/171
+Correct Responses: 29/171
+For quesiton: 170 the answer is: 8 which is a: b'ship'Correct Responses: 29/171Correct Responses: 29/173
+Correct Responses: 29/173
+For quesiton: 172 the answer is: 6 which is a: b'frog'Correct Responses: 29/173Correct Responses: 30/175
+Correct Responses: 31/175
+For quesiton: 174 the answer is: 9 which is a: b'truck'Correct Responses: 31/175Correct Responses: 31/177
+Correct Responses: 31/177
+For quesiton: 176 the answer is: 4 which is a: b'deer'Correct Responses: 31/177Correct Responses: 31/179
+Correct Responses: 31/179
+For quesiton: 178 the answer is: 8 which is a: b'ship'Correct Responses: 31/179Correct Responses: 31/181
+Correct Responses: 31/181
+For quesiton: 180 the answer is: 0 which is a: b'airplane'Correct Responses: 31/181Correct Responses: 31/183
+Correct Responses: 31/183
+For quesiton: 182 the answer is: 4 which is a: b'deer'Correct Responses: 31/183Correct Responses: 31/185
+Correct Responses: 31/185
+For quesiton: 184 the answer is: 0 which is a: b'airplane'Correct Responses: 31/185Correct Responses: 31/187
+Correct Responses: 31/187
+For quesiton: 186 the answer is: 6 which is a: b'frog'Correct Responses: 31/187Correct Responses: 31/189
+Correct Responses: 32/189
+For quesiton: 188 the answer is: 0 which is a: b'airplane'Correct Responses: 32/189Correct Responses: 32/191
+Correct Responses: 32/191
+For quesiton: 190 the answer is: 5 which is a: b'dog'Correct Responses: 32/191Correct Responses: 32/193
+Correct Responses: 32/193
+For quesiton: 192 the answer is: 5 which is a: b'dog'Correct Responses: 32/193Correct Responses: 32/195
+Correct Responses: 32/195
+For quesiton: 194 the answer is: 4 which is a: b'deer'Correct Responses: 32/195Correct Responses: 32/197
+Correct Responses: 32/197
+For quesiton: 196 the answer is: 0 which is a: b'airplane'Correct Responses: 32/197Correct Responses: 32/199
+Correct Responses: 32/199
+For quesiton: 198 the answer is: 5 which is a: b'dog'Correct Responses: 32/199Correct Responses: 32/201
+Correct Responses: 32/201
+For quesiton: 200 the answer is: 8 which is a: b'ship'Correct Responses: 32/201Correct Responses: 32/203
+Correct Responses: 32/203
+For quesiton: 202 the answer is: 6 which is a: b'frog'Correct Responses: 32/203Correct Responses: 32/205
+Correct Responses: 32/205
+For quesiton: 204 the answer is: 5 which is a: b'dog'Correct Responses: 32/205Correct Responses: 32/207
+Correct Responses: 33/207
+For quesiton: 206 the answer is: 5 which is a: b'dog'Correct Responses: 33/207Correct Responses: 33/209
+For quesiton: 207 the answer is: 7 which is a: b'horse'Correct Responses: 33/209Correct Responses: 33/211
+Correct Responses: 33/211
+Correct Responses: 33/211
+For quesiton: 210 the answer is: 1 which is a: b'automobile'Correct Responses: 33/211Correct Responses: 34/213
+Correct Responses: 35/213
+For quesiton: 212 the answer is: 9 which is a: b'truck'Correct Responses: 35/213Correct Responses: 35/215
+For quesiton: 213 the answer is: 9 which is a: b'truck'Correct Responses: 35/215Correct Responses: 36/217
+Correct Responses: 36/217
+Correct Responses: 36/217
+For quesiton: 216 the answer is: 8 which is a: b'ship'Correct Responses: 36/217Correct Responses: 36/219
+Correct Responses: 36/219
+For quesiton: 218 the answer is: 4 which is a: b'deer'Correct Responses: 36/219Correct Responses: 37/221
+For quesiton: 219 the answer is: 6 which is a: b'frog'Correct Responses: 37/221Correct Responses: 38/223
+Correct Responses: 38/223
+Correct Responses: 38/223
+For quesiton: 222 the answer is: 5 which is a: b'dog'Correct Responses: 38/223Correct Responses: 38/225
+Correct Responses: 39/225
+For quesiton: 224 the answer is: 9 which is a: b'truck'Correct Responses: 39/225Correct Responses: 39/227
+For quesiton: 225 the answer is: 9 which is a: b'truck'Correct Responses: 39/227Correct Responses: 39/229
+Correct Responses: 39/229
+Correct Responses: 40/229
+For quesiton: 228 the answer is: 6 which is a: b'frog'Correct Responses: 40/229Correct Responses: 40/231
+Correct Responses: 40/231
+For quesiton: 230 the answer is: 9 which is a: b'truck'Correct Responses: 40/231Correct Responses: 40/233
+For quesiton: 231 the answer is: 6 which is a: b'frog'Correct Responses: 40/233Correct Responses: 40/235
+Correct Responses: 40/235
+Correct Responses: 41/235
+For quesiton: 234 the answer is: 0 which is a: b'airplane'Correct Responses: 41/235Correct Responses: 41/237
+Correct Responses: 41/237
+For quesiton: 236 the answer is: 8 which is a: b'ship'Correct Responses: 41/237Correct Responses: 41/239
+For quesiton: 237 the answer is: 0 which is a: b'airplane'Correct Responses: 41/239Correct Responses: 41/241
+Correct Responses: 42/241
+Correct Responses: 42/241
+For quesiton: 240 the answer is: 6 which is a: b'frog'Correct Responses: 42/241Correct Responses: 43/243
+Correct Responses: 43/243
+For quesiton: 242 the answer is: 8 which is a: b'ship'Correct Responses: 43/243Correct Responses: 43/245
+For quesiton: 243 the answer is: 0 which is a: b'airplane'Correct Responses: 43/245Correct Responses: 43/247
+Correct Responses: 43/247
+Correct Responses: 43/247
+For quesiton: 246 the answer is: 8 which is a: b'ship'Correct Responses: 43/247Correct Responses: 43/249
+Correct Responses: 43/249
+For quesiton: 248 the answer is: 1 which is a: b'automobile'Correct Responses: 43/249Correct Responses: 43/251
+For quesiton: 249 the answer is: 9 which is a: b'truck'Correct Responses: 43/251Correct Responses: 43/253
+Correct Responses: 43/253
+Correct Responses: 43/253
+For quesiton: 252 the answer is: 6 which is a: b'frog'Correct Responses: 43/253Correct Responses: 43/255
+Correct Responses: 44/255
+For quesiton: 254 the answer is: 0 which is a: b'airplane'Correct Responses: 44/255Correct Responses: 44/257
+For quesiton: 255 the answer is: 6 which is a: b'frog'Correct Responses: 44/257Correct Responses: 44/259
+Correct Responses: 44/259
+Correct Responses: 44/259
+For quesiton: 258 the answer is: 6 which is a: b'frog'Correct Responses: 44/259Correct Responses: 44/261
+Correct Responses: 45/261
+For quesiton: 260 the answer is: 1 which is a: b'automobile'Correct Responses: 45/261Correct Responses: 45/263
+For quesiton: 261 the answer is: 6 which is a: b'frog'Correct Responses: 45/263Correct Responses: 45/265
+Correct Responses: 46/265
+Correct Responses: 47/265
+For quesiton: 264 the answer is: 8 which is a: b'ship'Correct Responses: 47/265Correct Responses: 47/267
+Correct Responses: 48/267
+For quesiton: 266 the answer is: 4 which is a: b'deer'Correct Responses: 48/267Correct Responses: 48/269
+For quesiton: 267 the answer is: 8 which is a: b'ship'Correct Responses: 48/269Correct Responses: 48/271
+Correct Responses: 48/271
+Correct Responses: 48/271
+For quesiton: 270 the answer is: 6 which is a: b'frog'Correct Responses: 48/271Correct Responses: 48/273
+Correct Responses: 48/273
+For quesiton: 272 the answer is: 1 which is a: b'automobile'Correct Responses: 48/273Correct Responses: 48/275
+For quesiton: 273 the answer is: 8 which is a: b'ship'Correct Responses: 48/275Correct Responses: 48/277
+Correct Responses: 48/277
+Correct Responses: 48/277
+For quesiton: 276 the answer is: 4 which is a: b'deer'Correct Responses: 48/277Correct Responses: 48/279
+Correct Responses: 48/279
+For quesiton: 278 the answer is: 5 which is a: b'dog'Correct Responses: 48/279Correct Responses: 48/281
+For quesiton: 279 the answer is: 8 which is a: b'ship'Correct Responses: 48/281Correct Responses: 48/283
+Correct Responses: 48/283
+Correct Responses: 48/283
+For quesiton: 282 the answer is: 0 which is a: b'airplane'Correct Responses: 48/283Correct Responses: 48/285
+Correct Responses: 49/285
+For quesiton: 284 the answer is: 9 which is a: b'truck'Correct Responses: 49/285Correct Responses: 49/287
+For quesiton: 285 the answer is: 5 which is a: b'dog'Correct Responses: 49/287Correct Responses: 49/289
+Correct Responses: 50/289
+Correct Responses: 51/289
+For quesiton: 288 the answer is: 9 which is a: b'truck'Correct Responses: 51/289Correct Responses: 51/291
+Correct Responses: 51/291
+For quesiton: 290 the answer is: 5 which is a: b'dog'Correct Responses: 51/291Correct Responses: 51/293
+For quesiton: 291 the answer is: 6 which is a: b'frog'Correct Responses: 51/293Correct Responses: 51/295
+Correct Responses: 51/295
+Correct Responses: 52/295
+For quesiton: 294 the answer is: 4 which is a: b'deer'Correct Responses: 52/295Correct Responses: 52/297
+Correct Responses: 53/297
+For quesiton: 296 the answer is: 0 which is a: b'airplane'Correct Responses: 53/297Correct Responses: 53/299
+For quesiton: 297 the answer is: 0 which is a: b'airplane'Correct Responses: 53/299Correct Responses: 54/301
+Correct Responses: 55/301
+Correct Responses: 55/301
+For quesiton: 300 the answer is: 7 which is a: b'horse'Correct Responses: 55/301Correct Responses: 55/303
+Correct Responses: 55/303
+For quesiton: 302 the answer is: 6 which is a: b'frog'Correct Responses: 55/303Correct Responses: 55/305
+For quesiton: 303 the answer is: 5 which is a: b'dog'Correct Responses: 55/305Correct Responses: 55/307
+Correct Responses: 55/307
+Correct Responses: 55/307
+For quesiton: 306 the answer is: 9 which is a: b'truck'Correct Responses: 55/307Correct Responses: 55/309
+Correct Responses: 55/309
+For quesiton: 308 the answer is: 4 which is a: b'deer'Correct Responses: 55/309Correct Responses: 55/311
+For quesiton: 309 the answer is: 8 which is a: b'ship'Correct Responses: 55/311Correct Responses: 55/313
+Correct Responses: 55/313
+Correct Responses: 56/313
+For quesiton: 312 the answer is: 0 which is a: b'airplane'Correct Responses: 56/313Correct Responses: 56/315
+Correct Responses: 56/315
+For quesiton: 314 the answer is: 9 which is a: b'truck'Correct Responses: 56/315Correct Responses: 56/317
+For quesiton: 315 the answer is: 5 which is a: b'dog'Correct Responses: 56/317Correct Responses: 56/319
+Correct Responses: 56/319
+Correct Responses: 57/319
+For quesiton: 318 the answer is: 5 which is a: b'dog'Correct Responses: 57/319Correct Responses: 58/321
+Correct Responses: 59/321
+For quesiton: 320 the answer is: 5 which is a: b'dog'Correct Responses: 59/321Correct Responses: 59/323
+For quesiton: 321 the answer is: 6 which is a: b'frog'Correct Responses: 59/323Correct Responses: 59/325
+Correct Responses: 60/325
+Correct Responses: 61/325
+For quesiton: 324 the answer is: 1 which is a: b'automobile'Correct Responses: 61/325Correct Responses: 61/327
+Correct Responses: 61/327
+For quesiton: 326 the answer is: 6 which is a: b'frog'Correct Responses: 61/327Correct Responses: 61/329
+For quesiton: 327 the answer is: 1 which is a: b'automobile'Correct Responses: 61/329Correct Responses: 61/331
+Correct Responses: 61/331
+Correct Responses: 62/331
+For quesiton: 330 the answer is: 9 which is a: b'truck'Correct Responses: 62/331Correct Responses: 62/333
+Correct Responses: 63/333
+For quesiton: 332 the answer is: 6 which is a: b'frog'Correct Responses: 63/333Correct Responses: 63/335
+For quesiton: 333 the answer is: 6 which is a: b'frog'Correct Responses: 63/335Correct Responses: 63/337
+Correct Responses: 63/337
+Correct Responses: 64/337
+For quesiton: 336 the answer is: 8 which is a: b'ship'Correct Responses: 64/337Correct Responses: 64/339
+Correct Responses: 64/339
+For quesiton: 338 the answer is: 8 which is a: b'ship'Correct Responses: 64/339Correct Responses: 64/341
+For quesiton: 339 the answer is: 5 which is a: b'dog'Correct Responses: 64/341Correct Responses: 64/343
+Correct Responses: 64/343
+Correct Responses: 65/343
+For quesiton: 342 the answer is: 5 which is a: b'dog'Correct Responses: 65/343Correct Responses: 65/345
+Correct Responses: 65/345
+For quesiton: 344 the answer is: 6 which is a: b'frog'Correct Responses: 65/345Correct Responses: 66/347
+For quesiton: 345 the answer is: 6 which is a: b'frog'Correct Responses: 66/347Correct Responses: 66/349
+Correct Responses: 66/349
+Correct Responses: 66/349
+For quesiton: 348 the answer is: 6 which is a: b'frog'Correct Responses: 66/349Correct Responses: 67/351
+Correct Responses: 67/351
+For quesiton: 350 the answer is: 6 which is a: b'frog'Correct Responses: 67/351Correct Responses: 67/353
+For quesiton: 351 the answer is: 8 which is a: b'ship'Correct Responses: 67/353Correct Responses: 67/355
+Correct Responses: 67/355
+Correct Responses: 68/355
+For quesiton: 354 the answer is: 7 which is a: b'horse'Correct Responses: 68/355Correct Responses: 68/357
+Correct Responses: 68/357
+For quesiton: 356 the answer is: 7 which is a: b'horse'Correct Responses: 68/357Correct Responses: 68/359
+For quesiton: 357 the answer is: 1 which is a: b'automobile'Correct Responses: 68/359Correct Responses: 68/361
+Correct Responses: 68/361
+Correct Responses: 69/361
+For quesiton: 360 the answer is: 5 which is a: b'dog'Correct Responses: 69/361Correct Responses: 69/363
+Correct Responses: 69/363
+For quesiton: 362 the answer is: 8 which is a: b'ship'Correct Responses: 69/363Correct Responses: 69/365
+For quesiton: 363 the answer is: 0 which is a: b'airplane'Correct Responses: 69/365Correct Responses: 69/367
+Correct Responses: 69/367
+Correct Responses: 69/367
+For quesiton: 366 the answer is: 1 which is a: b'automobile'Correct Responses: 69/367Correct Responses: 69/369
+For quesiton: 367 the answer is: 4 which is a: b'deer'Correct Responses: 69/369Correct Responses: 69/371
+Correct Responses: 69/371
+For quesiton: 369 the answer is: 4 which is a: b'deer'Correct Responses: 69/371Correct Responses: 69/373
+Correct Responses: 69/373
+Correct Responses: 69/373
+For quesiton: 372 the answer is: 9 which is a: b'truck'Correct Responses: 69/373Correct Responses: 69/375
+For quesiton: 373 the answer is: 5 which is a: b'dog'Correct Responses: 69/375Correct Responses: 70/377
+Correct Responses: 70/377
+For quesiton: 375 the answer is: 8 which is a: b'ship'Correct Responses: 70/377Correct Responses: 71/379
+Correct Responses: 72/379
+Correct Responses: 73/379
+For quesiton: 378 the answer is: 6 which is a: b'frog'Correct Responses: 73/379Correct Responses: 73/381
+For quesiton: 379 the answer is: 6 which is a: b'frog'Correct Responses: 73/381Correct Responses: 74/383
+Correct Responses: 74/383
+For quesiton: 381 the answer is: 0 which is a: b'airplane'Correct Responses: 74/383Correct Responses: 74/385
+Correct Responses: 74/385
+Correct Responses: 74/385
+For quesiton: 384 the answer is: 0 which is a: b'airplane'Correct Responses: 74/385Correct Responses: 74/387
+For quesiton: 385 the answer is: 9 which is a: b'truck'Correct Responses: 74/387Correct Responses: 74/389
+Correct Responses: 74/389
+For quesiton: 387 the answer is: 9 which is a: b'truck'Correct Responses: 74/389Correct Responses: 74/391
+Correct Responses: 74/391
+Correct Responses: 74/391
+For quesiton: 390 the answer is: 0 which is a: b'airplane'Correct Responses: 74/391Correct Responses: 74/393
+For quesiton: 391 the answer is: 6 which is a: b'frog'Correct Responses: 74/393Correct Responses: 74/395
+Correct Responses: 74/395
+For quesiton: 393 the answer is: 9 which is a: b'truck'Correct Responses: 74/395Correct Responses: 74/397
+Correct Responses: 74/397
+Correct Responses: 74/397
+For quesiton: 396 the answer is: 7 which is a: b'horse'Correct Responses: 74/397Correct Responses: 74/399
+For quesiton: 397 the answer is: 8 which is a: b'ship'Correct Responses: 74/399Correct Responses: 75/401
+Correct Responses: 75/401
+For quesiton: 399 the answer is: 9 which is a: b'truck'Correct Responses: 75/401Correct Responses: 75/403
+Correct Responses: 75/403
+Correct Responses: 76/403
+For quesiton: 402 the answer is: 8 which is a: b'ship'Correct Responses: 76/403Correct Responses: 76/405
+For quesiton: 403 the answer is: 8 which is a: b'ship'Correct Responses: 76/405Correct Responses: 76/407
+Correct Responses: 76/407
+For quesiton: 405 the answer is: 0 which is a: b'airplane'Correct Responses: 76/407Correct Responses: 76/409
+Correct Responses: 76/409
+Correct Responses: 76/409
+For quesiton: 408 the answer is: 0 which is a: b'airplane'Correct Responses: 76/409Correct Responses: 77/411
+For quesiton: 409 the answer is: 9 which is a: b'truck'Correct Responses: 77/411Correct Responses: 77/413
+Correct Responses: 77/413
+For quesiton: 411 the answer is: 4 which is a: b'deer'Correct Responses: 77/413Correct Responses: 77/415
+Correct Responses: 77/415
+Correct Responses: 77/415
+For quesiton: 414 the answer is: 8 which is a: b'ship'Correct Responses: 77/415Correct Responses: 77/417
+For quesiton: 415 the answer is: 0 which is a: b'airplane'Correct Responses: 77/417Correct Responses: 77/419
+Correct Responses: 77/419
+Correct Responses: 77/419
+For quesiton: 418 the answer is: 9 which is a: b'truck'Correct Responses: 77/419Correct Responses: 77/421
+Correct Responses: 77/421
+For quesiton: 420 the answer is: 4 which is a: b'deer'Correct Responses: 77/421Correct Responses: 77/423
+For quesiton: 421 the answer is: 8 which is a: b'ship'Correct Responses: 77/423Correct Responses: 77/425
+Correct Responses: 77/425
+For quesiton: 423 the answer is: 4 which is a: b'deer'Correct Responses: 77/425Correct Responses: 77/427
+Correct Responses: 77/427
+Correct Responses: 78/427
+For quesiton: 426 the answer is: 4 which is a: b'deer'Correct Responses: 78/427Correct Responses: 78/429
+For quesiton: 427 the answer is: 9 which is a: b'truck'Correct Responses: 78/429Correct Responses: 78/431
+Correct Responses: 78/431
+For quesiton: 429 the answer is: 6 which is a: b'frog'Correct Responses: 78/431Correct Responses: 78/433
+Correct Responses: 78/433
+Correct Responses: 78/433
+For quesiton: 432 the answer is: 6 which is a: b'frog'Correct Responses: 78/433Correct Responses: 78/435
+For quesiton: 433 the answer is: 9 which is a: b'truck'Correct Responses: 78/435Correct Responses: 78/437
+Correct Responses: 78/437
+For quesiton: 435 the answer is: 9 which is a: b'truck'Correct Responses: 78/437Correct Responses: 78/439
+Correct Responses: 78/439
+Correct Responses: 78/439
+For quesiton: 438 the answer is: 6 which is a: b'frog'Correct Responses: 78/439Correct Responses: 78/441
+For quesiton: 439 the answer is: 5 which is a: b'dog'Correct Responses: 78/441Correct Responses: 78/443
+Correct Responses: 79/443
+For quesiton: 441 the answer is: 9 which is a: b'truck'Correct Responses: 79/443Correct Responses: 79/445
+Correct Responses: 79/445
+Correct Responses: 79/445
+For quesiton: 444 the answer is: 6 which is a: b'frog'Correct Responses: 79/445Correct Responses: 79/447
+For quesiton: 445 the answer is: 8 which is a: b'ship'Correct Responses: 79/447Correct Responses: 79/449
+Correct Responses: 79/449
+For quesiton: 447 the answer is: 4 which is a: b'deer'Correct Responses: 79/449Correct Responses: 79/451
+Correct Responses: 80/451
+Correct Responses: 81/451
+For quesiton: 450 the answer is: 9 which is a: b'truck'Correct Responses: 81/451Correct Responses: 81/453
+For quesiton: 451 the answer is: 9 which is a: b'truck'Correct Responses: 81/453Correct Responses: 81/455
+Correct Responses: 81/455
+For quesiton: 453 the answer is: 0 which is a: b'airplane'Correct Responses: 81/455Correct Responses: 81/457
+Correct Responses: 82/457
+Correct Responses: 82/457
+For quesiton: 456 the answer is: 6 which is a: b'frog'Correct Responses: 82/457Correct Responses: 83/459
+For quesiton: 457 the answer is: 6 which is a: b'frog'Correct Responses: 83/459Correct Responses: 83/461
+Correct Responses: 83/461
+For quesiton: 459 the answer is: 5 which is a: b'dog'Correct Responses: 83/461Correct Responses: 83/463
+Correct Responses: 83/463
+Correct Responses: 84/463
+For quesiton: 462 the answer is: 4 which is a: b'deer'Correct Responses: 84/463Correct Responses: 84/465
+For quesiton: 463 the answer is: 9 which is a: b'truck'Correct Responses: 84/465Correct Responses: 84/467
+Correct Responses: 84/467
+For quesiton: 465 the answer is: 5 which is a: b'dog'Correct Responses: 84/467Correct Responses: 84/469
+Correct Responses: 84/469
+Correct Responses: 84/469
+For quesiton: 468 the answer is: 9 which is a: b'truck'Correct Responses: 84/469Correct Responses: 84/471
+For quesiton: 469 the answer is: 4 which is a: b'deer'Correct Responses: 84/471Correct Responses: 84/473
+Correct Responses: 84/473
+For quesiton: 471 the answer is: 1 which is a: b'automobile'Correct Responses: 84/473Correct Responses: 84/475
+Correct Responses: 84/475
+Correct Responses: 84/475
+For quesiton: 474 the answer is: 4 which is a: b'deer'Correct Responses: 84/475Correct Responses: 84/477
+For quesiton: 475 the answer is: 4 which is a: b'deer'Correct Responses: 84/477Correct Responses: 84/479
+Correct Responses: 85/479
+For quesiton: 477 the answer is: 4 which is a: b'deer'Correct Responses: 85/479Correct Responses: 85/481
+Correct Responses: 85/481
+Correct Responses: 86/481
+For quesiton: 480 the answer is: 6 which is a: b'frog'Correct Responses: 86/481Correct Responses: 86/483
+For quesiton: 481 the answer is: 8 which is a: b'ship'Correct Responses: 86/483Correct Responses: 86/485
+Correct Responses: 87/485
+For quesiton: 483 the answer is: 9 which is a: b'truck'Correct Responses: 87/485Correct Responses: 87/487
+Correct Responses: 88/487
+Correct Responses: 89/487
+For quesiton: 486 the answer is: 9 which is a: b'truck'Correct Responses: 89/487Correct Responses: 89/489
+For quesiton: 487 the answer is: 8 which is a: b'ship'Correct Responses: 89/489Correct Responses: 90/491
+Correct Responses: 90/491
+For quesiton: 489 the answer is: 1 which is a: b'automobile'Correct Responses: 90/491Correct Responses: 90/493
+Correct Responses: 90/493
+Correct Responses: 91/493
+For quesiton: 492 the answer is: 1 which is a: b'automobile'Correct Responses: 91/493Correct Responses: 92/495
+For quesiton: 493 the answer is: 8 which is a: b'ship'Correct Responses: 92/495Correct Responses: 92/497
+Correct Responses: 92/497
+For quesiton: 495 the answer is: 1 which is a: b'automobile'Correct Responses: 92/497Correct Responses: 92/499
+Correct Responses: 92/499
+Correct Responses: 93/499
+For quesiton: 498 the answer is: 0 which is a: b'airplane'Correct Responses: 93/499Correct Responses: 94/501
+For quesiton: 499 the answer is: 6 which is a: b'frog'Correct Responses: 94/501Correct Responses: 95/503
+Correct Responses: 95/503
+For quesiton: 501 the answer is: 5 which is a: b'dog'Correct Responses: 95/503Correct Responses: 96/505
+Correct Responses: 96/505
+Correct Responses: 96/505
+For quesiton: 504 the answer is: 8 which is a: b'ship'Correct Responses: 96/505Correct Responses: 96/507
+For quesiton: 505 the answer is: 6 which is a: b'frog'Correct Responses: 96/507Correct Responses: 96/509
+Correct Responses: 96/509
+For quesiton: 507 the answer is: 0 which is a: b'airplane'Correct Responses: 96/509Correct Responses: 96/511
+Correct Responses: 96/511
+Correct Responses: 97/511
+For quesiton: 510 the answer is: 6 which is a: b'frog'Correct Responses: 97/511Correct Responses: 97/513
+For quesiton: 511 the answer is: 4 which is a: b'deer'Correct Responses: 97/513Correct Responses: 97/515
+Correct Responses: 97/515
+For quesiton: 513 the answer is: 5 which is a: b'dog'Correct Responses: 97/515Correct Responses: 98/517
+Correct Responses: 98/517
+Correct Responses: 98/517
+For quesiton: 516 the answer is: 8 which is a: b'ship'Correct Responses: 98/517Correct Responses: 98/519
+For quesiton: 517 the answer is: 9 which is a: b'truck'Correct Responses: 98/519Correct Responses: 98/521
+Correct Responses: 98/521
+For quesiton: 519 the answer is: 8 which is a: b'ship'Correct Responses: 98/521Correct Responses: 98/523
+Correct Responses: 98/523
+Correct Responses: 98/523
+For quesiton: 522 the answer is: 9 which is a: b'truck'Correct Responses: 98/523Correct Responses: 98/525
+For quesiton: 523 the answer is: 0 which is a: b'airplane'Correct Responses: 98/525Correct Responses: 98/527
+Correct Responses: 98/527
+For quesiton: 525 the answer is: 5 which is a: b'dog'Correct Responses: 98/527Correct Responses: 98/529
+Correct Responses: 98/529
+For quesiton: 527 the answer is: 9 which is a: b'truck'Correct Responses: 98/529Correct Responses: 98/531
+Correct Responses: 98/531
+For quesiton: 529 the answer is: 8 which is a: b'ship'Correct Responses: 98/531Correct Responses: 98/533
+Correct Responses: 98/533
+Correct Responses: 98/533
+For quesiton: 532 the answer is: 0 which is a: b'airplane'Correct Responses: 98/533Correct Responses: 99/535
+For quesiton: 533 the answer is: 6 which is a: b'frog'Correct Responses: 99/535Correct Responses: 99/537
+Correct Responses: 99/537
+For quesiton: 535 the answer is: 4 which is a: b'deer'Correct Responses: 99/537Correct Responses: 99/539
+Correct Responses: 99/539
+For quesiton: 537 the answer is: 8 which is a: b'ship'Correct Responses: 99/539Correct Responses: 99/541
+Correct Responses: 99/541
+For quesiton: 539 the answer is: 8 which is a: b'ship'Correct Responses: 99/541Correct Responses: 99/543
+Correct Responses: 99/543
+For quesiton: 541 the answer is: 9 which is a: b'truck'Correct Responses: 99/543Correct Responses: 99/545
+Correct Responses: 99/545
+For quesiton: 543 the answer is: 5 which is a: b'dog'Correct Responses: 99/545Correct Responses: 99/547
+Correct Responses: 99/547
+For quesiton: 545 the answer is: 8 which is a: b'ship'Correct Responses: 99/547Correct Responses: 99/549
+Correct Responses: 99/549
+For quesiton: 547 the answer is: 6 which is a: b'frog'Correct Responses: 99/549Correct Responses: 100/551
+Correct Responses: 100/551
+For quesiton: 549 the answer is: 6 which is a: b'frog'Correct Responses: 100/551Correct Responses: 100/553
+Correct Responses: 100/553
+For quesiton: 551 the answer is: 9 which is a: b'truck'Correct Responses: 100/553Correct Responses: 100/555
+Correct Responses: 100/555
+For quesiton: 553 the answer is: 6 which is a: b'frog'Correct Responses: 100/555Correct Responses: 100/557
+Correct Responses: 101/557
+For quesiton: 555 the answer is: 4 which is a: b'deer'Correct Responses: 101/557Correct Responses: 101/559
+Correct Responses: 101/559
+For quesiton: 557 the answer is: 6 which is a: b'frog'Correct Responses: 101/559Correct Responses: 101/561
+Correct Responses: 101/561
+For quesiton: 559 the answer is: 0 which is a: b'airplane'Correct Responses: 101/561Correct Responses: 101/563
+Correct Responses: 101/563
+For quesiton: 561 the answer is: 4 which is a: b'deer'Correct Responses: 101/563Correct Responses: 101/565
+Correct Responses: 101/565
+For quesiton: 563 the answer is: 6 which is a: b'frog'Correct Responses: 101/565Correct Responses: 101/567
+Correct Responses: 101/567
+For quesiton: 565 the answer is: 8 which is a: b'ship'Correct Responses: 101/567Correct Responses: 101/569
+Correct Responses: 101/569
+For quesiton: 567 the answer is: 8 which is a: b'ship'Correct Responses: 101/569Correct Responses: 101/571
+Correct Responses: 101/571
+For quesiton: 569 the answer is: 9 which is a: b'truck'Correct Responses: 101/571Correct Responses: 101/573
+Correct Responses: 101/573
+For quesiton: 571 the answer is: 1 which is a: b'automobile'Correct Responses: 101/573Correct Responses: 102/575
+Correct Responses: 102/575
+For quesiton: 573 the answer is: 9 which is a: b'truck'Correct Responses: 102/575Correct Responses: 102/577
+Correct Responses: 102/577
+For quesiton: 575 the answer is: 1 which is a: b'automobile'Correct Responses: 102/577Correct Responses: 102/579
+Correct Responses: 102/579
+For quesiton: 577 the answer is: 8 which is a: b'ship'Correct Responses: 102/579Correct Responses: 102/581
+Correct Responses: 102/581
+Correct Responses: 102/581
+For quesiton: 580 the answer is: 9 which is a: b'truck'Correct Responses: 102/581Correct Responses: 102/583
+For quesiton: 581 the answer is: 5 which is a: b'dog'Correct Responses: 102/583Correct Responses: 102/585
+Correct Responses: 102/585
+For quesiton: 583 the answer is: 5 which is a: b'dog'Correct Responses: 102/585Correct Responses: 102/587
+Correct Responses: 103/587
+Correct Responses: 104/587
+For quesiton: 586 the answer is: 4 which is a: b'deer'Correct Responses: 104/587Correct Responses: 104/589
+For quesiton: 587 the answer is: 8 which is a: b'ship'Correct Responses: 104/589Correct Responses: 104/591
+Correct Responses: 105/591
+For quesiton: 589 the answer is: 9 which is a: b'truck'Correct Responses: 105/591Correct Responses: 105/593
+Correct Responses: 105/593
+Correct Responses: 105/593
+For quesiton: 592 the answer is: 4 which is a: b'deer'Correct Responses: 105/593Correct Responses: 105/595
+For quesiton: 593 the answer is: 9 which is a: b'truck'Correct Responses: 105/595Correct Responses: 105/597
+Correct Responses: 105/597
+For quesiton: 595 the answer is: 8 which is a: b'ship'Correct Responses: 105/597Correct Responses: 105/599
+Correct Responses: 105/599
+Correct Responses: 105/599
+For quesiton: 598 the answer is: 5 which is a: b'dog'Correct Responses: 105/599Correct Responses: 105/601
+For quesiton: 599 the answer is: 0 which is a: b'airplane'Correct Responses: 105/601Correct Responses: 105/603
+Correct Responses: 105/603
+For quesiton: 601 the answer is: 0 which is a: b'airplane'Correct Responses: 105/603Correct Responses: 105/605
+Correct Responses: 105/605
+For quesiton: 603 the answer is: 4 which is a: b'deer'Correct Responses: 105/605Correct Responses: 105/607
+Correct Responses: 105/607
+For quesiton: 605 the answer is: 1 which is a: b'automobile'Correct Responses: 105/607Correct Responses: 105/609
+Correct Responses: 105/609
+For quesiton: 607 the answer is: 6 which is a: b'frog'Correct Responses: 105/609Correct Responses: 106/611
+Correct Responses: 106/611
+For quesiton: 609 the answer is: 4 which is a: b'deer'Correct Responses: 106/611Correct Responses: 106/613
+Correct Responses: 107/613
+For quesiton: 611 the answer is: 8 which is a: b'ship'Correct Responses: 107/613Correct Responses: 107/615
+Correct Responses: 107/615
+For quesiton: 613 the answer is: 6 which is a: b'frog'Correct Responses: 107/615Correct Responses: 107/617
+Correct Responses: 107/617
+For quesiton: 615 the answer is: 9 which is a: b'truck'Correct Responses: 107/617Correct Responses: 107/619
+Correct Responses: 107/619
+For quesiton: 617 the answer is: 9 which is a: b'truck'Correct Responses: 107/619Correct Responses: 107/621
+Correct Responses: 107/621
+For quesiton: 619 the answer is: 4 which is a: b'deer'Correct Responses: 107/621Correct Responses: 107/623
+Correct Responses: 107/623
+For quesiton: 621 the answer is: 1 which is a: b'automobile'Correct Responses: 107/623Correct Responses: 108/625
+Correct Responses: 108/625
+For quesiton: 623 the answer is: 4 which is a: b'deer'Correct Responses: 108/625Correct Responses: 108/627
+Correct Responses: 108/627
+For quesiton: 625 the answer is: 9 which is a: b'truck'Correct Responses: 108/627Correct Responses: 108/629
+Correct Responses: 108/629
+Correct Responses: 108/629
+For quesiton: 628 the answer is: 4 which is a: b'deer'Correct Responses: 108/629Correct Responses: 108/631
+For quesiton: 629 the answer is: 4 which is a: b'deer'Correct Responses: 108/631Correct Responses: 108/633
+Correct Responses: 108/633
+For quesiton: 631 the answer is: 4 which is a: b'deer'Correct Responses: 108/633Correct Responses: 108/635
+Correct Responses: 108/635
+Correct Responses: 108/635
+For quesiton: 634 the answer is: 9 which is a: b'truck'Correct Responses: 108/635Correct Responses: 108/637
+For quesiton: 635 the answer is: 8 which is a: b'ship'Correct Responses: 108/637Correct Responses: 108/639
+Correct Responses: 108/639
+For quesiton: 637 the answer is: 8 which is a: b'ship'Correct Responses: 108/639Correct Responses: 108/641
+Correct Responses: 108/641
+Correct Responses: 108/641
+For quesiton: 640 the answer is: 6 which is a: b'frog'Correct Responses: 108/641Correct Responses: 108/643
+For quesiton: 641 the answer is: 8 which is a: b'ship'Correct Responses: 108/643Correct Responses: 108/645
+Correct Responses: 108/645
+For quesiton: 643 the answer is: 9 which is a: b'truck'Correct Responses: 108/645Correct Responses: 108/647
+Correct Responses: 109/647
+For quesiton: 645 the answer is: 4 which is a: b'deer'Correct Responses: 109/647Correct Responses: 109/649
+Correct Responses: 109/649
+For quesiton: 647 the answer is: 4 which is a: b'deer'Correct Responses: 109/649Correct Responses: 109/651
+Correct Responses: 109/651
+For quesiton: 649 the answer is: 6 which is a: b'frog'Correct Responses: 109/651Correct Responses: 109/653
+Correct Responses: 109/653
+Correct Responses: 109/653
+For quesiton: 652 the answer is: 4 which is a: b'deer'Correct Responses: 109/653Correct Responses: 109/655
+For quesiton: 653 the answer is: 9 which is a: b'truck'Correct Responses: 109/655Correct Responses: 109/657
+Correct Responses: 109/657
+For quesiton: 655 the answer is: 9 which is a: b'truck'Correct Responses: 109/657Correct Responses: 109/659
+Correct Responses: 109/659
+Correct Responses: 109/659
+For quesiton: 658 the answer is: 6 which is a: b'frog'Correct Responses: 109/659Correct Responses: 109/661
+For quesiton: 659 the answer is: 9 which is a: b'truck'Correct Responses: 109/661Correct Responses: 109/663
+Correct Responses: 109/663
+For quesiton: 661 the answer is: 9 which is a: b'truck'Correct Responses: 109/663Correct Responses: 109/665
+Correct Responses: 109/665
+Correct Responses: 110/665
+For quesiton: 664 the answer is: 8 which is a: b'ship'Correct Responses: 110/665Correct Responses: 110/667
+For quesiton: 665 the answer is: 5 which is a: b'dog'Correct Responses: 110/667Correct Responses: 110/669
+Correct Responses: 110/669
+For quesiton: 667 the answer is: 8 which is a: b'ship'Correct Responses: 110/669Correct Responses: 110/671
+Correct Responses: 110/671
+Correct Responses: 110/671
+For quesiton: 670 the answer is: 5 which is a: b'dog'Correct Responses: 110/671Correct Responses: 110/673
+For quesiton: 671 the answer is: 5 which is a: b'dog'Correct Responses: 110/673Correct Responses: 110/675
+Correct Responses: 110/675
+For quesiton: 673 the answer is: 6 which is a: b'frog'Correct Responses: 110/675Correct Responses: 110/677
+Correct Responses: 110/677
+For quesiton: 675 the answer is: 4 which is a: b'deer'Correct Responses: 110/677Correct Responses: 110/679
+Correct Responses: 110/679
+For quesiton: 677 the answer is: 9 which is a: b'truck'Correct Responses: 110/679Correct Responses: 110/681
+Correct Responses: 110/681
+For quesiton: 679 the answer is: 9 which is a: b'truck'Correct Responses: 110/681Correct Responses: 110/683
+Correct Responses: 110/683
+For quesiton: 681 the answer is: 9 which is a: b'truck'Correct Responses: 110/683Correct Responses: 110/685
+Correct Responses: 110/685
+For quesiton: 683 the answer is: 9 which is a: b'truck'Correct Responses: 110/685Correct Responses: 110/687
+Correct Responses: 111/687
+For quesiton: 685 the answer is: 6 which is a: b'frog'Correct Responses: 111/687Correct Responses: 111/689
+Correct Responses: 111/689
+For quesiton: 687 the answer is: 4 which is a: b'deer'Correct Responses: 111/689Correct Responses: 111/691
+Correct Responses: 111/691
+For quesiton: 689 the answer is: 4 which is a: b'deer'Correct Responses: 111/691Correct Responses: 111/693
+Correct Responses: 111/693
+For quesiton: 691 the answer is: 0 which is a: b'airplane'Correct Responses: 111/693Correct Responses: 111/695
+Correct Responses: 111/695
+For quesiton: 693 the answer is: 8 which is a: b'ship'Correct Responses: 111/695Correct Responses: 111/697
+Correct Responses: 111/697
+For quesiton: 695 the answer is: 0 which is a: b'airplane'Correct Responses: 111/697Correct Responses: 111/699
+Correct Responses: 111/699
+For quesiton: 697 the answer is: 4 which is a: b'deer'Correct Responses: 111/699Correct Responses: 111/701
+Correct Responses: 111/701
+For quesiton: 699 the answer is: 9 which is a: b'truck'Correct Responses: 111/701Correct Responses: 111/703
+Correct Responses: 111/703
+For quesiton: 701 the answer is: 5 which is a: b'dog'Correct Responses: 111/703Correct Responses: 111/705
+Correct Responses: 111/705
+For quesiton: 703 the answer is: 6 which is a: b'frog'Correct Responses: 111/705Correct Responses: 111/707
+Correct Responses: 111/707
+For quesiton: 705 the answer is: 0 which is a: b'airplane'Correct Responses: 111/707Correct Responses: 111/709
+Correct Responses: 112/709
+For quesiton: 707 the answer is: 8 which is a: b'ship'Correct Responses: 112/709Correct Responses: 112/711
+Correct Responses: 112/711
+For quesiton: 709 the answer is: 9 which is a: b'truck'Correct Responses: 112/711Correct Responses: 112/713
+Correct Responses: 112/713
+For quesiton: 711 the answer is: 8 which is a: b'ship'Correct Responses: 112/713Correct Responses: 112/715
+Correct Responses: 112/715
+For quesiton: 713 the answer is: 6 which is a: b'frog'Correct Responses: 112/715Correct Responses: 112/717
+Correct Responses: 112/717
+For quesiton: 715 the answer is: 4 which is a: b'deer'Correct Responses: 112/717Correct Responses: 112/719
+Correct Responses: 112/719
+For quesiton: 717 the answer is: 4 which is a: b'deer'Correct Responses: 112/719Correct Responses: 112/721
+Correct Responses: 112/721
+For quesiton: 719 the answer is: 9 which is a: b'truck'Correct Responses: 112/721Correct Responses: 112/723
+Correct Responses: 112/723
+For quesiton: 721 the answer is: 9 which is a: b'truck'Correct Responses: 112/723Correct Responses: 112/725
+Correct Responses: 112/725
+For quesiton: 723 the answer is: 9 which is a: b'truck'Correct Responses: 112/725Correct Responses: 112/727
+Correct Responses: 112/727
+For quesiton: 725 the answer is: 6 which is a: b'frog'Correct Responses: 112/727Correct Responses: 112/729
+Correct Responses: 112/729
+For quesiton: 727 the answer is: 7 which is a: b'horse'Correct Responses: 112/729Correct Responses: 112/731
+Correct Responses: 112/731
+For quesiton: 729 the answer is: 6 which is a: b'frog'Correct Responses: 112/731Correct Responses: 112/733
+Correct Responses: 113/733
+For quesiton: 731 the answer is: 9 which is a: b'truck'Correct Responses: 113/733Correct Responses: 113/735
+Correct Responses: 114/735
+For quesiton: 733 the answer is: 4 which is a: b'deer'Correct Responses: 114/735Correct Responses: 115/737
+Correct Responses: 115/737
+For quesiton: 735 the answer is: 9 which is a: b'truck'Correct Responses: 115/737Correct Responses: 115/739
+Correct Responses: 115/739
+For quesiton: 737 the answer is: 1 which is a: b'automobile'Correct Responses: 115/739Correct Responses: 116/741
+Correct Responses: 116/741
+For quesiton: 739 the answer is: 5 which is a: b'dog'Correct Responses: 116/741Correct Responses: 116/743
+Correct Responses: 116/743
+For quesiton: 741 the answer is: 6 which is a: b'frog'Correct Responses: 116/743Correct Responses: 116/745
+Correct Responses: 116/745
+For quesiton: 743 the answer is: 6 which is a: b'frog'Correct Responses: 116/745Correct Responses: 116/747
+Correct Responses: 116/747
+For quesiton: 745 the answer is: 4 which is a: b'deer'Correct Responses: 116/747Correct Responses: 116/749
+Correct Responses: 116/749
+For quesiton: 747 the answer is: 9 which is a: b'truck'Correct Responses: 116/749Correct Responses: 116/751
+Correct Responses: 116/751
+For quesiton: 749 the answer is: 8 which is a: b'ship'Correct Responses: 116/751Correct Responses: 116/753
+Correct Responses: 116/753
+For quesiton: 751 the answer is: 9 which is a: b'truck'Correct Responses: 116/753Correct Responses: 116/755
+Correct Responses: 116/755
+For quesiton: 753 the answer is: 4 which is a: b'deer'Correct Responses: 116/755Correct Responses: 116/757
+Correct Responses: 116/757
+For quesiton: 755 the answer is: 6 which is a: b'frog'Correct Responses: 116/757Correct Responses: 116/759
+Correct Responses: 116/759
+For quesiton: 757 the answer is: 8 which is a: b'ship'Correct Responses: 116/759Correct Responses: 116/761
+Correct Responses: 116/761
+For quesiton: 759 the answer is: 9 which is a: b'truck'Correct Responses: 116/761Correct Responses: 116/763
+Correct Responses: 116/763
+For quesiton: 761 the answer is: 4 which is a: b'deer'Correct Responses: 116/763Correct Responses: 116/765
+Correct Responses: 116/765
+For quesiton: 763 the answer is: 8 which is a: b'ship'Correct Responses: 116/765Correct Responses: 116/767
+Correct Responses: 116/767
+For quesiton: 765 the answer is: 8 which is a: b'ship'Correct Responses: 116/767Correct Responses: 116/769
+Correct Responses: 117/769
+For quesiton: 767 the answer is: 4 which is a: b'deer'Correct Responses: 117/769Correct Responses: 117/771
+Correct Responses: 118/771
+For quesiton: 769 the answer is: 1 which is a: b'automobile'Correct Responses: 118/771Correct Responses: 118/773
+Correct Responses: 118/773
+For quesiton: 771 the answer is: 5 which is a: b'dog'Correct Responses: 118/773Correct Responses: 118/775
+Correct Responses: 118/775
+For quesiton: 773 the answer is: 0 which is a: b'airplane'Correct Responses: 118/775Correct Responses: 119/777
+Correct Responses: 120/777
+For quesiton: 775 the answer is: 6 which is a: b'frog'Correct Responses: 120/777Correct Responses: 120/779
+Correct Responses: 120/779
+For quesiton: 777 the answer is: 4 which is a: b'deer'Correct Responses: 120/779Correct Responses: 120/781
+Correct Responses: 120/781
+For quesiton: 779 the answer is: 9 which is a: b'truck'Correct Responses: 120/781Correct Responses: 121/783
+Correct Responses: 121/783
+For quesiton: 781 the answer is: 4 which is a: b'deer'Correct Responses: 121/783Correct Responses: 121/785
+Correct Responses: 121/785
+For quesiton: 783 the answer is: 6 which is a: b'frog'Correct Responses: 121/785Correct Responses: 121/787
+Correct Responses: 122/787
+For quesiton: 785 the answer is: 9 which is a: b'truck'Correct Responses: 122/787Correct Responses: 123/789
+Correct Responses: 123/789
+For quesiton: 787 the answer is: 6 which is a: b'frog'Correct Responses: 123/789Correct Responses: 123/791
+Correct Responses: 124/791
+For quesiton: 789 the answer is: 0 which is a: b'airplane'Correct Responses: 124/791Correct Responses: 124/793
+Correct Responses: 124/793
+For quesiton: 791 the answer is: 0 which is a: b'airplane'Correct Responses: 124/793Correct Responses: 124/795
+Correct Responses: 124/795
+For quesiton: 793 the answer is: 9 which is a: b'truck'Correct Responses: 124/795Correct Responses: 124/797
+Correct Responses: 124/797
+For quesiton: 795 the answer is: 6 which is a: b'frog'Correct Responses: 124/797Correct Responses: 124/799
+Correct Responses: 124/799
+For quesiton: 797 the answer is: 4 which is a: b'deer'Correct Responses: 124/799Correct Responses: 124/801
+Correct Responses: 124/801
+For quesiton: 799 the answer is: 9 which is a: b'truck'Correct Responses: 124/801Correct Responses: 124/803
+Correct Responses: 124/803
+For quesiton: 801 the answer is: 0 which is a: b'airplane'Correct Responses: 124/803Correct Responses: 124/805
+Correct Responses: 124/805
+For quesiton: 803 the answer is: 6 which is a: b'frog'Correct Responses: 124/805Correct Responses: 125/807
+Correct Responses: 125/807
+For quesiton: 805 the answer is: 0 which is a: b'airplane'Correct Responses: 125/807Correct Responses: 125/809
+Correct Responses: 125/809
+For quesiton: 807 the answer is: 5 which is a: b'dog'Correct Responses: 125/809Correct Responses: 125/811
+Correct Responses: 125/811
+For quesiton: 809 the answer is: 0 which is a: b'airplane'Correct Responses: 125/811Correct Responses: 125/813
+Correct Responses: 125/813
+For quesiton: 811 the answer is: 9 which is a: b'truck'Correct Responses: 125/813Correct Responses: 125/815
+Correct Responses: 125/815
+For quesiton: 813 the answer is: 1 which is a: b'automobile'Correct Responses: 125/815Correct Responses: 125/817
+Correct Responses: 125/817
+For quesiton: 815 the answer is: 9 which is a: b'truck'Correct Responses: 125/817Correct Responses: 125/819
+Correct Responses: 125/819
+For quesiton: 817 the answer is: 4 which is a: b'deer'Correct Responses: 125/819Correct Responses: 125/821
+Correct Responses: 125/821
+For quesiton: 819 the answer is: 9 which is a: b'truck'Correct Responses: 125/821Correct Responses: 125/823
+Correct Responses: 126/823
+For quesiton: 821 the answer is: 8 which is a: b'ship'Correct Responses: 126/823Correct Responses: 126/825
+Correct Responses: 126/825
+For quesiton: 823 the answer is: 4 which is a: b'deer'Correct Responses: 126/825Correct Responses: 127/827
+Correct Responses: 128/827
+For quesiton: 825 the answer is: 6 which is a: b'frog'Correct Responses: 128/827Correct Responses: 128/829
+Correct Responses: 128/829
+For quesiton: 827 the answer is: 4 which is a: b'deer'Correct Responses: 128/829Correct Responses: 128/831
+Correct Responses: 128/831
+For quesiton: 829 the answer is: 6 which is a: b'frog'Correct Responses: 128/831Correct Responses: 128/833
+Correct Responses: 128/833
+For quesiton: 831 the answer is: 0 which is a: b'airplane'Correct Responses: 128/833Correct Responses: 129/835
+Correct Responses: 130/835
+For quesiton: 833 the answer is: 4 which is a: b'deer'Correct Responses: 130/835Correct Responses: 130/837
+Correct Responses: 130/837
+For quesiton: 835 the answer is: 8 which is a: b'ship'Correct Responses: 130/837Correct Responses: 130/839
+Correct Responses: 130/839
+For quesiton: 837 the answer is: 9 which is a: b'truck'Correct Responses: 130/839Correct Responses: 131/841
+Correct Responses: 132/841
+For quesiton: 839 the answer is: 0 which is a: b'airplane'Correct Responses: 132/841Correct Responses: 132/843
+Correct Responses: 132/843
+For quesiton: 841 the answer is: 6 which is a: b'frog'Correct Responses: 132/843Correct Responses: 132/845
+Correct Responses: 132/845
+For quesiton: 843 the answer is: 1 which is a: b'automobile'Correct Responses: 132/845Correct Responses: 132/847
+Correct Responses: 132/847
+For quesiton: 845 the answer is: 5 which is a: b'dog'Correct Responses: 132/847Correct Responses: 132/849
+Correct Responses: 132/849
+For quesiton: 847 the answer is: 6 which is a: b'frog'Correct Responses: 132/849Correct Responses: 132/851
+Correct Responses: 132/851
+For quesiton: 849 the answer is: 5 which is a: b'dog'Correct Responses: 132/851Correct Responses: 133/853
+Correct Responses: 133/853
+For quesiton: 851 the answer is: 8 which is a: b'ship'Correct Responses: 133/853Correct Responses: 133/855
+Correct Responses: 133/855
+For quesiton: 853 the answer is: 0 which is a: b'airplane'Correct Responses: 133/855Correct Responses: 133/857
+Correct Responses: 133/857
+For quesiton: 855 the answer is: 8 which is a: b'ship'Correct Responses: 133/857Correct Responses: 134/859
+Correct Responses: 134/859
+For quesiton: 857 the answer is: 6 which is a: b'frog'Correct Responses: 134/859Correct Responses: 134/861
+Correct Responses: 134/861
+For quesiton: 859 the answer is: 4 which is a: b'deer'Correct Responses: 134/861Correct Responses: 134/863
+Correct Responses: 134/863
+For quesiton: 861 the answer is: 6 which is a: b'frog'Correct Responses: 134/863Correct Responses: 134/865
+Correct Responses: 134/865
+For quesiton: 863 the answer is: 0 which is a: b'airplane'Correct Responses: 134/865Correct Responses: 134/867
+Correct Responses: 134/867
+For quesiton: 865 the answer is: 6 which is a: b'frog'Correct Responses: 134/867Correct Responses: 134/869
+Correct Responses: 134/869
+For quesiton: 867 the answer is: 8 which is a: b'ship'Correct Responses: 134/869Correct Responses: 134/871
+Correct Responses: 134/871
+For quesiton: 869 the answer is: 9 which is a: b'truck'Correct Responses: 134/871Correct Responses: 134/873
+Correct Responses: 134/873
+For quesiton: 871 the answer is: 6 which is a: b'frog'Correct Responses: 134/873Correct Responses: 134/875
+Correct Responses: 134/875
+For quesiton: 873 the answer is: 5 which is a: b'dog'Correct Responses: 134/875Correct Responses: 134/877
+Correct Responses: 134/877
+For quesiton: 875 the answer is: 4 which is a: b'deer'Correct Responses: 134/877Correct Responses: 134/879
+Correct Responses: 134/879
+For quesiton: 877 the answer is: 8 which is a: b'ship'Correct Responses: 134/879Correct Responses: 134/881
+Correct Responses: 134/881
+For quesiton: 879 the answer is: 0 which is a: b'airplane'Correct Responses: 134/881Correct Responses: 134/883
+Correct Responses: 135/883
+For quesiton: 881 the answer is: 0 which is a: b'airplane'Correct Responses: 135/883Correct Responses: 136/885
+Correct Responses: 136/885
+For quesiton: 883 the answer is: 9 which is a: b'truck'Correct Responses: 136/885Correct Responses: 136/887
+Correct Responses: 136/887
+For quesiton: 885 the answer is: 8 which is a: b'ship'Correct Responses: 136/887Correct Responses: 136/889
+Correct Responses: 136/889
+For quesiton: 887 the answer is: 5 which is a: b'dog'Correct Responses: 136/889Correct Responses: 136/891
+Correct Responses: 136/891
+For quesiton: 889 the answer is: 4 which is a: b'deer'Correct Responses: 136/891Correct Responses: 137/893
+Correct Responses: 137/893
+For quesiton: 891 the answer is: 9 which is a: b'truck'Correct Responses: 137/893Correct Responses: 137/895
+Correct Responses: 137/895
+For quesiton: 893 the answer is: 5 which is a: b'dog'Correct Responses: 137/895Correct Responses: 137/897
+Correct Responses: 137/897
+For quesiton: 895 the answer is: 5 which is a: b'dog'Correct Responses: 137/897Correct Responses: 137/899
+Correct Responses: 137/899
+For quesiton: 897 the answer is: 6 which is a: b'frog'Correct Responses: 137/899Correct Responses: 137/901
+Correct Responses: 138/901
+For quesiton: 899 the answer is: 6 which is a: b'frog'Correct Responses: 138/901Correct Responses: 138/903
+Correct Responses: 138/903
+For quesiton: 901 the answer is: 6 which is a: b'frog'Correct Responses: 138/903Correct Responses: 138/905
+Correct Responses: 138/905
+For quesiton: 903 the answer is: 0 which is a: b'airplane'Correct Responses: 138/905Correct Responses: 138/907
+Correct Responses: 138/907
+For quesiton: 905 the answer is: 9 which is a: b'truck'Correct Responses: 138/907Correct Responses: 138/909
+Correct Responses: 139/909
+For quesiton: 907 the answer is: 8 which is a: b'ship'Correct Responses: 139/909Correct Responses: 139/911
+Correct Responses: 139/911
+For quesiton: 909 the answer is: 5 which is a: b'dog'Correct Responses: 139/911Correct Responses: 140/913
+Correct Responses: 140/913
+For quesiton: 911 the answer is: 9 which is a: b'truck'Correct Responses: 140/913Correct Responses: 140/915
+Correct Responses: 140/915
+For quesiton: 913 the answer is: 6 which is a: b'frog'Correct Responses: 140/915Correct Responses: 141/917
+Correct Responses: 141/917
+For quesiton: 915 the answer is: 9 which is a: b'truck'Correct Responses: 141/917Correct Responses: 141/919
+Correct Responses: 142/919
+For quesiton: 917 the answer is: 0 which is a: b'airplane'Correct Responses: 142/919Correct Responses: 142/921
+Correct Responses: 142/921
+For quesiton: 919 the answer is: 4 which is a: b'deer'Correct Responses: 142/921Correct Responses: 142/923
+Correct Responses: 142/923
+For quesiton: 921 the answer is: 7 which is a: b'horse'Correct Responses: 142/923Correct Responses: 142/925
+Correct Responses: 143/925
+For quesiton: 923 the answer is: 5 which is a: b'dog'Correct Responses: 143/925Correct Responses: 143/927
+Correct Responses: 143/927
+For quesiton: 925 the answer is: 9 which is a: b'truck'Correct Responses: 143/927Correct Responses: 143/929
+Correct Responses: 143/929
+For quesiton: 927 the answer is: 8 which is a: b'ship'Correct Responses: 143/929Correct Responses: 143/931
+Correct Responses: 143/931
+For quesiton: 929 the answer is: 4 which is a: b'deer'Correct Responses: 143/931Correct Responses: 143/933
+Correct Responses: 143/933
+For quesiton: 931 the answer is: 6 which is a: b'frog'Correct Responses: 143/933Correct Responses: 143/935
+Correct Responses: 143/935
+For quesiton: 933 the answer is: 9 which is a: b'truck'Correct Responses: 143/935Correct Responses: 143/937
+Correct Responses: 143/937
+For quesiton: 935 the answer is: 9 which is a: b'truck'Correct Responses: 143/937Correct Responses: 143/939
+Correct Responses: 143/939
+For quesiton: 937 the answer is: 4 which is a: b'deer'Correct Responses: 143/939Correct Responses: 143/941
+Correct Responses: 143/941
+For quesiton: 939 the answer is: 6 which is a: b'frog'Correct Responses: 143/941Correct Responses: 143/943
+Correct Responses: 143/943
+For quesiton: 941 the answer is: 9 which is a: b'truck'Correct Responses: 143/943Correct Responses: 143/945
+Correct Responses: 143/945
+For quesiton: 943 the answer is: 4 which is a: b'deer'Correct Responses: 143/945Correct Responses: 143/947
+Correct Responses: 143/947
+For quesiton: 945 the answer is: 0 which is a: b'airplane'Correct Responses: 143/947Correct Responses: 143/949
+Correct Responses: 143/949
+For quesiton: 947 the answer is: 5 which is a: b'dog'Correct Responses: 143/949Correct Responses: 143/951
+Correct Responses: 144/951
+For quesiton: 949 the answer is: 9 which is a: b'truck'Correct Responses: 144/951Correct Responses: 144/953
+Correct Responses: 144/953
+For quesiton: 951 the answer is: 4 which is a: b'deer'Correct Responses: 144/953Correct Responses: 144/955
+Correct Responses: 144/955
+For quesiton: 953 the answer is: 4 which is a: b'deer'Correct Responses: 144/955Correct Responses: 144/957
+Correct Responses: 144/957
+For quesiton: 955 the answer is: 0 which is a: b'airplane'Correct Responses: 144/957Correct Responses: 144/959
+Correct Responses: 145/959
+For quesiton: 957 the answer is: 8 which is a: b'ship'Correct Responses: 145/959Correct Responses: 145/961
+Correct Responses: 145/961
+For quesiton: 959 the answer is: 9 which is a: b'truck'Correct Responses: 145/961Correct Responses: 145/963
+Correct Responses: 145/963
+For quesiton: 961 the answer is: 9 which is a: b'truck'Correct Responses: 145/963Correct Responses: 145/965
+Correct Responses: 145/965
+For quesiton: 963 the answer is: 4 which is a: b'deer'Correct Responses: 145/965Correct Responses: 145/967
+Correct Responses: 146/967
+For quesiton: 965 the answer is: 9 which is a: b'truck'Correct Responses: 146/967Correct Responses: 147/969
+Correct Responses: 147/969
+For quesiton: 967 the answer is: 6 which is a: b'frog'Correct Responses: 147/969Correct Responses: 147/971
+Correct Responses: 147/971
+For quesiton: 969 the answer is: 9 which is a: b'truck'Correct Responses: 147/971Correct Responses: 147/973
+Correct Responses: 147/973
+For quesiton: 971 the answer is: 6 which is a: b'frog'Correct Responses: 147/973Correct Responses: 147/975
+Correct Responses: 148/975
+For quesiton: 973 the answer is: 0 which is a: b'airplane'Correct Responses: 148/975Correct Responses: 149/977
+Correct Responses: 149/977
+For quesiton: 975 the answer is: 1 which is a: b'automobile'Correct Responses: 149/977Correct Responses: 149/979
+Correct Responses: 149/979
+For quesiton: 977 the answer is: 6 which is a: b'frog'Correct Responses: 149/979Correct Responses: 149/981
+Correct Responses: 149/981
+For quesiton: 979 the answer is: 4 which is a: b'deer'Correct Responses: 149/981Correct Responses: 149/983
+Correct Responses: 149/983
+For quesiton: 981 the answer is: 5 which is a: b'dog'Correct Responses: 149/983Correct Responses: 149/985
+Correct Responses: 149/985
+For quesiton: 983 the answer is: 4 which is a: b'deer'Correct Responses: 149/985Correct Responses: 150/987
+Correct Responses: 150/987
+For quesiton: 985 the answer is: 5 which is a: b'dog'Correct Responses: 150/987Correct Responses: 150/989
+Correct Responses: 150/989
+For quesiton: 987 the answer is: 4 which is a: b'deer'Correct Responses: 150/989Correct Responses: 150/991
+Correct Responses: 150/991
+For quesiton: 989 the answer is: 6 which is a: b'frog'Correct Responses: 150/991Correct Responses: 150/993
+Correct Responses: 150/993
+For quesiton: 991 the answer is: 0 which is a: b'airplane'Correct Responses: 150/993Correct Responses: 150/995
+For quesiton: 992 the answer is: 9 which is a: b'truck'Correct Responses: 150/995Correct Responses: 150/997
+Correct Responses: 150/997
+Correct Responses: 150/997
+For quesiton: 995 the answer is: 8 which is a: b'ship'Correct Responses: 150/997

@@ -5,6 +5,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import train_test_split
 from sklearn import svm
 from sklearn.linear_model import SGDClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 import os.path
 from time import time
@@ -88,3 +89,26 @@ class mlsgd():
         X = self.img["data"]
         Y = self.img["labels"]
         self.clf.partial_fit(X, Y)
+
+class mlrf():
+
+    def __init__(self, imgs, ID):
+
+        if os.path.exists('saved_model' + str(ID) + '.pkl'):
+            self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
+        else:
+            self.imgs = imgs
+            X = self.imgs[b"data"]
+            Y = self.imgs[b"labels"]
+            _print("Running the ML")
+            self.clf = RandomForestClassifier(n_estimators=200, max_depth=2, max_features=55, random_state=0)
+            self.clf.fit(X, Y)
+            _print("Finished running the ML")
+            joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
+            print(self.clf)
+
+    def classify(self, img):
+        self.img = img
+        predict = self.clf.predict_proba(self.img)
+        predict = predict[0]
+        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
