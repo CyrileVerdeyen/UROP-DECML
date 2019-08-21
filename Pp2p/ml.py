@@ -36,9 +36,9 @@ class mlsvm():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[prediction].tolist()])
 
 class mlnn():
 
@@ -57,9 +57,9 @@ class mlnn():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[prediction].tolist()])
 
 class mlsgd():
 
@@ -80,9 +80,9 @@ class mlsgd():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[prediction].tolist()])
 
     def update(self, img):
         self.img = img
@@ -109,6 +109,6 @@ class mlrf():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[prediction].tolist()])
