@@ -3,30 +3,36 @@ import sys
 import json
 import time
 import random
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.utils import check_random_state
 from sklearn.metrics import accuracy_score
 import os
 
 
-def unpickle(file):
-    import pickle
-    with open(file, 'rb') as fo:
-        dict = pickle.load(fo, encoding='bytes')
-    return dict
+imgs = {"data": [], "labels": []}
 
-def nameImg(ID):
-    images = unpickle("./cifar-10-batches-py/batches.meta")
-    return images[b"label_names"][ID]
+X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
+train_samples = 50000
 
-imgs1 = unpickle("./cifar-10-batches-py/test_batch")
+random_state = check_random_state(0)
+permutation = random_state.permutation(X.shape[0])
+X = X[permutation]
+y = y[permutation]
+X = X.reshape((X.shape[0], -1))
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_samples, test_size=1000)
+imgs["data"].append(X_test)
+imgs["labels"].append(y_test)
 
 true_answers = []
 answers = []
 
 def createQuestion(number):
 
-    question0 = imgs1[b"data"][number].tolist()
-    answer0 = imgs1[b"labels"][number]
-    print("The expected answer is: ", answer0, " Which is a: ", nameImg(answer0))
+    question0 = imgs["data"][0][number].tolist()
+    answer0 = imgs["labels"][0][number]
+    print("The expected answer is: ", answer0)
     true_answers.append(answer0)
 
     m0 =({'msgtype': 'question', 'question': [question0]})

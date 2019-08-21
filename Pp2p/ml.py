@@ -25,9 +25,8 @@ class mlsvm():
             self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
         else:
             self.imgs = imgs
-            X = self.imgs[b"data"]
-            Y = self.imgs[b"labels"]
-
+            X = self.imgs["data"][0]
+            Y = self.imgs["labels"][0]
             self.clf = svm.SVC(gamma='scale', decision_function_shape='ovo', probability=True)
             _print("Running the ML")
             self.clf.fit(X, Y)
@@ -36,9 +35,9 @@ class mlsvm():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[(int(prediction))].tolist()])
 
 class mlnn():
 
