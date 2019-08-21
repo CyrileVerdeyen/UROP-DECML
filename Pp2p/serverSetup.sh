@@ -9,21 +9,15 @@ SCRIPT=("git clone -b serverImplementation --single-branch https://github.com/Cy
 SCRIPTP=("cd UROPFNS/Pp2p;
     git pull")
 
+SCRIPTB=("cd UROPFNS/Pp2p;
+    git fetch;
+    git checkout serverImplementationMnist")
+
 SCRIPTR=("cd UROPFNS/Pp2p/tests;
     rm saved_model0.pkl")
 
 SCRIPTN=("cd UROPFNS/Pp2p/tests;
     mv saved_model0.pkl saved_model.pkl")
-
-SCRIPTM=("cd UROPFNS/Pp2p;
-    wget -O Tdata.tar.gz 'http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz';
-    tar -C ./tests -xvzf Tdata.tar.gz;
-    wget -O Ldata.tar.gz 'http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz';
-    tar -C ./tests -xvzf Ldata.tar.gz;
-    wget -O Tedata.tar.gz 'http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz';
-    tar -C ./tests -xvzf Tedata.tar.gz;
-    wget -O Ledata.tar.gz 'http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz';
-    tar -C ./tests -xvzf Ledata.tar.gz")
 
 SCRIPTD=("cd UROPFNS/Pp2p/tests;
     git clean -f")
@@ -62,5 +56,12 @@ if [[ ${PULLFLAG} == *"rename" ]];
 then
     for i in ${!HOSTS[*]} ; do
         konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTN}" & sleep 1s
+    done
+fi
+
+if [[ ${PULLFLAG} == *"branch" ]];
+then
+    for i in ${!HOSTS[*]} ; do
+        konsole --noclose -e ssh -t ${HOSTS[i]} "${SCRIPTB}" & sleep 1s
     done
 fi

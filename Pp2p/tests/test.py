@@ -1,6 +1,9 @@
 import testFrame
 import ml
 import random
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.utils import check_random_state
 import socket
 
 def unpickle(file):
@@ -26,14 +29,21 @@ class node():
 
         self.ip = socket.gethostbyname(socket.gethostname())
 
-        imgs = {b"data": [], b"labels": []}
+        imgs = {"data": [], "labels": []}
 
-        for i in (range (1,6)):
-            data = random.randint(0, 4999)
-            img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
-            for j in range(5000):
-                imgs[b"data"].append(img[b"data"][(data+j)])
-                imgs[b"labels"].append(img[b"labels"][(data+j)])
+        X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
+        train_samples = 25000
+
+        seed = random.randint(0,100)
+        random_state = check_random_state(seed)
+        permutation = random_state.permutation(X.shape[0])
+        X = X[permutation]
+        y = y[permutation]
+        X = X.reshape((X.shape[0], -1))
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_samples, test_size=10000)
+        imgs["data"].append(X_train)
+        imgs["labels"].append(y_train)
 
         self.DEFAULT_PORT = 5006
         self.BOOTSRAP_NODES = ["10.221.31.232:5005"]
