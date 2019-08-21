@@ -47,8 +47,8 @@ class mlnn():
             self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
         else:
             self.imgs = imgs
-            X = self.imgs[b"data"]
-            Y = self.imgs[b"labels"]
+            X = self.imgs["data"][0]
+            Y = self.imgs["labels"][0]
             self.clf = MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(100, 20), random_state=1, early_stopping=True)
             self.clf.fit(X, Y)
             joblib.dump(self.clf, 'saved_model' + str(ID) + '.pkl')
@@ -56,9 +56,9 @@ class mlnn():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[(int(prediction))].tolist()])
 
 class mlsgd():
 
@@ -68,8 +68,8 @@ class mlsgd():
             self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
         else:
             self.imgs = imgs
-            X = self.imgs[b"data"]
-            Y = self.imgs[b"labels"]
+            X = self.imgs["data"][0]
+            Y = self.imgs["labels"][0]
 
             _print("Running the ML")
             self.clf = SGDClassifier(loss="modified_huber", penalty="l2", max_iter=20, early_stopping=False, shuffle=True, learning_rate="optimal")
@@ -79,14 +79,14 @@ class mlsgd():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[(int(prediction))].tolist()])
 
     def update(self, img):
         self.img = img
-        X = self.img["data"]
-        Y = self.img["labels"]
+        X = self.img["data"][0]
+        Y = self.img["labels"][0]
         self.clf.partial_fit(X, Y)
 
 class mlrf():
@@ -97,8 +97,8 @@ class mlrf():
             self.clf = joblib.load('saved_model' + str(ID) + '.pkl')
         else:
             self.imgs = imgs
-            X = self.imgs[b"data"]
-            Y = self.imgs[b"labels"]
+            X = self.imgs["data"][0]
+            Y = self.imgs["labels"][0]
             _print("Running the ML")
             self.clf = RandomForestClassifier(n_estimators=200, max_depth=2, max_features=55, random_state=0)
             self.clf.fit(X, Y)
@@ -108,6 +108,6 @@ class mlrf():
 
     def classify(self, img):
         self.img = img
-        predict = self.clf.predict_proba(self.img)
-        predict = predict[0]
-        return ([self.clf.predict(self.img).tolist(), predict[(self.clf.predict(self.img))].tolist()])
+        predict = self.clf.predict_proba(self.img)[0]
+        prediction = self.clf.predict(self.img)
+        return ([prediction.tolist(), predict[(int(prediction))].tolist()])

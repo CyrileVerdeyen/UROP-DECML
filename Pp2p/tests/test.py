@@ -9,7 +9,7 @@ def data():
     imgs = {"data": [], "labels": []}
 
     X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
-    train_samples = 50000
+    train_samples = 60000
 
     random_state = check_random_state(0)
     permutation = random_state.permutation(X.shape[0])

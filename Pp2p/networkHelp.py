@@ -15,7 +15,7 @@ def answerQuestion(message, nodeid, factory):
     question = np.asarray(message["question"]).reshape(1, -1)
     answer = factory.ml.classify(question)
     guess = str(answer[0][0])
-    certainty = answer[1][0]
+    certainty = answer[1]
     answerID = generate_answerid()
 
     _print( " [ ] Response to " ,  message["questionID"], " is ", answer)
