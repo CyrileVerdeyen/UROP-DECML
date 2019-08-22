@@ -70,9 +70,11 @@ try:
         for response in message["response"]:
             message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]))
             print(message)
+            print("This is response: ", int(response[1]), "This is ercieved: ", QA[1])
             if int(response[1]) == QA[1]:
                 correctAnswers += 1
             score = ("Correct Responses: " + str(correctAnswers) + "/" + str(quesitonsSent))
+            print(score)
             log.write(score + "\r\n")
             answers.append(int(response[1]))
 
@@ -82,9 +84,6 @@ try:
         quesitonsSent += 1
 
         time.sleep(15)
-        print(score)
-        log.write(message)
-        log.write(score)
         answers.append(int(response[1]))
 
 finally:
