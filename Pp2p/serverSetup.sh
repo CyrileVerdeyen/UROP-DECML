@@ -9,9 +9,8 @@ SCRIPT=("git clone -b serverImplementation --single-branch https://github.com/Cy
 SCRIPTP=("cd UROPFNS/Pp2p;
     git pull")
 
-SCRIPTB=("cd UROPFNS/Pp2p;
-    git fetch;
-    git checkout serverImplementationMnist")
+SCRIPTB=("sudo rm -r UROPFNS;
+    git clone -b serverImplementationMnist --single-branch https://github.com/CyrileVerdeyen/UROPFNS.git")
 
 SCRIPTR=("cd UROPFNS/Pp2p/tests;
     rm saved_model0.pkl")
