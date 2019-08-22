@@ -70,8 +70,7 @@ try:
         for response in message["response"]:
             message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]))
             print(message)
-            print("This is response: ", int(response[1]), "This is ercieved: ", QA[1])
-            if int(response[1]) == QA[1]:
+            if int(response[1]) == int(QA[1]):
                 correctAnswers += 1
             score = ("Correct Responses: " + str(correctAnswers) + "/" + str(quesitonsSent))
             print(score)
