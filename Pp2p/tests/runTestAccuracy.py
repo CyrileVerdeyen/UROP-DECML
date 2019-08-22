@@ -70,9 +70,10 @@ try:
         for response in message["response"]:
             message = ("For quesiton: " + str(response[0]) + " the answer is: " + str(response[1]))
             print(message)
-            if int(response[1]) == QA[1]:
+            if int(response[1]) == int(QA[1]):
                 correctAnswers += 1
             score = ("Correct Responses: " + str(correctAnswers) + "/" + str(quesitonsSent))
+            print(score)
             log.write(score + "\r\n")
             answers.append(int(response[1]))
 
@@ -81,19 +82,8 @@ try:
         sock.sendall(QA[0])
         quesitonsSent += 1
 
-        time.sleep(5)
-        print(score)
-        log.write(message)
-        log.write(score)
+        time.sleep(15)
         answers.append(int(response[1]))
-
-        num += 1
-        QA = createQuestion(num)
-        sock.sendall(QA[0])
-        quesitonsSent += 1
-
-        time.sleep(5)
-
 
 finally:
     sock.close()
