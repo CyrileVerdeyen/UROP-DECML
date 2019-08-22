@@ -81,19 +81,11 @@ try:
         sock.sendall(QA[0])
         quesitonsSent += 1
 
-        time.sleep(5)
+        time.sleep(15)
         print(score)
         log.write(message)
         log.write(score)
         answers.append(int(response[1]))
-
-        num += 1
-        QA = createQuestion(num)
-        sock.sendall(QA[0])
-        quesitonsSent += 1
-
-        time.sleep(5)
-
 
 finally:
     sock.close()
