@@ -18,7 +18,7 @@ from twisted.internet.task import LoopingCall
 from crypto import generate_nodeid
 
 QUESTION_INTERVAL = 5.0 # How often we send out questions
-RESPONSE_INTERVAL = 8.0 # How often we send out the responses we got
+RESPONSE_INTERVAL = 15.0 # How often we send out the responses we got
 TIMES_TO_SEND = 1 # Amount of nodes that recieve the question
 PEERS_INTERVAL = 20.0 # How often we send out the peers we have connected with
 DATA_INTERVAL = 30.0 # How often data gets sent to Nodes for more learning
