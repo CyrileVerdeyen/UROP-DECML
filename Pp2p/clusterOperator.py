@@ -9,6 +9,9 @@ from collections import defaultdict
 from collections import Counter
 
 from twisted.internet import reactor
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.utils import check_random_state
 from twisted.internet.endpoints import (TCP4ClientEndpoint, TCP4ServerEndpoint,
                                         connectProtocol)
 from twisted.internet.protocol import Factory, Protocol
@@ -256,12 +259,22 @@ class COProtocol(LineReceiver):
     def send_data(self):
         datas = []
         labels = []
-        i = random.randint(1,5)
-        data = random.randint(0, 9500)
-        img = unpickle("./cifar-10-batches-py/data_batch_" + str(i))
-        for j in range(250):
-            datas.append((img[b"data"][(data+j)]).tolist())
-            labels.append((img[b"labels"][(data+j)]))
+        imgs = {"data": [], "labels": []}
+
+        X, y = fetch_openml('mnist_784', version=1, return_X_y=True)
+        train_samples = 50000
+
+        seed = random.randint(0,100)
+        random_state = check_random_state(seed)
+        permutation = random_state.permutation(X.shape[0])
+        X = X[permutation]
+        y = y[permutation]
+        X = X.reshape((X.shape[0], -1))
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_samples, test_size=250)
+        datas.append(X_test)
+        labels.append(y_test)
+
         data = json.dumps({'msgtype': 'data', 'data': datas, 'labels': labels})
         _print(" [>] Sending data to: ", self.remote_nodeid, self.remote_ip)
         self.write(data)
