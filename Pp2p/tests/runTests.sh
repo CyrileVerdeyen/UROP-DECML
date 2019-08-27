@@ -39,10 +39,10 @@ PULLFLAG=$2
 
 if [ ${PULLFLAG} == "q" ];
 then
-    sleep 20s & konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}"
+    sleep 20s & konsole --noclose -e ssh -t ${Q} "${SCRIPTQ}" &
 fi
 
 if [ ${PULLFLAG} == "a" ];
 then
-    sleep 20s & konsole --noclose -e ssh -t ${Q} "${SCRIPTA}"
+    sleep 20s & konsole --noclose -e ssh -t ${Q} "${SCRIPTA}" &
 fi
