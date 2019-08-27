@@ -48,7 +48,7 @@ class node():
         self.DEFAULT_PORT = 5006
         self.BOOTSRAP_NODES = ["10.221.31.232:5005"]
 
-        self.ml = ml.mlsvm(imgs, "0")
+        self.ml = ml.mlsgd(imgs, "0")
 
     def run(self):
         server = testFrame.testPP(self.DEFAULT_PORT, self.BOOTSRAP_NODES, self.ml, Host=self.ip)
