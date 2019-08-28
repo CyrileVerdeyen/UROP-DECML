@@ -21,7 +21,7 @@ X = X[permutation]
 y = y[permutation]
 X = X.reshape((X.shape[0], -1))
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_samples, test_size=1000)
+X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=train_samples, test_size=10000)
 imgs["data"].append(X_test)
 imgs["labels"].append(y_test)
 
@@ -61,7 +61,7 @@ try:
         message = json.loads(answer)
         for response in message["response"]:
             print("Guessed answer is: ", response[1])
-            if int(response[1]) == QA[1]:
+            if int(response[1]) == int(QA[1]):
                 correctAnswers += 1
             print("Correct Responses: ", correctAnswers, "/", quesitonsSent)
 
