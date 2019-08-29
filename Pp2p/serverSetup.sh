@@ -16,7 +16,7 @@ SCRIPTR=("cd UROPFNS/Pp2p/tests;
     rm saved_model0.pkl")
 
 SCRIPTN=("cd UROPFNS/Pp2p/tests;
-    mv saved_model_MnistSVM.pkl saved_model0.pkl")
+    mv saved_model0.pkl saved_model_MnistSVM.pkl")
 
 SCRIPTD=("cd UROPFNS/Pp2p/tests;
     git clean -f")
